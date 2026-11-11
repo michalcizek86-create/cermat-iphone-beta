@@ -10,19 +10,36 @@
   const plural=(n,one,few,many)=>n===1?one:n>=2&&n<=4?few:many;
   const percent=x=>x===null?'—':x+' %';
   const date=x=>new Date(x).toLocaleString('cs-CZ',{day:'numeric',month:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'});
-  
-  
+
+
   async function load(){
     await api.store.ready;
     refresh();
     await Promise.all([...api.store.historyMeta.values()].filter(m=>m.kind==='topic-practice').map(m=>api.store.historyRecord(m.attemptId)));
     api.refresh();
   }
-  
+
   function cards(){
-    return `<div class="topic-grid">${T.CATEGORIES.map((c,index)=>{const s=summary(c.id),pool=catalog.pool(c.id),unfinished=drafts(c.id);return `<article class="tc topic-card"><div class="topic-card-head"><span class="editorial-label">OBLAST ${String(index+1).padStart(2,'0')}</span><span class="topic-symbol topic-symbol-${c.id}" aria-hidden="true">${c.symbol}</span></div><h3>${e(c.name)}</h3><p>${e(c.intro)}</p><div class="topic-card-topics">${c.topics.slice(0,3).map(([,name])=>e(name)).join(' · ')}<span> a další</span></div><div class="topic-card-count">${pool.length} ${plural(pool.length,'dostupná úloha','dostupné úlohy','dostupných úloh')} <span>·</span> ${c.topics.length} podtémat</div><div class="topic-card-stats"><span><b>${s.completed}</b> ${plural(s.completed,'dokončený test','dokončené testy','dokončených testů')}</span><span><b>${percent(s.accuracy)}</b> úspěšnost</span></div><div class="tc-act"><button class="p" onclick="CermatPractice.configure(${js(c.id)})" aria-label="Procvičovat ${e(c.name)}">Vybrat procvičování</button>${unfinished.length?`<button onclick="CermatUpgrade.resume(${js(unfinished[0].key)})">Pokračovat (${unfinished.length})</button>`:''}</div></article>`;}).join('')}</div>`;
+    return `<div class="topic-grid">${T.CATEGORIES.map(c=>{
+      const stats=summary(c.id), pool=catalog.pool(c.id), unfinished=drafts(c.id);
+      return `<article class="tc topic-card">
+        <span class="topic-symbol topic-symbol-${c.id}" aria-hidden="true">${c.symbol}</span>
+        <div class="topic-copy">
+          <h3>${e(c.name)}</h3><p>${e(c.intro)}</p>
+          <div class="topic-card-count">${pool.length} ${plural(pool.length,'dostupná úloha','dostupné úlohy','dostupných úloh')} <span>·</span> ${c.topics.length} podtémat</div>
+          <div class="topic-card-stats"><span><b>${stats.completed}</b> ${plural(stats.completed,'dokončený test','dokončené testy','dokončených testů')}</span><span><b>${percent(stats.accuracy)}</b> úspěšnost</span></div>
+          <div class="tc-act"><button class="text-button" onclick="CermatPractice.configure(${js(c.id)})" aria-label="Procvičovat ${e(c.name)}">Procvičovat <span aria-hidden="true">→</span></button>${unfinished.length?`<button onclick="CermatUpgrade.resume(${js(unfinished[0].key)})">Pokračovat (${unfinished.length})</button>`:''}</div>
+        </div>
+      </article>`;
+    }).join('')}</div>`;
   }
-  function home(){refresh();return `<section class="topic-home" id="sect-topics" aria-labelledby="topics-heading"><div class="sech"><div><span class="editorial-label">PROCVIČUJ TO, CO PRÁVĚ POTŘEBUJEŠ</span><h2 id="topics-heading">Procvičování podle témat</h2></div><button class="text-button" onclick="go('topics')">Přehled témat →</button></div>${cards()}</section>`;}
+  function home(){
+    refresh();
+    return `<section class="topic-home" id="sect-topics" aria-labelledby="topics-heading">
+      <div class="sech"><h2 id="topics-heading">Procvičování podle témat</h2><button class="text-button" onclick="go('topics')">Přehled témat <span aria-hidden="true">→</span></button></div>
+      ${cards()}
+    </section>`;
+  }
   function heading(title,back='home'){return `<header class="practice-heading"><button class="text-button" onclick="go(${js(back)})">← ${back==='home'?'Zpět na testy':'Všechna témata'}</button><span class="editorial-label">MATEMATIKA KROK ZA KROKEM</span><h1>${e(title)}</h1></header>`;}
   function overview(){refresh();return `${heading('Procvičování podle témat')}<p class="practice-lead">Vyber oblast a sestav si vlastní sadu úloh. Každý pokus má své odpovědi, pracovní papír a výsledky.</p>${cards()}`;}
   function statsMarkup(c){
@@ -56,8 +73,8 @@
     if(entries.some(x=>!x)){api.notify('Některá původní úloha chybí. Obnov ji ze zálohy; dosavadní práce zůstala zachována.');return;}
     api.start(T.createSession(entries,{category,subtopics:config.subtopics,mode:'mistakes'}));
   }
-  
-  
+
+
   root.CermatPractice={catalog,install(options){api=options;ready=load();document.getElementById('app').addEventListener('input',event=>{if(event.target.id==='practice-count')preview();});document.getElementById('app').addEventListener('change',event=>{if(event.target.name==='practice-subtopic'||event.target.id==='practice-count')preview();});},home,view:route=>route==='topics'?overview():route==='topic'?categoryView():null,afterRender:preview,
     configure(id){if(!T.CATEGORIES.some(c=>c.id===id))return;category=id;config={subtopics:[],count:20};api.navigate('topic');},count(n){document.getElementById('practice-count').value=n;preview();},clearSubtopics(){document.querySelectorAll('[name="practice-subtopic"]').forEach(x=>x.checked=false);preview();},generate,repeat,summary,refresh,
     resultActions(record){const wrong=record.result?.rows.filter(r=>r.g<r.m&&!r.pend).length||0;return `<div class="row practice-result-actions"><button class="p" onclick="CermatPractice.repeat(CermatUpgrade.active)">Nové procvičování tématu</button>${wrong?`<button onclick="CermatPractice.repeat(CermatUpgrade.active,true)">Procvičit chyby (${wrong})</button>`:''}<button onclick="CermatPractice.configure(${js(record.practice.category)})">Pokrok v tématu</button><button onclick="go('home')">Zpět na testy</button></div>`;}

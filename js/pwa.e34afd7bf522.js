@@ -22,8 +22,8 @@
     document.querySelectorAll('[data-pwa-mode]').forEach(el=>el.textContent=standalone()?'Spuštěno z plochy':'Spuštěno v prohlížeči');
     const running=typeof view!=='undefined'&&view==='run';
     if(toast){toast.hidden=dismissed||running||state.ready&&!state.waiting||state.phase==='unavailable';toast.querySelector('strong').textContent=state.waiting?'Aktualizace je připravená':state.error?'Offline podklady nejsou kompletní':'Připravuji aplikaci pro offline';toast.querySelector('p').textContent=state.waiting?'Použij ji v Nastavení, až budeš mít uloženou práci.':state.error||statusText();const progress=toast.querySelector('progress');progress.value=percent();progress.hidden=state.phase!=='downloading';}
-    const theme=document.querySelector('meta[name="theme-color"]');if(theme)theme.content='#111a24';
-    const statusBar=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(statusBar)statusBar.content='black-translucent';
+    const theme=document.querySelector('meta[name="theme-color"]');if(theme)theme.content='#f8f7f3';
+    const statusBar=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(statusBar)statusBar.content='default';
   }
   function showMessage(message){const el=document.querySelector('[data-pwa-message]');if(el)el.textContent=message;}
   async function ask(worker){

@@ -165,11 +165,13 @@ function tpts(t){return t.questions.reduce((a,q)=>a+(q.type==='series'?(q.offici
 function mixPool(){const seen=new Set(),o=[];tests.forEach(t=>t.questions.forEach(q=>{if(/předchozí/i.test(q.text||''))return;const k=(q.text||'')+q.type;if(seen.has(k))return;seen.add(k);o.push(q)}));return o}
 function startMix(n){const pool=mixPool();if(!pool.length)return;const pick=pool.sort(()=>Math.random()-.5).slice(0,Math.min(n,pool.length));startT({id:'mix',title:'Náhodný mix',minutes:Math.max(10,Math.round(pick.length*1.2)),shuffle:false,temp:true,questions:pick.map(q=>Object.assign({},q,{no:''}))})}
 function randTest(){startMix(getP().mix||20)}
-function mixCard(){const n=getP().mix||20,pool=mixPool().length;
- return `<article class="tc mix"><div class="tc-top"><div class="tc-h"><h3>Náhodný mix</h3><span class="tc-sub">Náhodné úlohy ze všech testů dohromady</span></div><div class="mixic">${SHUF}</div></div>
-<div class="tc-tags"><span>${pool} úloh k výběru</span><span>${tests.length} testů</span><span>~${Math.max(10,Math.round(n*1.2))} min</span></div>
-<small class="tc-last">Pokaždé jiná sada, ať se úlohy nenaučíš podle pořadí.</small>
-<div class="tc-act"><button class="p" onclick="startMix(${n})">${PLAY}Spustit ${n} úloh</button><button onclick="startMix(10)" aria-label="Spustit mix 10 úloh" title="Spustit mix 10 úloh">10</button><button onclick="startMix(30)" aria-label="Spustit mix 30 úloh" title="Spustit mix 30 úloh">30</button></div></article>`}
+function mixCard(){
+  const n=getP().mix||20, minutes=Math.max(10,Math.round(n*1.2));
+  return `<article class="tc mix notebook-mix" aria-labelledby="mix-heading">
+    <div class="mix-copy"><h3 id="mix-heading">Náhodný mix</h3><p>Úlohy napříč testy a tématy.</p><p class="mix-meta">Přibližně ${minutes} min</p></div>
+    <div class="tc-act"><button class="p" onclick="startMix(${n})">Spustit ${n} úloh</button><button onclick="startMix(10)" aria-label="Spustit mix 10 úloh" title="Spustit mix 10 úloh">10</button><button onclick="startMix(30)" aria-label="Spustit mix 30 úloh" title="Spustit mix 30 úloh">30</button></div>
+  </article>`;
+}
 
 function save(){if(storeReady)return CermatStudent.persist(CermatUpgrade.store);}
 

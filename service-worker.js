@@ -1,7 +1,7 @@
 /* GitHub Pages serves this worker under the repository's own scope. */
 'use strict';
-const RELEASE = '30f7dd1195635adc';
-const FILES = ["./index.html","./manifest.webmanifest","./js/bank.84ffdd99e458.js","./js/diagrams-01.0bfbde1ca480.js","./js/diagrams-02.f24ec2aa56eb.js","./js/diagrams-03.9ca59702945c.js","./js/diagrams-04.ce3495bfcc19.js","./js/diagrams-05.9db26e5e1ef7.js","./js/diagrams-06.673bb8017552.js","./js/diagrams-07.76c4fd0e5ecb.js","./js/diagrams-08.652ba8193b59.js","./js/diagrams-09.78219511a3dc.js","./js/diagrams-10.06044f70b3aa.js","./js/questions-01.da205587c574.js","./js/facts.bfb8fcad5e5b.js","./js/geometry.bbee47810086.js","./js/paper-editor.5071359d19be.js","./js/topic-tags.ce7798a23ce1.js","./js/topic-practice.1e39a7689a83.js","./js/study-store.63b4844caa16.js","./js/practice-ui.7ff418761cff.js","./js/student-state.ef307186d32b.js","./js/study-upgrade.b77d43e2eef6.js","./js/app.296c22646f20.js","./js/pwa.9c52705db507.js","./icons/apple-touch-icon.png","./icons/favicon-32.png","./icons/icon-192.png","./icons/icon-512.png","./icons/icon-maskable-512.png","./icons/icon-source.svg"];
+const RELEASE = 'aa9902d3f79f13b0';
+const FILES = ["./index.html","./manifest.webmanifest","./styles/notebook.79c997d5853e.css","./assets/mathematical-notes.a4373d3a2a88.webp","./assets/paper-grain.60a3ea610bc1.webp","./assets/cermat-sans.3a330b1e6800.woff","./assets/stix-two-text.0c9a389199d1.woff","./js/bank.84ffdd99e458.js","./js/diagrams-01.0bfbde1ca480.js","./js/diagrams-02.f24ec2aa56eb.js","./js/diagrams-03.9ca59702945c.js","./js/diagrams-04.ce3495bfcc19.js","./js/diagrams-05.9db26e5e1ef7.js","./js/diagrams-06.673bb8017552.js","./js/diagrams-07.76c4fd0e5ecb.js","./js/diagrams-08.652ba8193b59.js","./js/diagrams-09.78219511a3dc.js","./js/diagrams-10.06044f70b3aa.js","./js/questions-01.da205587c574.js","./js/facts.bfb8fcad5e5b.js","./js/geometry.bbee47810086.js","./js/paper-editor.5071359d19be.js","./js/topic-tags.ce7798a23ce1.js","./js/topic-practice.1e39a7689a83.js","./js/study-store.63b4844caa16.js","./js/practice-ui.4227c27ccfb0.js","./js/student-state.ef307186d32b.js","./js/study-upgrade.ace7fa93e58c.js","./js/app.ebf231460563.js","./js/pwa.e34afd7bf522.js","./icons/apple-touch-icon.png","./icons/favicon-32.png","./icons/icon-192.png","./icons/icon-512.png","./icons/icon-maskable-512.png","./icons/icon-source.svg"];
 const BASE = new URL('./', self.location.href);
 const INDEX = new URL('index.html', BASE).href;
 const PREFIX = 'cermat-offline:' + BASE.pathname + ':';
@@ -27,8 +27,9 @@ async function status() {
 async function valid(response, url) {
   if (!response?.ok || response.type==='opaque') return false;
   const type = response.headers.get('content-type') || '';
-  if (/\.(png|svg)$/.test(url)) return type.startsWith('image/');
+  if (/\.(png|svg|webp)$/.test(url)) return type.startsWith('image/');
   if (/\.js$/.test(url)) return /javascript/.test(type);
+  if (/\.css$/.test(url)) return type.startsWith('text/css');
   if (url!==INDEX) return true;
   if (!type.includes('text/html')) return false;
   const html = await response.clone().text();

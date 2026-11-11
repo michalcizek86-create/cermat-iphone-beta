@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="cs" data-theme="dark"><head>
+<html lang="cs" data-theme="light"><head>
 <meta name="cermat-edition" content="student">
-<meta name="cermat-release" content="30f7dd1195635adc">
+<meta name="cermat-release" content="aa9902d3f79f13b0">
 <meta charset="utf-8">
-<meta name="color-scheme" content="dark">
+<meta name="color-scheme" content="light">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Procvičování matematiky k přijímacím zkouškám. Vlastní testy a oficiální úlohy CERMAT.">
-<meta name="theme-color" content="#111a24">
+<meta name="description" content="Procvičování matematiky k přijímacím zkouškám. Oficiální úlohy CERMAT a procvičování podle témat.">
+<meta name="theme-color" content="#f8f7f3">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Cermat">
 <meta name="format-detection" content="telephone=no">
 <title>Cermat testy – procvičování matematiky</title>
@@ -17,16 +17,8 @@
 <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32.png">
 <style>
-/* The application always uses its established dark palette. */
-:root {
-  --bg:#111a24; --card:#192532; --field:#15212d; --surface:#233244;
-  --tx:#e6edf4; --mut:#a7b7c7; --ac:#a8cdf1; --onac:#142b43;
-  --ok:#8bc8b0; --bad:#f0a7a9; --bd:#304151; --sel:#223b51;
-  --sh:rgb(0 0 0 / 18%); color-scheme:dark;
-  --hl:var(--ac); --page-pad:28px;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-  font-size:16px;
-}
+/* Shared settings and worksheet controls. */
+:root { --hl:var(--ac); font-size:16px; }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html { scroll-padding-top: calc(100px + env(safe-area-inset-top, 0px)); }
@@ -380,13 +372,6 @@ main { width: 100%; }
   input[type="text"], input[type="search"], textarea, select { font-size: max(16px, 1rem); }
 }
 
-/* Dark interface; original exam papers retain their own readable surface. */
-:root {
-  --bg:#111a24; --card:#192532; --field:#15212d; --surface:#233244;
-  --tx:#e6edf4; --mut:#a7b7c7; --ac:#a8cdf1; --onac:#142b43;
-  --ok:#8bc8b0; --bad:#f0a7a9; --bd:#304151; --sel:#223b51;
-  --sh:rgb(0 0 0 / 18%); color-scheme:dark;
-}
 html {scroll-padding-top:180px;}
 body {font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;}
 button {font-weight:550;transition:background-color .12s,border-color .12s;}
@@ -854,6 +839,7 @@ main.paperview {padding-top:env(safe-area-inset-top,0px);padding-bottom:calc(80p
 @media(max-width:600px){.workspace-tools{top:calc(99px + env(safe-area-inset-top,0px));}.pwa-panel .row{align-items:stretch;}.pwa-panel button{min-height:44px;}.pwa-status-row{align-items:start;flex-direction:column;gap:5px;}input:not([type=checkbox]):not([type=radio]):not([type=color]):not([type=range]),textarea,select{font-size:1rem;}#pwa-download-note{right:calc(12px + env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));max-width:calc(100% - 24px - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px));}}
 
 </style>
+<link rel="stylesheet" href="./styles/notebook.79c997d5853e.css">
 </head><body><main id="app"><section class="startup" aria-live="polite"><h1>Cermat testy</h1><p id="startup-status">Načítám testy z matematiky…</p><div class="startup-actions" id="startup-actions" hidden><button type="button" id="startup-retry">Zkusit znovu</button></div></section></main><noscript><p>Pro spuštění aplikace povol JavaScript v nastavení prohlížeče.</p></noscript><script data-cermat-module="startup">
 (()=>{const status=document.getElementById('startup-status'),actions=document.getElementById('startup-actions');document.getElementById('startup-retry').addEventListener('click',()=>location.reload());function failed(){if(window.CERMAT_APP_READY)return;status.textContent='Aplikaci se nepodařilo načíst. Zkus stránku načíst znovu.';actions.hidden=false;}addEventListener('error',failed);setTimeout(failed,15000);})();
 </script>
@@ -875,11 +861,11 @@ main.paperview {padding-top:env(safe-area-inset-top,0px);padding-bottom:calc(80p
 <script defer src="./js/topic-tags.ce7798a23ce1.js"></script>
 <script defer src="./js/topic-practice.1e39a7689a83.js"></script>
 <script defer src="./js/study-store.63b4844caa16.js"></script>
-<script defer src="./js/practice-ui.7ff418761cff.js"></script>
+<script defer src="./js/practice-ui.4227c27ccfb0.js"></script>
 <script defer src="./js/student-state.ef307186d32b.js"></script>
-<script defer src="./js/study-upgrade.b77d43e2eef6.js"></script>
-<script defer src="./js/app.296c22646f20.js"></script>
-<script defer src="./js/pwa.9c52705db507.js"></script>
+<script defer src="./js/study-upgrade.ace7fa93e58c.js"></script>
+<script defer src="./js/app.ebf231460563.js"></script>
+<script defer src="./js/pwa.e34afd7bf522.js"></script>
 
 
 
