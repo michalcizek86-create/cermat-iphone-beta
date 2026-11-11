@@ -1,6 +1,6 @@
 {
   "edition": "student",
-  "release": "295806a59ab0db6f",
+  "release": "f668e35aac19f2f5",
   "baseline": "ef8c3c4f373c8d1619d839963cc0d266c0ca9b60",
   "officialExams": 35,
   "bundledPracticeSets": 6,
@@ -8,5 +8,5 @@
   "artwork": 510,
   "browserDataIncluded": false,
   "design": "ivory mathematics notebook",
-  "offlineResources": 36
+  "offlineResources": 37
 }

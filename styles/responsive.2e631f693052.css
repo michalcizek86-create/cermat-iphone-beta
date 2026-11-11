@@ -1,0 +1,64 @@
+/* The notebook sidebar is narrower than the original full-width progress card. */
+.notebook-progress .ov {
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: .85rem;
+}
+
+.notebook-progress .ovrow {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 0 0 .75rem;
+  border-right: 0;
+  border-bottom: 1px solid var(--bd);
+}
+
+.notebook-progress .ovrow > div + div {
+  border-left: 1px solid var(--bd);
+  padding-left: .75rem;
+}
+
+.notebook-progress .ov-detail { margin-top: 0; }
+.notebook-progress .ov-detail > .mut { overflow-wrap: break-word; }
+
+.notebook-progress .tps {
+  grid-template-columns: minmax(0, 1fr);
+  gap: .65rem;
+  margin-top: 0;
+  padding-top: .85rem;
+}
+
+.notebook-progress .tp {
+  grid-template-columns: minmax(0, 1fr) minmax(2.5rem, .55fr) auto;
+  gap: .55rem;
+}
+
+/* The question picker already calculates the height of both sticky toolbars. */
+html:has(.paperview) { scroll-padding-top: 0; }
+
+.workspace-tools {
+  max-block-size: 42vh;
+  overflow-y: auto;
+}
+
+@media (max-width: 760px) {
+  .topnav .study-brand { padding-right: 0; }
+  .topnav .nav .si { position: static; margin-left: 0; }
+  .workspace-title strong { white-space: normal; overflow-wrap: break-word; }
+}
+
+@media (pointer: coarse) {
+  .workspace-top > button,
+  .tool-primary select,
+  .tool-actions button,
+  .zoom-controls button,
+  .instrument-options > summary { min-height: 44px; }
+  .tool-actions button, .zoom-controls button { min-width: 44px; }
+}
+
+@media (max-height: 480px) {
+  /* In landscape, scroll the controls with the page so they leave room to draw. */
+  .workspace-top { position: relative; top: auto; }
+  .workspace-tools { position: static; max-block-size: none; overflow: visible; }
+  /* Override the inline offset calculated for sticky toolbars. */
+  .exam-page { scroll-margin-top: 1rem !important; }
+}
