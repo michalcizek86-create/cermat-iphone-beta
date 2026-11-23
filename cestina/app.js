@@ -90,10 +90,12 @@ function overview() {
 function topicCards() {
   return topics.map(category=>{
     const pool=practicePool(category.id,new Set()),s=topicStats(category.id);
-    return UI.topic({id:category.id,symbol:category.symbol,title:category.name,description:category.description,
+    const unfinished=listAttempts('active').filter(a=>a.kind==='practice' && a.practice?.category===category.id);
+    return UI.topic({id:category.id,title:category.name,description:category.description,
       count:`${countTasks(pool.length)} <span>·</span> ${category.topics.length} podtémat`,
-      stats:`<span><b>${s.rows.length}</b> vyhodnocených úloh</span><span><b>${s.pct===null?'—':s.pct+' %'}</b> úspěšnost</span>`,
-      actions:button('Procvičovat →','practice',category.id,'text-button',`aria-label="Procvičovat ${html(category.name)}"`)});
+      stats:s.rows.length?`<span><b>${s.rows.length}</b> ${plural(s.rows.length,'vyhodnocená úloha','vyhodnocené úlohy','vyhodnocených úloh')}</span>`:'',accuracy:s.pct,
+      actions:button('Procvičovat','practice',category.id,'topic-practice-action',`aria-label="Procvičovat ${html(category.name)}"`),
+      sessions:unfinished.map(a=>({label:`${answered(a)}/${a.questionIds.length} odpovědí`,updated:formatDate(a.updatedAt),action:button('Pokračovat','resume',a.id,'topic-resume-action',`aria-label="Pokračovat ${html(category.name)} · ${html(formatDate(a.updatedAt))}"`)}))});
   }).join('');
 }
 function topicHome() {

@@ -24,8 +24,10 @@
   function mix({meta,actions}){
     return `<article class="tc mix notebook-mix" aria-labelledby="mix-heading"><div class="mix-copy"><h3 id="mix-heading">Náhodný mix</h3><p>Úlohy napříč testy a tématy.</p><p class="mix-meta">${e(meta)}</p></div><div class="tc-act">${actions}</div></article>`;
   }
-  function topic({id,symbol,title,description,count,stats,actions}){
-    return `<article class="tc topic-card"><span class="topic-symbol topic-symbol-${e(id)}" aria-hidden="true">${e(symbol)}</span><div class="topic-copy"><h3>${e(title)}</h3><p>${e(description)}</p><div class="topic-card-count">${count}</div><div class="topic-card-stats">${stats}</div><div class="tc-act">${actions}</div></div></article>`;
+  function topic({id,title,description,count,stats='',accuracy,actions,sessions=[]}){
+    const result=Number.isFinite(accuracy)?`<span><b>${e(accuracy)} %</b> úspěšnost odpovědí</span>`:'<span class="topic-empty">Zatím bez výsledků</span>';
+    const unfinished=sessions.length>1?`<details class="topic-drafts"><summary>Vybrat rozepsaný test (${sessions.length})</summary><ul class="topic-session-list">${sessions.map(s=>`<li><div><strong>${e(s.label)}</strong><span>${e(s.updated)}</span></div>${s.action}</li>`).join('')}</ul></details>`:sessions.length?`<p class="topic-resume-note">Rozepsáno · ${e(sessions[0].label)} · ${e(sessions[0].updated)}</p>`:'';
+    return `<article class="tc topic-card" data-topic-id="${e(id)}" aria-labelledby="topic-heading-${e(id)}"><div class="topic-copy"><h3 id="topic-heading-${e(id)}">${e(title)}</h3><p>${e(description)}</p><div class="topic-card-count">${count}</div><div class="topic-card-stats">${stats}${result}</div><div class="tc-act">${actions}${sessions[0]?.action||''}</div>${unfinished}</div></article>`;
   }
   function topicHome({cards,action}){
     return `<section class="topic-home" id="sect-topics" aria-labelledby="topics-heading"><div class="sech"><h2 id="topics-heading">Procvičování podle témat</h2>${action}</div><div class="topic-grid">${cards}</div></section>`;

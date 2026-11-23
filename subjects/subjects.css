@@ -50,33 +50,36 @@ html[data-subject="cz"] .notebook-pattern {background-image:url("./literary-note
   .workspace-top {flex-wrap:wrap;}
 }
 
-/* Symbols such as “slovem” need their intrinsic width, not a fixed icon slot. */
+/* One shared text-first card for both subjects; full Czech words wrap at spaces. */
 .topic-grid .topic-card {
-  grid-template-columns:minmax(5.5rem,max-content) minmax(0,1fr);
-  grid-template-areas:"symbol content";
-  align-items:start;
+  grid-template-columns:minmax(0,1fr);
+  align-items:stretch;
 }
-.topic-grid .topic-card .topic-symbol {
-  grid-area:symbol;
-  justify-self:start;
+.topic-grid .topic-card .topic-copy {
   min-inline-size:0;
-  max-inline-size:100%;
-  padding-inline-end:.12em;
-  white-space:normal;
+  display:flex;
+  flex-direction:column;
 }
-.topic-grid .topic-card .topic-copy {grid-area:content;min-inline-size:0;}
-.topic-grid .topic-card :is(.topic-symbol,.topic-copy h3,.topic-copy > p) {
+.topic-grid .topic-card :is(h3,p,button,summary,.topic-card-count,.topic-card-stats,.topic-session-list) {
   overflow-wrap:normal;
   word-break:normal;
   hyphens:none;
 }
 .topic-grid .topic-card .topic-copy h3 {white-space:normal;}
-
-/* Narrow cards give the full text column to the category name and description. */
-@media (max-width:900px) {
-  .topic-grid .topic-card {
-    grid-template-columns:minmax(0,1fr);
-    grid-template-areas:"symbol" "content";
-    gap:10px;
-  }
+.topic-grid .topic-card .topic-copy > p {line-height:1.5;margin-bottom:12px;}
+.topic-grid .topic-card .topic-card-count {margin-top:auto;}
+.topic-grid .topic-card .topic-card-stats {line-height:1.5;}
+.topic-grid .topic-card .tc-act {margin-top:14px;gap:8px;}
+.topic-grid .topic-card .tc-act button,.topic-session-list button {
+  flex:none;min-height:44px;max-inline-size:100%;white-space:normal;
 }
+.topic-grid .topic-card .topic-practice-action {background:var(--sel);color:var(--ac);border-color:var(--strong-rule);}
+.topic-grid .topic-card .topic-resume-action {background:var(--card);color:var(--tx);border-color:var(--bd);}
+.topic-grid .topic-card .topic-copy > .topic-resume-note {font-size:.8rem;color:var(--mut);margin:10px 0 0;}
+.topic-drafts {margin-top:10px;border-top:1px solid var(--bd);font-size:.85rem;}
+.topic-drafts > summary {padding:10px 0;min-height:44px;color:var(--ac);cursor:pointer;}
+.topic-session-list {list-style:none;margin:0;padding:0;}
+.topic-session-list li {display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:10px 0;border-top:1px solid var(--bd);}
+.topic-session-list li > div {flex:1 1 140px;min-inline-size:0;}
+.topic-session-list strong,.topic-session-list span {display:block;font-weight:400;line-height:1.5;}
+.topic-session-list span {color:var(--mut);font-size:.8rem;}
