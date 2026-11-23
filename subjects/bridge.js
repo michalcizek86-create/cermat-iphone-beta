@@ -22,10 +22,10 @@
     dispatchEvent(new CustomEvent('cermat:subject-visibility', {detail:{active}}));
   }
 
-  function select(next) {
+  function select(next,keyboard=false) {
     if (next===subject) return;
     visibility(false);
-    parent.postMessage({type:'CERMAT_SELECT_SUBJECT',subject:next},location.origin);
+    parent.postMessage({type:'CERMAT_SELECT_SUBJECT',subject:next,keyboard},location.origin);
   }
 
   function control() {
@@ -43,7 +43,7 @@
       button.addEventListener('keydown', event => {
         if (!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
         event.preventDefault();
-        select(event.key==='Home' ? 'math' : event.key==='End' ? 'cz' : subject==='math' ? 'cz' : 'math');
+        select(event.key==='Home' ? 'math' : event.key==='End' ? 'cz' : subject==='math' ? 'cz' : 'math',true);
       });
       group.append(button);
     }
@@ -57,6 +57,7 @@
       const group = control();
       const brand = target.querySelector('.study-brand');
       brand ? brand.after(group) : target.append(group);
+      window.CermatMotion?.segment(group,subject);
     }
     const top = document.querySelector('.workspace-top');
     if (top!==observedTop) {
@@ -71,9 +72,16 @@
   }
 
   addEventListener('message', event => {
-    if (event.source===parent && event.origin===location.origin && event.data?.type==='CERMAT_SUBJECT_VISIBILITY') visibility(!!event.data.active);
+    if (event.source!==parent || event.origin!==location.origin || event.data?.type!=='CERMAT_SUBJECT_VISIBILITY')return;
+    visibility(!!event.data.active);
+    if(event.data.active){
+      document.querySelectorAll('.subject-switch').forEach(group=>window.CermatMotion?.segment(group,subject,{from:event.data.from,animated:event.data.animate}));
+      if(event.data.keyboard)document.querySelector('[data-subject-choice="'+subject+'"]')?.focus({preventScroll:true});
+    }
   });
+  addEventListener('cermat:motion-settle',()=>parent.postMessage({type:'CERMAT_SETTLE_SUBJECT'},location.origin));
   window.CermatSubjectBridge = {get active(){return active;}};
-  new MutationObserver(attach).observe(document.getElementById('app'), {childList:true,subtree:true});
+  // View changes replace app children; drawing paths never need a header scan.
+  new MutationObserver(attach).observe(document.getElementById('app'), {childList:true});
   attach();
 })();

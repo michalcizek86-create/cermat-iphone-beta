@@ -1,0 +1,38 @@
+/* Motion only: the existing geometry, palette and typography stay in their own styles. */
+:root {
+  --motion-ease:cubic-bezier(.22,1,.36,1);
+  --motion-spring:cubic-bezier(.2,.8,.2,1);
+}
+
+.subject-switch {position:relative;isolation:isolate;}
+.subject-switch .subject-indicator {
+  position:absolute;top:2px;left:0;bottom:2px;
+  border-radius:3px;background:var(--sel);pointer-events:none;z-index:-1;
+}
+.subject-switch[data-motion-ready] button[aria-pressed="true"],
+.subject-switch[data-motion-ready] button:hover {background:transparent;}
+.subject-switch button {transition:color 160ms var(--motion-ease);}
+
+button,.notebook-links a,.year-card > summary {
+  transition:background-color 160ms ease,border-color 160ms ease,color 160ms ease;
+}
+.year-chevron {transition:transform 240ms var(--motion-ease);}
+.year-card[open][data-motion-expanded="false"] .year-chevron {transform:rotate(45deg);}
+.topnav[data-motion-menu-closing] .nav {display:flex!important;}
+.goal > i,.tp .bar > i {transform-origin:left center;}
+
+@media (prefers-reduced-motion:no-preference) {
+  button:not(.workspace-tools button):not(#mk button),.notebook-links a {
+    transition:transform 160ms var(--motion-spring),background-color 160ms ease,border-color 160ms ease,color 160ms ease;
+  }
+  button:not(:disabled):not(.subject-switch button):not(.workspace-tools button):not(#mk button):active,
+  .notebook-links a:active {transform:translateY(1px) scale(.985);}
+  .topic-card,.notebook-mix {transition:transform 220ms var(--motion-ease),border-color 160ms ease;}
+}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
+  .topic-card:hover,.notebook-mix:hover {transform:translateY(-2px);}
+}
+@media (prefers-reduced-motion:reduce) {
+  html {scroll-behavior:auto!important;}
+  button,.notebook-links a,.year-card > summary,.year-chevron,.topic-card,.notebook-mix {transition:none!important;}
+}

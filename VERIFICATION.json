@@ -1,6 +1,6 @@
 {
   "edition": "student",
-  "release": "d51d25cb0b45277a",
+  "release": "c75f44acba8d7338",
   "baseline": "ef8c3c4f373c8d1619d839963cc0d266c0ca9b60",
   "officialExams": 35,
   "bundledPracticeSets": 6,
@@ -8,7 +8,7 @@
   "artwork": 510,
   "browserDataIncluded": false,
   "design": "ivory mathematics notebook",
-  "offlineResources": 265,
+  "offlineResources": 267,
   "subjects": {
     "math": {
       "officialExams": 35,
@@ -19,5 +19,6 @@
       "questionRecords": 1200
     }
   },
-  "czechArchiveDocuments": 110
+  "czechArchiveDocuments": 110,
+  "motion": "shared, event-driven, reduced-motion aware"
 }
