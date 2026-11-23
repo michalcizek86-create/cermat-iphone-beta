@@ -1,0 +1,1362 @@
+[
+  {
+    "id": "cz-2026-r1",
+    "year": 2026,
+    "kind": "regular",
+    "term": 1,
+    "title": "1. řádný termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/C9A_2026_TS.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/C9A_2026_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/C9A_2026_KSR.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/C9A_2026_komentovana_verze_aktualizace.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2026-r1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/C9A_2026_TS.pdf",
+        "sha256": "a13cd5254a46ecb788917ceef94373538c1de9684c8373cc4d908ce85525c720",
+        "bytes": 1006535,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2026-r1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9A_2026_KSR.pdf",
+        "sha256": "f0211645c8d9c523fe70f174a9669333ea7d8879dd2b290ef854a1c1074f1110",
+        "bytes": 268935,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2026-r1/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/C9A_2026_komentovana_verze_aktualizace.pdf",
+        "sha256": "9f506bb98f8e4cda4bd6d7eba6e159250445e93d8e0bc74e9085ca66e04bb3a8",
+        "bytes": 275300,
+        "pages": 15
+      }
+    }
+  },
+  {
+    "id": "cz-2026-r2",
+    "year": 2026,
+    "kind": "regular",
+    "term": 2,
+    "title": "2. řádný termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/C9B_2026_TS.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/C9B_2026_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/C9B_2026_KSR.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/C9B_2026_komentovana_verze.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2026-r2/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/C9B_2026_TS.pdf",
+        "sha256": "9fd60e0e4334732f5652c0f8e4bff3133187d67b6dfddf9c9be705ce2a0dc3b9",
+        "bytes": 1232055,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2026-r2/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9B_2026_KSR.pdf",
+        "sha256": "2fe377d12baf2a18c6cd57a6458af3092f892b2a2f31a4d5f943a50ba37fdf12",
+        "bytes": 267434,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2026-r2/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9B_2026_komentovana_verze.pdf",
+        "sha256": "d0fd96a0a69658e6725318f37275281728ecb575df70e14e0e1c5e14885662fe",
+        "bytes": 268567,
+        "pages": 16
+      }
+    }
+  },
+  {
+    "id": "cz-2026-n1",
+    "year": 2026,
+    "kind": "alternative",
+    "term": 1,
+    "title": "1. náhradní termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/C9C_2026_TS.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/C9C_2026_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/C9C_2026_KSR.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/C9C_2026_komentovana_verze.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2026-n1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9C_2026_TS.pdf",
+        "sha256": "e1dec48e79e5aa189c5c47dd35c54931212a7844a9f48415c49197d05afcb142",
+        "bytes": 761062,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2026-n1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9C_2026_KSR.pdf",
+        "sha256": "f9af8ff73c44eaa0e2c486012b57825f47c1fa580d9631d45658bb11ad0b57b9",
+        "bytes": 271359,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2026-n1/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9C_2026_komentovana_verze.pdf",
+        "sha256": "23f61c23fec1ec32b5921335e13b7c243f8deadae47fae58d1f098b6becd1383",
+        "bytes": 257513,
+        "pages": 16
+      }
+    }
+  },
+  {
+    "id": "cz-2026-n2",
+    "year": 2026,
+    "kind": "alternative",
+    "term": 2,
+    "title": "2. náhradní termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/C9D_2026_TS.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/C9D_2026_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/C9D_2026_KSR.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/C9D_2026_komentovana_verze.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2026-n2/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9D_2026_TS.pdf",
+        "sha256": "da892d162d1a2acfde0dd75d36e82f3a09a8e203ea90a79fddd15a1740f79b90",
+        "bytes": 1078931,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2026-n2/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9D_2026_KSR.pdf",
+        "sha256": "d2777dec41d10c75bd58cdef171f2ad813001444fb43cd1b10113e015babfb0e",
+        "bytes": 269239,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2026-n2/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9D_2026_komentovana_verze.pdf",
+        "sha256": "d8557d9ef173bf99040a6b82cff1414e33c767aed9290623f027900969acdeab",
+        "bytes": 306268,
+        "pages": 16
+      }
+    }
+  },
+  {
+    "id": "cz-2025-r1",
+    "year": 2025,
+    "kind": "regular",
+    "term": 1,
+    "title": "1. řádný termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/C9A_2025_TS.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/C9A_2025_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/C9A_2025_roz%C5%A1%C3%AD%C5%99en%C3%BD_kl%C3%AD%C4%8D.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/C9PAD25C0T01_komentovan%C3%A1_verze_FINAL.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2025-r1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9A_2025_TS.pdf",
+        "sha256": "6a5e9f6a86049c8dba051399873830f12fbcf7a5254a08e70303c807734b2be9",
+        "bytes": 814949,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2025-r1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/C9A_2025_roz%C5%A1%C3%AD%C5%99en%C3%BD_kl%C3%AD%C4%8D.pdf",
+        "sha256": "a88c227971aca2c51ccd5848c55a395babbc8d51469ed8ad4fddc3c7a6dbffd0",
+        "bytes": 178924,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2025-r1/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9PAD25C0T01_komentovan%C3%A1_verze_FINAL.pdf",
+        "sha256": "61359a20a63724b95945f3ebf6785774d9aacb8ad25b2d360fe400747be60e2c",
+        "bytes": 249431,
+        "pages": 17
+      }
+    }
+  },
+  {
+    "id": "cz-2025-r2",
+    "year": 2025,
+    "kind": "regular",
+    "term": 2,
+    "title": "2. řádný termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/C9B_2025_TS.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/C9B_2025_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/C9B_2025_roz%C5%A1%C3%AD%C5%99en%C3%BD_kl%C3%AD%C4%8D.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/C9PBD25C0T02_komentovan%C3%A1_verze_FINAL.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2025-r2/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9B_2025_TS.pdf",
+        "sha256": "52559a080898b369628d9b4d26172f396269051e995b4566b79dfc74403b17a1",
+        "bytes": 896222,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2025-r2/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/C9B_2025_roz%C5%A1%C3%AD%C5%99en%C3%BD_kl%C3%AD%C4%8D.pdf",
+        "sha256": "585487396cc9896afaf800cfd7a4529c44c142bb58f7430405321f0b322edce2",
+        "bytes": 182055,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2025-r2/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9PBD25C0T02_komentovan%C3%A1_verze_FINAL.pdf",
+        "sha256": "e6135745ddaba08f9fba5534415c4a4f400556721188e5c0770baee984981d2e",
+        "bytes": 267865,
+        "pages": 16
+      }
+    }
+  },
+  {
+    "id": "cz-2025-n1",
+    "year": 2025,
+    "kind": "alternative",
+    "term": 1,
+    "title": "1. náhradní termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/C9C_2025_TS.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/C9C_2025_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/C9C_2025_roz%C5%A1%C3%AD%C5%99en%C3%BD_kl%C3%AD%C4%8D.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2025-n1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9C_2025_TS.pdf",
+        "sha256": "05d6a6c73b83538dc9a19eb596545d2bfee21b8d15d540d82ebf3fda6b30e092",
+        "bytes": 389699,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2025-n1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/C9C_2025_roz%C5%A1%C3%AD%C5%99en%C3%BD_kl%C3%AD%C4%8D.pdf",
+        "sha256": "432cd92d1990e78e51b9943cb8b975693a0b5503bdcf489233c053d132e1958d",
+        "bytes": 178898,
+        "pages": 2
+      }
+    }
+  },
+  {
+    "id": "cz-2025-n2",
+    "year": 2025,
+    "kind": "alternative",
+    "term": 2,
+    "title": "2. náhradní termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/C9D_2025_TS.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/C9D_2025_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/C9D_2025_roz%C5%A1%C3%AD%C5%99en%C3%BD_kl%C3%AD%C4%8D.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2025-n2/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9D_2025_TS.pdf",
+        "sha256": "0afc85dd9b3b728756371a7975e20e0c797a62ad9fb7a42bfde785246e9c4c7c",
+        "bytes": 390055,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2025-n2/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/C9D_2025_roz%C5%A1%C3%AD%C5%99en%C3%BD_kl%C3%AD%C4%8D.pdf",
+        "sha256": "40ea2ee11e3a3028a9d32b6d8173a413f022db527e542e759fce4828b8ed8c7e",
+        "bytes": 181404,
+        "pages": 2
+      }
+    }
+  },
+  {
+    "id": "cz-2024-r1",
+    "year": 2024,
+    "kind": "regular",
+    "term": 1,
+    "title": "1. řádný termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/CJL_2024_9A_TS.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/CJL_2024_9A_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/C9PAD24C0K01_roz%C5%A1%C3%AD%C5%99en%C3%BD_kl%C3%AD%C4%8D.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/C9PAD24C0T01_komentovan%C3%A1_verze_FINAL.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2024-r1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/CJL_2024_9A_TS.pdf",
+        "sha256": "a4fe8511df9900d54490762df9f635e6687074e53fee6995fbd241f10ef352fb",
+        "bytes": 2541094,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2024-r1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9PAD24C0K01_roz%C5%A1%C3%AD%C5%99en%C3%BD_kl%C3%AD%C4%8D.pdf",
+        "sha256": "ff3ef69207c648c6c3fafc787d0be4ffb7eeae9a14b9afd9a0db9b782e048038",
+        "bytes": 259730,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2024-r1/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9PAD24C0T01_komentovan%C3%A1_verze_FINAL.pdf",
+        "sha256": "356ce2464805d7344eb3d6069bf7cefc4aab6d11180980b0cd5430a6f2a363a6",
+        "bytes": 202420,
+        "pages": 16
+      }
+    }
+  },
+  {
+    "id": "cz-2024-r2",
+    "year": 2024,
+    "kind": "regular",
+    "term": 2,
+    "title": "2. řádný termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/CJL_2024_9B_TS.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/CJL_2024_9B_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/C9PBD24C0K02_roz%C5%A1%C3%AD%C5%99en%C3%BD_kl%C3%AD%C4%8D.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/C9PBD24C0T02_komentovan%C3%A1_verze_FINAL.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2024-r2/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/CJL_2024_9B_TS.pdf",
+        "sha256": "d201c27fa690b4312d82f42c66fc7f135bcfb5391a4517aa4fdc0b0eac015b70",
+        "bytes": 2495633,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2024-r2/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9PBD24C0K02_roz%C5%A1%C3%AD%C5%99en%C3%BD_kl%C3%AD%C4%8D.pdf",
+        "sha256": "68e7e1e80e0e7ff0840c416ce0e847215e2a7407a68284b799a25a04c6f48978",
+        "bytes": 256450,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2024-r2/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9PBD24C0T02_komentovan%C3%A1_verze_FINAL.pdf",
+        "sha256": "c7f528022621ca7787901b173ef8df7527d63af6e33bc7f069dea7d7691f391b",
+        "bytes": 202539,
+        "pages": 16
+      }
+    }
+  },
+  {
+    "id": "cz-2024-n1",
+    "year": 2024,
+    "kind": "alternative",
+    "term": 1,
+    "title": "1. náhradní termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/CJL_2024_9C_TS.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/CJL_2024_9C_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/C9PCD24C0K03_roz%C5%A1%C3%AD%C5%99en%C3%BD_kl%C3%AD%C4%8D.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2024-n1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/CJL_2024_9C_TS.pdf",
+        "sha256": "d4127788e11fa0636f51e89c2bc0a5d8b15e576a4fa3427c77541a515362e870",
+        "bytes": 4702964,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2024-n1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9PCD24C0K03_roz%C5%A1%C3%AD%C5%99en%C3%BD_kl%C3%AD%C4%8D.pdf",
+        "sha256": "dd8dc36624a2b82d25bc641f034695847c6996e47c8705ffdea050edade68c71",
+        "bytes": 261439,
+        "pages": 2
+      }
+    }
+  },
+  {
+    "id": "cz-2024-n2",
+    "year": 2024,
+    "kind": "alternative",
+    "term": 2,
+    "title": "2. náhradní termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/CJL_2024_9D_TS.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/CJL_2024_9D_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/C9PDD24C0K04_roz%C5%A1%C3%AD%C5%99en%C3%BD_kl%C3%AD%C4%8D.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2024-n2/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/CJL_2024_9D_TS.pdf",
+        "sha256": "d0fb8181d385f999fd930e09b4a433ea33879b8aead91352839ffa66b614eb8b",
+        "bytes": 4712595,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2024-n2/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9PDD24C0K04_roz%C5%A1%C3%AD%C5%99en%C3%BD_kl%C3%AD%C4%8D.pdf",
+        "sha256": "437d77b77ea9a86748b940e96eaa1b944dd37d16c843bfc6665ca34be75a21f2",
+        "bytes": 260177,
+        "pages": 2
+      }
+    }
+  },
+  {
+    "id": "cz-2023-r1",
+    "year": 2023,
+    "kind": "regular",
+    "term": 1,
+    "title": "1. řádný termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/C9A_2023_DT.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/C9A_2023_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/C9A_DT_23_roz%C5%A1%C3%AD%C5%99en%C3%BD_kl%C3%AD%C4%8D.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/C9PAD23C0T01_komentovan%C3%A1_verze_FINAL.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2023-r1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9A_2023_DT.pdf",
+        "sha256": "8e10610c73a26873899ba4b8778aa367069fee3f6491fc760175273cdba9683a",
+        "bytes": 248390,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2023-r1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9A_DT_23_roz%C5%A1%C3%AD%C5%99en%C3%BD_kl%C3%AD%C4%8D.pdf",
+        "sha256": "ba8ccd6e33474df74df7a4fd66542167199552066bcb4d6aad432c1dbf81ae3a",
+        "bytes": 174967,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2023-r1/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9PAD23C0T01_komentovan%C3%A1_verze_FINAL.pdf",
+        "sha256": "bc4feb1d3775a90091ea36f4d1de2c72b9b98af93216cfddaba9428631c2c989",
+        "bytes": 199243,
+        "pages": 16
+      }
+    }
+  },
+  {
+    "id": "cz-2023-r2",
+    "year": 2023,
+    "kind": "regular",
+    "term": 2,
+    "title": "2. řádný termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/C9B_2023_DT.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/C9B_2023_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/C9B_DT_23_roz%C5%A1%C3%AD%C5%99en%C3%BD_kl%C3%AD%C4%8D.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/C9PBD23C0T02_komentovan%C3%A1_verze_FINAL.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2023-r2/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9B_2023_DT.pdf",
+        "sha256": "147ac1a19d4f2918ed9c99a03abe6c14e0fa8ec40bbe0585267bb0c7d62dad9e",
+        "bytes": 246581,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2023-r2/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9B_DT_23_roz%C5%A1%C3%AD%C5%99en%C3%BD_kl%C3%AD%C4%8D.pdf",
+        "sha256": "7eeceb31a2a2d4ada01744239e69ac46e10d61b0159b1043e8e7a8cb9eee8751",
+        "bytes": 179196,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2023-r2/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9PBD23C0T02_komentovan%C3%A1_verze_FINAL.pdf",
+        "sha256": "91033b0de9143d6a8b119e6259349cbd8e10eba8fd1fc11b15e413315aedca4a",
+        "bytes": 176441,
+        "pages": 16
+      }
+    }
+  },
+  {
+    "id": "cz-2023-n1",
+    "year": 2023,
+    "kind": "alternative",
+    "term": 1,
+    "title": "1. náhradní termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/CJ9C_2023_DT.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/C9C_2023_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/C9C_2023_klic_rozsireny.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2023-n1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/CJ9C_2023_DT.pdf",
+        "sha256": "50ca47b7045ac36988557739a69ac5b64dcfd69c4e6cbbbab10e955736ee3115",
+        "bytes": 335438,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2023-n1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9C_2023_klic_rozsireny.pdf",
+        "sha256": "cb589e73b7ef7fbd49d88ef19035709b05ea7e1bdab4a4a38badcc916cc5530e",
+        "bytes": 174390,
+        "pages": 2
+      }
+    }
+  },
+  {
+    "id": "cz-2023-n2",
+    "year": 2023,
+    "kind": "alternative",
+    "term": 2,
+    "title": "2. náhradní termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/C9D_2023_DT.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/C9D_203_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/C9D_2023_klic_rozsireny.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2023-n2/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9D_2023_DT.pdf",
+        "sha256": "8529640e6cbeae76e5d8a6981c4a247596ef09e428df02975be64c353f68e7a7",
+        "bytes": 88395,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2023-n2/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9D_2023_klic_rozsireny.pdf",
+        "sha256": "3faa67d376d7f782ea6587e0f7fa958a6a5af2166d7f663913240b87c0fe5976",
+        "bytes": 173850,
+        "pages": 2
+      }
+    }
+  },
+  {
+    "id": "cz-2022-r1",
+    "year": 2022,
+    "kind": "regular",
+    "term": 1,
+    "title": "1. řádný termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9A_2022_DT.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9A_2022_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9A_2022_KLIC.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9A_2022_komentovana_verze.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2022-r1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9A_2022_DT.pdf",
+        "sha256": "a01a53998316fdf5880e82fd41d15173c41f4eea4148129b8b7096748546520c",
+        "bytes": 161375,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2022-r1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9A_2022_KLIC.pdf",
+        "sha256": "6c453174f7586f521fc19cd2fcb86189c28b5a87fced01ec5e1f457105b0d3c5",
+        "bytes": 241862,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2022-r1/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9A_2022_komentovana_verze.pdf",
+        "sha256": "a685524fce3906bd99260a1b076a74004c6bac18248907078272c2faf866bf8a",
+        "bytes": 201446,
+        "pages": 16
+      }
+    }
+  },
+  {
+    "id": "cz-2022-r2",
+    "year": 2022,
+    "kind": "regular",
+    "term": 2,
+    "title": "2. řádný termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9B_2022_DT.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9B_2022_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9B_2022_KLIC.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9B_2022_komentovana_verze.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2022-r2/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9B_2022_DT.pdf",
+        "sha256": "7c591455fc917d18d8a512bed8e60d318ad252cd735dd51ec4c0bfdd6da3ad9a",
+        "bytes": 160399,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2022-r2/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9B_2022_KLIC.pdf",
+        "sha256": "55d98833bc42bcd5017e51b8da88b4006053293d2cb39ae98847a443937fe1dc",
+        "bytes": 298289,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2022-r2/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9B_2022_komentovana_verze.pdf",
+        "sha256": "8ac0c90296a182d2336bb6b0b4922517674ed2e9445c9c0b4690213614db9204",
+        "bytes": 215067,
+        "pages": 16
+      }
+    }
+  },
+  {
+    "id": "cz-2022-n1",
+    "year": 2022,
+    "kind": "alternative",
+    "term": 1,
+    "title": "1. náhradní termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9C_2022_DT.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9C_2022_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9C_2022_KLIC.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2022-n1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9C_2022_DT.pdf",
+        "sha256": "8a42a6cc94961b498d4a5d37f948e9cde14a7aa84387a54ad263915ac61e860d",
+        "bytes": 163018,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2022-n1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9C_2022_KLIC.pdf",
+        "sha256": "41afd68200b78251aa5f8a1aed5275bbf2bedcedaff6089126117018b68aab0f",
+        "bytes": 173452,
+        "pages": 2
+      }
+    }
+  },
+  {
+    "id": "cz-2022-n2",
+    "year": 2022,
+    "kind": "alternative",
+    "term": 2,
+    "title": "2. náhradní termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9D_2022_DT.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9D_2022_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9D_2022_KLIC.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2022-n2/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9D_2022_DT.pdf",
+        "sha256": "9a1c9ef6be441601b5c53c54ffa047102ab5f1f4195be26788d5185ac9b6870c",
+        "bytes": 187341,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2022-n2/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2022/C9D_2022_KLIC.pdf",
+        "sha256": "0533b036f9603d4975d30e8890f3d398db190da2f151c7ff7fe43e2587318bbe",
+        "bytes": 172719,
+        "pages": 2
+      }
+    }
+  },
+  {
+    "id": "cz-2021-r1",
+    "year": 2021,
+    "kind": "regular",
+    "term": 1,
+    "title": "1. řádný termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/C9A_2021_DT.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/C9A_2021_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/C9A_2021_KLIC.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/C9A_2021_komentovana_verze.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2021-r1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/C9A_2021_DT.pdf",
+        "sha256": "8cdfca4fc863d46198ea2e00e4c75ec02874d3bab46fa5583545919306040327",
+        "bytes": 208644,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2021-r1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/C9A_2021_KLIC.pdf",
+        "sha256": "a0b2de8f4247e6ce2cf13e31f24300e7c52bf9a46445e46f9f038c12486c9424",
+        "bytes": 184863,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2021-r1/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/C9A_2021_komentovana_verze.pdf",
+        "sha256": "d98524313c13bfe872e3ae33bc4651b7ddf82ed54c950bdf1f31fb3c2bef5a48",
+        "bytes": 307985,
+        "pages": 17
+      }
+    }
+  },
+  {
+    "id": "cz-2021-r2",
+    "year": 2021,
+    "kind": "regular",
+    "term": 2,
+    "title": "2. řádný termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/C9B_2021_DT.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/C9B_2021_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/C9B_2021_KLIC.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/C9B_2021_komentovana_verze.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2021-r2/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/C9B_2021_DT.pdf",
+        "sha256": "5f27c20183dd7779eeee184f1445c8e0c12fd8fddcd7de9bc1c85ff8fd16dbdf",
+        "bytes": 208567,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2021-r2/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/C9B_2021_KLIC.pdf",
+        "sha256": "dd84e57c7240b616e610f6425effc1f6747a06bd0909f816d9e8e8356f7ac126",
+        "bytes": 184518,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2021-r2/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/C9B_2021_komentovana_verze.pdf",
+        "sha256": "03d562b71e0592c4a0e9e27978183bfdf6157bd66f863e3f887e6715759b056b",
+        "bytes": 305516,
+        "pages": 16
+      }
+    }
+  },
+  {
+    "id": "cz-2021-n1",
+    "year": 2021,
+    "kind": "alternative",
+    "term": 1,
+    "title": "1. náhradní termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/Nahradni-terminy/C9C_2021_DT.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/Nahradni-terminy/C9C_2021_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/Nahradni-terminy/C9C_2021_KLIC.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2021-n1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/Nahradni-terminy/C9C_2021_DT.pdf",
+        "sha256": "10935c2e6f3f391c3ffdfbc9c13bd3f6202e1a987e29061cc8e0b075c754e8ae",
+        "bytes": 158520,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2021-n1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/Nahradni-terminy/C9C_2021_KLIC.pdf",
+        "sha256": "d06f54820dc22576171300d9fa1b171e32d1025872d1af562bbde5e545165ecc",
+        "bytes": 185055,
+        "pages": 2
+      }
+    }
+  },
+  {
+    "id": "cz-2021-n2",
+    "year": 2021,
+    "kind": "alternative",
+    "term": 2,
+    "title": "2. náhradní termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/Nahradni-terminy/C9D_2021_DT.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/Nahradni-terminy/C9D_2021_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/Nahradni-terminy/C9D_2021_KLIC.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2021-n2/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/Nahradni-terminy/C9D_2021_DT.pdf",
+        "sha256": "41f880fe131093ee6f36c1de8ed579ba1790c3af80e668502bfa97e84c5e73e3",
+        "bytes": 160628,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2021-n2/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2021/Nahradni-terminy/C9D_2021_KLIC.pdf",
+        "sha256": "9beed6091b1ea815185eee859019e647029ecae1a0d48e340cb4ec88968ba901",
+        "bytes": 182319,
+        "pages": 2
+      }
+    }
+  },
+  {
+    "id": "cz-2021-i1",
+    "year": 2021,
+    "kind": "illustration",
+    "term": 1,
+    "title": "Ilustrační test",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/IT_2021/C9I_2021_TEST.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/IT_2021/C9I_2021_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/IT_2021/C9I_2021_KLIC.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/IT_2021/C9I_2021_komentovana_verze.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2021-i1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/IT_2021/C9I_2021_TEST.pdf",
+        "sha256": "a0018e31550f48aecb6616994d33267a1c1b51a22451d1925f54e83df108f2b6",
+        "bytes": 174015,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2021-i1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/IT_2021/C9I_2021_KLIC.pdf",
+        "sha256": "1d55d5b6ae6d7ee6871a54fa7e61bd865ac9722566999e5109f780409c2bac12",
+        "bytes": 222053,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2021-i1/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/IT_2021/C9I_2021_komentovana_verze.pdf",
+        "sha256": "59b76ef8c4c7d6263442d3416b012d1aeb3a9901fbe6095b64a9eb1c75a2ba3c",
+        "bytes": 161706,
+        "pages": 16
+      }
+    }
+  },
+  {
+    "id": "cz-2020-r1",
+    "year": 2020,
+    "kind": "regular",
+    "term": 1,
+    "title": "1. řádný termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2020/CJL_2020_9_A_DT.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2020/CJL_2020_9_A_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2020/CJL_2020_9_A_KLIC.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2020/C9A_2020_komentovane_reseni.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2020-r1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2020/CJL_2020_9_A_DT.pdf",
+        "sha256": "84be4ca991971d88b60444ee5add12671056d80eb10fd366a9fcac342300cfd3",
+        "bytes": 159008,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2020-r1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2020/CJL_2020_9_A_KLIC.pdf",
+        "sha256": "dea8fec5499d1c628436aafa99fca1d9bf07d6a3bccaf8c94ad098eb0e4237fa",
+        "bytes": 419615,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2020-r1/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2020/C9A_2020_komentovane_reseni.pdf",
+        "sha256": "d3d7a6d71f642c935d0251a7e264737a6814d2360962757f418e1b556f347588",
+        "bytes": 225607,
+        "pages": 16
+      }
+    }
+  },
+  {
+    "id": "cz-2020-i1",
+    "year": 2020,
+    "kind": "illustration",
+    "term": 1,
+    "title": "Ilustrační test",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/IT_2020/CJL/C9PID20C0T01.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/IT_2020/CJL/C9PID20C0Z01_ilustracni_test_2020_9_zaznamovy_arch.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/IT_2020/CJL/C9PID20C0K01_ilustracni_test_2020_9_klic_spravnych_reseni.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/IT_2020/CJL/C9PID20C0T01_komentovana_verze.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2020-i1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/IT_2020/CJL/C9PID20C0T01.pdf",
+        "sha256": "656a1bff4c29237af1091c3f9b92a18f9150ac59cd3117809126096fca97fff8",
+        "bytes": 175459,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2020-i1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/IT_2020/CJL/C9PID20C0K01_ilustracni_test_2020_9_klic_spravnych_reseni.pdf",
+        "sha256": "9fb5745e33e7ee8c1ee30814c625f014bcc51869ab60a219ae842b71739a58c4",
+        "bytes": 198202,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2020-i1/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/IT_2020/CJL/C9PID20C0T01_komentovana_verze.pdf",
+        "sha256": "91483dc8de14838ed1c23589ad3d45f89180b66c19fb8dd233cacc31b9145043",
+        "bytes": 291744,
+        "pages": 18
+      }
+    }
+  },
+  {
+    "id": "cz-2019-r1",
+    "year": 2019,
+    "kind": "regular",
+    "term": 1,
+    "title": "1. řádný termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/jednotna-prijmaci-zkouska/2019/CJ-didakticky-test-1term.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/jednotna-prijmaci-zkouska/2019/CJ-ZA-1term.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2019/C9A_2019_KLIC.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PAD19C0T01_komentovana_verze.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2019-r1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/jednotna-prijmaci-zkouska/2019/CJ-didakticky-test-1term.pdf",
+        "sha256": "ddb30e98d3ed94e7dccb9bb58fc8ee7302fcc4f4df7030a652d9e114e90f73e2",
+        "bytes": 157406,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2019-r1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2019/C9A_2019_KLIC.pdf",
+        "sha256": "81b3e5d5d1cf1b3070693d7091790fab54f0cb629bc0701eff758519c9f95cea",
+        "bytes": 196778,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2019-r1/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PAD19C0T01_komentovana_verze.pdf",
+        "sha256": "0775571746ac82d60c8615b344bcd2fd9386f614672eac371091d8bb545a2986",
+        "bytes": 283822,
+        "pages": 15
+      }
+    }
+  },
+  {
+    "id": "cz-2019-r2",
+    "year": 2019,
+    "kind": "regular",
+    "term": 2,
+    "title": "2. řádný termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/jednotna-prijmaci-zkouska/2019/CJ-didakticky-test-2term.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/jednotna-prijmaci-zkouska/2019/CJ-ZA-2term.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2019/C9B_2019_KLIC.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PBD19C0T02_komentovana_verze.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2019-r2/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/jednotna-prijmaci-zkouska/2019/CJ-didakticky-test-2term.pdf",
+        "sha256": "ac2acece940f8f828fbf2988d5b0c379ed64de8a35e1213161429d6ad2072b61",
+        "bytes": 158545,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2019-r2/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2019/C9B_2019_KLIC.pdf",
+        "sha256": "e74ffd7a22c42ffcb2d03671949f042b73123ee501928218a162335caee19041",
+        "bytes": 197392,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2019-r2/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PBD19C0T02_komentovana_verze.pdf",
+        "sha256": "d452ae64daf15d39056bde8d0329bfac28d4585126aa40d94cd6d9d04073f89d",
+        "bytes": 300214,
+        "pages": 17
+      }
+    }
+  },
+  {
+    "id": "cz-2019-i1",
+    "year": 2019,
+    "kind": "illustration",
+    "term": 1,
+    "title": "Ilustrační test",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/JPZ2019_IT_CJL_4lete_test_C9PID19C0T01.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/JPZ2019_IT_CJL_4lete_ZA_C9PID19C0Z01.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/JPZ2019_IT_CJL_4lete_klic_C9PID19C0K01.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PID19C0T01_komentovana_verze.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2019-i1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/JPZ2019_IT_CJL_4lete_test_C9PID19C0T01.pdf",
+        "sha256": "696bbda0df71b8060e9a8d39b372fe48031f6ca4652713443fdcc8055fb38e2a",
+        "bytes": 167179,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2019-i1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/JPZ2019_IT_CJL_4lete_klic_C9PID19C0K01.pdf",
+        "sha256": "afff3508a86501c975417e306eacc7f7c157b15512cbd81939297f58c33c9153",
+        "bytes": 179591,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2019-i1/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PID19C0T01_komentovana_verze.pdf",
+        "sha256": "9e01e4144bd1c5dc43bfd89f7465df062fe85b3dc3d1d409f9a8a6f759827d3c",
+        "bytes": 350527,
+        "pages": 15
+      }
+    }
+  },
+  {
+    "id": "cz-2018-r1",
+    "year": 2018,
+    "kind": "regular",
+    "term": 1,
+    "title": "1. řádný termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL_2018_9_A.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL_2018_9_A_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL_ctyrlete-obory_1-radny-termin.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PAD18C0T01_komentovana_verze.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2018-r1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL_2018_9_A.pdf",
+        "sha256": "de934a33eec2c0d1b95a95b9afcca8ba8724fc5729a18af3f1d8ead5b427007f",
+        "bytes": 170630,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2018-r1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL_ctyrlete-obory_1-radny-termin.pdf",
+        "sha256": "f5d1cf47e5df020ab387e785e85b07c713634bfaea7059d41c16f2e33f252696",
+        "bytes": 153931,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2018-r1/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PAD18C0T01_komentovana_verze.pdf",
+        "sha256": "63e7090fabb9e06765fdd4de53324d514ab0c2798c15782a616f966894573616",
+        "bytes": 294975,
+        "pages": 17
+      }
+    }
+  },
+  {
+    "id": "cz-2018-r2",
+    "year": 2018,
+    "kind": "regular",
+    "term": 2,
+    "title": "2. řádný termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL_2018_9_B.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL_2018_9_B_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL_ctyrlete-obory_2radny-termin.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PBD18C0T02_komentovana_verze.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2018-r2/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL_2018_9_B.pdf",
+        "sha256": "6a8fd9502fd50a2cbbf305eacc4d27451448ec3558e59b0707f67f4f9dd91fcb",
+        "bytes": 156053,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2018-r2/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL_ctyrlete-obory_2radny-termin.pdf",
+        "sha256": "c88ca424729de7ae7f167ed7f2c9a695b59fae3d245c4ce2b8c9173ae0a93d5f",
+        "bytes": 153946,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2018-r2/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PBD18C0T02_komentovana_verze.pdf",
+        "sha256": "c952f902012c7e59d84bc04dcbbcca619deca2b833aa7fef438cc8d11e480ab8",
+        "bytes": 373246,
+        "pages": 16
+      }
+    }
+  },
+  {
+    "id": "cz-2018-i1",
+    "year": 2018,
+    "kind": "illustration",
+    "term": 1,
+    "title": "Ilustrační test",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PID18C0T01.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PID18C0T01_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PID18C0T01_KSR.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PID18C0T01_komentovana_verze.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2018-i1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PID18C0T01.pdf",
+        "sha256": "dca347dfcf9b773c2974ef6969ab45184e8d7493daee02396f5367d17772f546",
+        "bytes": 155757,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2018-i1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PID18C0T01_KSR.pdf",
+        "sha256": "d56d3823efb6d006609188b4c2759f257a5b6737c1105f3b5eaab6f3380cb330",
+        "bytes": 155672,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2018-i1/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PID18C0T01_komentovana_verze.pdf",
+        "sha256": "f6309c6faa8f161b5dd5f08f59b88c84c90eb16d5b826b6b9383c8a24a3ba6b9",
+        "bytes": 340680,
+        "pages": 16
+      }
+    }
+  },
+  {
+    "id": "cz-2017-r1",
+    "year": 2017,
+    "kind": "regular",
+    "term": 1,
+    "title": "1. řádný termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL_2017_9_A.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/JP17-CJL_9_A_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL_9_A_120417_klic.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PAD17C0T01_komentovana_verze.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2017-r1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL_2017_9_A.pdf",
+        "sha256": "f9058f49c4964bb11cc4c0fae4d343670d7f24b63434571d04650cf6fe244556",
+        "bytes": 169078,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2017-r1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL_9_A_120417_klic.pdf",
+        "sha256": "052fb7f82a30129b2c662d8d42df136c22eb6e3bd4870c200cd3dba8cfcffc2d",
+        "bytes": 180136,
+        "pages": 3
+      },
+      "guide": {
+        "path": "official/cz-2017-r1/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PAD17C0T01_komentovana_verze.pdf",
+        "sha256": "9f4dd5d40fdcac2a97847c44fb5af970dee60c82991216d4223636c9769e01db",
+        "bytes": 363704,
+        "pages": 15
+      }
+    }
+  },
+  {
+    "id": "cz-2017-r2",
+    "year": 2017,
+    "kind": "regular",
+    "term": 2,
+    "title": "2. řádný termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL_2017_9_B.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/JP17-CJL_9_B_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL_9_B_190417_klic.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PBD17C0T02_komentovana_verze.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2017-r2/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL_2017_9_B.pdf",
+        "sha256": "f93a4f31d26887b33c8736fab0332cefa215751fd6b1a9c799bfbff250609417",
+        "bytes": 192693,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2017-r2/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL_9_B_190417_klic.pdf",
+        "sha256": "5d78ef78ddf5306b1fb6b0e298884359320580f754d8f8ddbeb90e75bdf776c7",
+        "bytes": 182078,
+        "pages": 3
+      },
+      "guide": {
+        "path": "official/cz-2017-r2/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PBD17C0T02_komentovana_verze.pdf",
+        "sha256": "7dd62cae18f4a1eab33f999bae1d95c6f09c007c5c627bb2874eb130d5ad979c",
+        "bytes": 336324,
+        "pages": 14
+      }
+    }
+  },
+  {
+    "id": "cz-2017-i1",
+    "year": 2017,
+    "kind": "illustration",
+    "term": 1,
+    "title": "Ilustrační test",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL_IT-JPZ17_ctyrlete_testovy-sesit.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL_IT-JPZ17_ctyrlete_zanamovy-arch.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/C9PID17C0K01_FINAL2017.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2017/C9I_17_komentovana_verze.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2017-i1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL_IT-JPZ17_ctyrlete_testovy-sesit.pdf",
+        "sha256": "3c9c42737ceddb3dc8774031c7d83be7a0d13bfc82907b12d729765d3b63e062",
+        "bytes": 155425,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2017-i1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/C9PID17C0K01_FINAL2017.pdf",
+        "sha256": "8a2b6b828b39690a4e5a6dd6a0cfef202bbd6740d928b596e0c2927e75c16763",
+        "bytes": 128366,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2017-i1/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2017/C9I_17_komentovana_verze.pdf",
+        "sha256": "ee50b5aa7184a766c1aa728e01cb61f872f541050074cbce0cca232fd89f7b7b",
+        "bytes": 286133,
+        "pages": 16
+      }
+    }
+  },
+  {
+    "id": "cz-2016-r1",
+    "year": 2016,
+    "kind": "regular",
+    "term": 1,
+    "title": "1. řádný termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PZD16C0T01_Didakticky_test.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PZD16C0Z01_Zaznamovy_arch.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PZD16C0K01_FINAL_podrobny-klic.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2016/C9A_2016_komentovana_verze.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2016-r1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PZD16C0T01_Didakticky_test.pdf",
+        "sha256": "c61d0a9d232aa41a06384fe6677f21098ed41f8805084489c127a1886d635bbf",
+        "bytes": 156891,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2016-r1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PZD16C0K01_FINAL_podrobny-klic.pdf",
+        "sha256": "6f7885bfeb772fd37757991f789041a9402e6cdc8f97ab63747a0a1b8fc4e989",
+        "bytes": 223802,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2016-r1/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2016/C9A_2016_komentovana_verze.pdf",
+        "sha256": "c302331dbc9f57be30ef01047b176f58ff1eda2211b4b170e078ffa54acd1fc2",
+        "bytes": 291135,
+        "pages": 15
+      }
+    }
+  },
+  {
+    "id": "cz-2016-i1",
+    "year": 2016,
+    "kind": "illustration",
+    "term": 1,
+    "title": "Ilustrační test",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL9_jaro_2016_DT_ilustracni.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PID16C0Z01_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PID16C0K01_klic.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2016/C9I_2016_komentovana_verze.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2016-i1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL9_jaro_2016_DT_ilustracni.pdf",
+        "sha256": "58bd649e0ede5754e8b5b6bc8654ee60b9dcacfdea0694bc6f168b32c39c6777",
+        "bytes": 155003,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2016-i1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/C9PID16C0K01_klic.pdf",
+        "sha256": "93126b5ecb2270d8c4ec57b6e928058358cc2a7da38a4a323c1c83d971326398",
+        "bytes": 42888,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2016-i1/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2016/C9I_2016_komentovana_verze.pdf",
+        "sha256": "f05bb3eee95552b7afb08bb5dcde314f9f85c999b1f01a21f5e615ac22ec3e26",
+        "bytes": 282208,
+        "pages": 15
+      }
+    }
+  },
+  {
+    "id": "cz-2015-r1",
+    "year": 2015,
+    "kind": "regular",
+    "term": 1,
+    "title": "1. řádný termín",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL9_jaro_2015_DT.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL9_jaro_2015_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL9_jaro_2015_KLIC.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2015/C9A_2015_komentovana_verze.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2015-r1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL9_jaro_2015_DT.pdf",
+        "sha256": "9d6796cd8617e504d0b03f6872020a8026e3248087a6fce19c984aa40d0ee78c",
+        "bytes": 157652,
+        "pages": 11
+      },
+      "key": {
+        "path": "official/cz-2015-r1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/CJL9_jaro_2015_KLIC.pdf",
+        "sha256": "8e4703c665de07e1507b6f5f9f9301f05246bee1148d0bcee4147bc5040a0369",
+        "bytes": 42570,
+        "pages": 3
+      },
+      "guide": {
+        "path": "official/cz-2015-r1/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2015/C9A_2015_komentovana_verze.pdf",
+        "sha256": "edcdb7f4e1517d70a535c96e9464029b3a9b5dea01c0e77b2dcd240f7cbb2614",
+        "bytes": 396687,
+        "pages": 16
+      }
+    }
+  },
+  {
+    "id": "cz-2015-i1",
+    "year": 2015,
+    "kind": "illustration",
+    "term": 1,
+    "title": "Ilustrační test",
+    "urls": {
+      "paper": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2015/C9I_2015_TEST.pdf",
+      "sheet": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/IT_PO_PR_ctyrlete-obory_CJL_2015_ZA.pdf",
+      "key": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2015/C9I_2015_KLIC_FINAL.pdf",
+      "guide": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2015/C9I_2015_komentovana_verze.pdf"
+    },
+    "files": {
+      "paper": {
+        "path": "official/cz-2015-i1/paper.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2015/C9I_2015_TEST.pdf",
+        "sha256": "729b66a8c483efd770f6e67ae8f2e11b5a910e291206bac6821a1df16e147422",
+        "bytes": 94167,
+        "pages": 12
+      },
+      "key": {
+        "path": "official/cz-2015-i1/key.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2015/C9I_2015_KLIC_FINAL.pdf",
+        "sha256": "0317bc947f0c95424a03e3279f71e56f753c6f21054098f0e57aeee9e8bba445",
+        "bytes": 79616,
+        "pages": 2
+      },
+      "guide": {
+        "path": "official/cz-2015-i1/guide.pdf",
+        "sourceUrl": "https://prijimacky.cermat.gov.cz/files/files/dokumenty/testova-zadani/4lete-cj/2015/C9I_2015_komentovana_verze.pdf",
+        "sha256": "4e5eb4811324a9a247085ab099ecd430a2d107c05671eded5813c36fad52f6b4",
+        "bytes": 285608,
+        "pages": 15
+      }
+    }
+  }
+]

@@ -1,7 +1,7 @@
 {
-  "name": "Cermat testy – matematika 9",
-  "short_name": "Cermat",
-  "description": "Matematika k přijímacím zkouškám. Oficiální zadání, procvičování podle témat a vlastní pracovní papír.",
+  "name": "Cermat testy – matematika a čeština",
+  "short_name": "Cermat testy",
+  "description": "Matematika a český jazyk k přijímacím zkouškám pro 9. třídu.",
   "lang": "cs",
   "start_url": "./index.html",
   "scope": "./",

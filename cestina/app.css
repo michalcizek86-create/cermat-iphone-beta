@@ -1,0 +1,106 @@
+/* Czech worksheet adaptations use the typography and palette of the shared app. */
+.jungmann {margin:0;padding:0}
+.jungmann img {display:block;width:150px;height:188px;object-fit:cover;object-position:50% 34%;border:1px solid var(--bd);background:#2b3033}
+.jungmann figcaption {font-size:.75rem;line-height:1.5;margin-top:10px}
+.jungmann figcaption span,.jungmann figcaption a {display:block;color:var(--mut);font-size:.6875rem}
+.jungmann figcaption a {margin-top:5px;text-decoration:none}
+.archive-notes {margin-top:24px;color:var(--mut);font-size:.8125rem}
+.archive-notes summary {cursor:pointer;min-height:40px}
+.archive-notes p {max-width:75ch;margin:9px 0}
+.year-grid .term-source {font-size:.6875rem;margin-top:4px}
+.topic-card-topics {overflow-wrap:anywhere}
+.topic-card-topics > span {white-space:normal}
+.topic-filter {border-bottom:1px solid var(--bd);margin-bottom:8px;padding-bottom:5px}
+.topic-filter summary {font-size:.875rem;cursor:pointer;min-height:36px;padding:5px 0}
+.practice-config .topic-filter:last-of-type {margin-bottom:12px}
+.topic-archive-note {font-size:.75rem;line-height:1.6;color:var(--mut);margin-top:22px}
+.status-pill {font-size:.6875rem;color:var(--mut);display:block;margin-top:3px}
+.cz-notice {margin:10px 0;color:var(--ac);font-size:.8125rem}
+.cz-notice:empty {display:none}
+.cz-workspace .workspace-top {top:env(safe-area-inset-top,0px)}
+.cz-workspace .workspace-tools {top:calc(var(--cz-toolbar-top,76px) + env(safe-area-inset-top,0px))}
+.cz-workspace .tool-primary {grid-template-columns:minmax(145px,1fr) auto auto minmax(155px,1fr)}
+.cz-workspace .tool-primary select {width:100%}
+.cz-workspace .instrument-options .instrument-fields {margin-bottom:3px}
+.cz-workspace .instrument-fields input[type=range] {width:120px}
+.cz-workspace .workspace-introduction {margin-bottom:10px}
+.cz-workspace .exam-paper-stack {width:100%;max-width:none}
+.cz-paper-scroll {overflow-x:auto;overscroll-behavior-x:contain;padding-bottom:8px}
+.cz-paper-inner {max-width:920px;margin:0 auto;width:100%}
+.cz-paper-inner.zoomed {max-width:none;margin:0}
+.cz-page {scroll-margin-top:calc(var(--cz-toolbar-top,76px) + 156px + env(safe-area-inset-top,0px));margin-bottom:22px}
+.cz-page .paper-surface {border-bottom:1px solid #ccd1d1}
+.pdf-sheet {isolation:isolate}
+.pdf-sheet canvas,.pdf-sheet .study-paper-svg {position:absolute;inset:0;width:100%;height:100%;display:block}
+.pdf-sheet canvas:not([data-rendered]) {visibility:hidden}
+.pdf-sheet .study-paper-svg {background:transparent;z-index:2}
+.pdf-sheet .study-paper-svg:not([style*="pointer-events: none"]) {cursor:crosshair}
+.pdf-status {position:absolute;left:5%;top:4%;font-size:.75rem;color:#586b80}
+.pdf-transcript {font-size:.75rem;color:var(--mut);margin:6px 0 10px}
+.pdf-transcript summary {cursor:pointer;min-height:32px;display:flex;align-items:center}
+.pdf-transcript-text {white-space:pre-wrap;overflow-wrap:anywhere;font:inherit}
+.cz-answer {border-bottom:1px solid var(--bd);padding:14px 0}
+.cz-answer:last-child {border-bottom:0}
+.cz-answer fieldset {border:0;margin:0;padding:0;min-width:0}
+.cz-answer legend {font-size:.8125rem;font-weight:600;margin-bottom:8px}
+.cz-answer .opts {margin:0}
+.cz-answer .opts .po {flex:0 0 auto;min-width:45px;justify-content:center}
+.cz-answer .part-answer {display:grid;grid-template-columns:60px minmax(0,1fr);gap:8px 12px;align-items:center;margin:7px 0}
+.cz-answer .part-answer label {margin:0;font-size:.75rem}
+.cz-answer textarea {min-height:54px;font-size:1rem;margin:0}
+.cz-answer .part-answer select {max-width:200px}
+.cz-answer .clear-answer {min-height:30px;margin-top:4px;color:#285c8b}
+.cz-answer .answer-inline {display:flex;flex-wrap:wrap;align-items:center;gap:6px 9px}
+.cz-answer .answer-inline .po {margin:0;min-height:38px;padding:5px 8px}
+.cz-answer .answer-inline .bub {width:auto;padding:0 6px}
+.cz-answer-stack {padding:6px 24px 12px;gap:0;margin:0 0 14px}
+.cz-answer-stack h3 {margin:10px 0 0;font-size:.875rem}
+.cz-question-nav {display:flex;flex-wrap:wrap;gap:4px 6px;margin:10px 0 0}
+.cz-question-nav button {min-width:34px;min-height:34px;padding:5px 7px;font-size:.75rem}
+.cz-question-nav button.answered {color:var(--ac);border-color:var(--ac);background:var(--sel)}
+.cz-workspace .question-index {max-width:920px;margin:0 auto 12px;font-size:.75rem}
+.cz-workspace .question-index summary {cursor:pointer;padding:6px 0;min-height:32px}
+.cz-practice-header {max-width:920px;margin:14px auto 12px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.cz-practice-header h1 {font-size:1.125rem;margin:0}
+.cz-practice-header p {margin:3px 0 0}
+.cz-workspace .workspace-bottom {max-width:920px;margin:20px auto}
+.key-text {white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;font-size:.875rem;margin:6px 0 10px}
+.key-review {display:grid;gap:7px}
+.key-review label {margin:0}
+.review-answer-grid {display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.review-answer-grid > div {min-width:0}
+.manual-review {margin-top:12px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.manual-review label {margin:0}
+.manual-review select {width:auto}
+.result-summary-actions {margin-bottom:18px}
+.result-summary-actions button[aria-pressed=true] {background:var(--sel);border-color:var(--ac);color:var(--ac)}
+.result-paper {margin-top:20px}
+.inline-key-links {display:flex;flex-wrap:wrap;gap:8px 16px;font-size:.75rem;margin:0 0 12px}
+.cz-offline-progress {width:100%;accent-color:var(--ac);margin-top:12px}
+dialog h2 {margin:0 0 10px}
+dialog .row {margin-top:16px;justify-content:flex-end}
+dialog p {color:var(--mut);font-size:.875rem}
+.dialog-presets {display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.dialog-presets button {min-height:34px;padding:5px 9px;font-size:.75rem}
+@media(max-width:800px) {
+  .jungmann img {width:122px;height:157px}
+  .cz-workspace .tool-primary {grid-template-columns:minmax(135px,1fr) auto auto}
+  .cz-workspace .tool-primary .jump-label {grid-column:1/-1}
+}
+@media(max-width:600px) {
+  .jungmann {grid-column:2;grid-row:1}
+  .jungmann img {width:100%;height:auto;aspect-ratio:150/188}
+  .jungmann figcaption {font-size:.6875rem}
+  .jungmann figcaption a {font-size:.5625rem}
+  .cz-workspace .tool-primary {grid-template-columns:minmax(0,1fr) auto;gap:7px}
+  .cz-workspace .tool-primary .zoom-controls {grid-column:2;grid-row:1}
+  .cz-workspace .tool-primary .tool-actions {grid-column:1}
+  .cz-workspace .tool-primary .jump-label {grid-column:2;grid-row:2}
+  .cz-workspace .tool-actions button,.cz-workspace .zoom-controls button {min-height:40px;padding:5px 8px}
+  .cz-workspace .zoom-controls #paper-zoom {min-width:47px}
+  .cz-workspace .instrument-hint {font-size:.625rem}
+  .cz-workspace .workspace-top {gap:7px}
+  .cz-workspace .workspace-top > button {padding:6px 9px}
+  .cz-answer-stack {padding:5px 14px 8px}
+  .review-answer-grid {grid-template-columns:1fr;gap:8px}
+}

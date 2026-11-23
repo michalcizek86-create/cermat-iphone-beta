@@ -1,0 +1,80 @@
+@font-face {
+  font-family: "Cermat Sans";
+  src: url("../assets/cermat-sans.3a330b1e6800.woff") format("woff");
+  font-weight: 200 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "STIX Two Text";
+  src: url("../assets/stix-two-text.0c9a389199d1.woff") format("woff");
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+/* The Czech edition uses the same paper palette as the Mathematics edition. */
+html[data-subject="cz"] {
+  color-scheme: light;
+  --bg:#f8f7f3; --card:#fffefa; --field:#fff; --surface:#f0efea;
+  --tx:#262b29; --mut:#54605e; --ac:#2d5a7b; --onac:#fff;
+  --ok:#2a6753; --bad:#9c343f; --bd:#d6dad5; --sel:#e6eff4;
+  --sh:rgb(40 47 43 / 9%);
+}
+html[data-subject="cz"] body {
+  font-family:"Cermat Sans","Segoe UI",Arial,sans-serif;
+  background-image:url("../assets/paper-grain.60a3ea610bc1.webp");
+}
+html[data-subject="cz"] :is(.study-intro h1,.fact-editorial h2) {font-family:"STIX Two Text",Georgia,serif;}
+html[data-subject="cz"] .jungmann img {background:#fffefa;}
+html[data-subject="cz"] button.p {
+  color:#1e4059; background:#d8eaf4; border-color:#a7c2d3;
+}
+html[data-subject="cz"] button.p:hover:not(:disabled) {background:#c9e0ed; border-color:#789eb6;}
+html[data-subject="cz"] .mix .tc-act .p {color:#1e4059; background:#d8eaf4; border-color:#a7c2d3;}
+
+.subject-switch {
+  display:inline-flex;
+  flex:none;
+  align-items:stretch;
+  padding:2px;
+  margin:0;
+  border:1px solid var(--bd);
+  border-radius:5px;
+  background:var(--card);
+  gap:2px;
+  max-width:100%;
+}
+.subject-switch button {
+  min-height:34px;
+  padding:6px 10px;
+  border:1px solid transparent;
+  border-radius:3px;
+  font:600 .84rem/1.25 "Cermat Sans","Segoe UI",Arial,sans-serif;
+  color:var(--mut);
+  background:transparent;
+  white-space:nowrap;
+}
+.subject-switch button[aria-pressed="true"] {background:var(--sel);color:var(--ac);}
+.subject-switch button:hover {color:var(--ac);background:var(--surface);}
+.tn-in {flex-wrap:wrap;}
+.tn-in .nav {flex-wrap:wrap;}
+.sethd,.practice-heading,.result-heading {position:relative;}
+.sethd {flex-wrap:wrap;}
+.practice-heading > .subject-switch,.result-heading > .subject-switch {margin-bottom:14px;}
+.workspace-top > .subject-switch {margin-left:auto;}
+
+@media (pointer:coarse) {.subject-switch button {min-height:40px;}}
+@media (max-width:760px) {
+  .tn-in > .study-brand {order:0;flex:1;}
+  .tn-in > .mobile-nav-toggle {order:1;}
+  .tn-in > .subject-switch {order:2;}
+  .tn-in > .nav {order:3;}
+  .topnav .nav .si {position:static;}
+  .workspace-top > .subject-switch {order:3;margin:0;}
+  .workspace-top {flex-wrap:wrap;}
+  .subject-switch button {min-height:40px;}
+}
+@media (min-width:761px) and (max-width:1100px) {
+  .tn-in > .nav {flex-basis:100%;width:100%;}
+  .topnav .nav .si {position:static;margin-left:0;}
+  .workspace-top {flex-wrap:wrap;}
+}
