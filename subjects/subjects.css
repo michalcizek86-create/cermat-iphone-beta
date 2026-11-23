@@ -49,3 +49,34 @@ html[data-subject="cz"] .notebook-pattern {background-image:url("./literary-note
   .topnav .nav .si {position:static;margin-left:0;}
   .workspace-top {flex-wrap:wrap;}
 }
+
+/* Symbols such as “slovem” need their intrinsic width, not a fixed icon slot. */
+.topic-grid .topic-card {
+  grid-template-columns:minmax(5.5rem,max-content) minmax(0,1fr);
+  grid-template-areas:"symbol content";
+  align-items:start;
+}
+.topic-grid .topic-card .topic-symbol {
+  grid-area:symbol;
+  justify-self:start;
+  min-inline-size:0;
+  max-inline-size:100%;
+  padding-inline-end:.12em;
+  white-space:normal;
+}
+.topic-grid .topic-card .topic-copy {grid-area:content;min-inline-size:0;}
+.topic-grid .topic-card :is(.topic-symbol,.topic-copy h3,.topic-copy > p) {
+  overflow-wrap:normal;
+  word-break:normal;
+  hyphens:none;
+}
+.topic-grid .topic-card .topic-copy h3 {white-space:normal;}
+
+/* Narrow cards give the full text column to the category name and description. */
+@media (max-width:900px) {
+  .topic-grid .topic-card {
+    grid-template-columns:minmax(0,1fr);
+    grid-template-areas:"symbol" "content";
+    gap:10px;
+  }
+}
