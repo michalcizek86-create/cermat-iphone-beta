@@ -1,36 +1,7 @@
-@font-face {
-  font-family: "Cermat Sans";
-  src: url("../assets/cermat-sans.3a330b1e6800.woff") format("woff");
-  font-weight: 200 900;
-  font-display: swap;
-}
-@font-face {
-  font-family: "STIX Two Text";
-  src: url("../assets/stix-two-text.0c9a389199d1.woff") format("woff");
-  font-weight: 400 700;
-  font-display: swap;
-}
-
-/* The Czech edition uses the same paper palette as the Mathematics edition. */
-html[data-subject="cz"] {
-  color-scheme: light;
-  --bg:#f8f7f3; --card:#fffefa; --field:#fff; --surface:#f0efea;
-  --tx:#262b29; --mut:#54605e; --ac:#2d5a7b; --onac:#fff;
-  --ok:#2a6753; --bad:#9c343f; --bd:#d6dad5; --sel:#e6eff4;
-  --sh:rgb(40 47 43 / 9%);
-}
-html[data-subject="cz"] body {
-  font-family:"Cermat Sans","Segoe UI",Arial,sans-serif;
-  background-image:url("../assets/paper-grain.60a3ea610bc1.webp");
-}
-html[data-subject="cz"] :is(.study-intro h1,.fact-editorial h2) {font-family:"STIX Two Text",Georgia,serif;}
-html[data-subject="cz"] .jungmann img {background:#fffefa;}
-html[data-subject="cz"] button.p {
-  color:#1e4059; background:#d8eaf4; border-color:#a7c2d3;
-}
-html[data-subject="cz"] button.p:hover:not(:disabled) {background:#c9e0ed; border-color:#789eb6;}
-html[data-subject="cz"] .mix .tc-act .p {color:#1e4059; background:#d8eaf4; border-color:#a7c2d3;}
-
+/* All palette, typography and component rules come from the shared Mathematics styles. */
+.study-brand .bt {width:8.2rem;}
+.notebook-intro > p:not(.notebook-kicker) {min-block-size:4.41em;}
+html[data-subject="cz"] .notebook-pattern {background-image:url("./literary-notes.svg");}
 .subject-switch {
   display:inline-flex;
   flex:none;

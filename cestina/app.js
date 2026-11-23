@@ -1,3 +1,4 @@
+import '../subjects/ui.js';
 import { topics } from './data/topics.js';
 import { SCHEMA, loadAttempts, newAttempt, putAttempt, recover, journal, pref, setPref, validateBackup } from './shared/storage.js';
 import { isAnswered, scoreAttempt, shuffleUnique } from './shared/scoring.js';
@@ -5,6 +6,7 @@ import { PaperRenderer } from './shared/paper.js';
 import { html, formatDate, countTasks, plural, fold, clock, button, pdfLink, answerForm } from './shared/ui.js';
 import { setupOffline, offlinePanel, cacheArchive } from './shared/offline.js';
 
+const UI=window.CermatUI;
 const app = document.getElementById('app');
 const dialog = document.getElementById('app-dialog');
 const portraitUrl = 'https://commons.wikimedia.org/wiki/File:Anton%C3%ADn_Machek_-_Portrait_of_Josef_Jungmann.jpg';
@@ -20,7 +22,7 @@ let zoom = 100, tool = { tool:'move', color:'#2663a5', width:2.3 };
 let startedAt = null, saveTimer, saveChain = Promise.resolve();
 let query = '', searchOpen = false, selectedCategory = '', practiceMode = 'topics', reviewFilter = 'all';
 let practiceCount = 10, practiceTags = new Set(), readOnlyPaper = false, resultScroll = 0;
-let openedYears = new Set();
+let openedYears = new Set(),topicOverview=false,yearsInitialized=false;
 
 async function json(path) {
   const response = await fetch(path);
@@ -64,15 +66,12 @@ function nextFact() {
   setPref('fact',next);
 }
 function factMarkup() {
-  return `<aside class="fact-editorial" id="daily-fact"><div class="editorial-label">VĚDĚL JSI, ŽE…?</div><h2>${html(currentFact.title)}</h2><p>${html(currentFact.text)}</p><div class="fact-bottom"><a href="${html(currentFact.source)}" target="_blank" rel="noopener">${html(currentFact.credit)}</a>${button('Další zajímavost','fact','','text-button')}</div></aside>`;
+  return UI.fact({id:'daily-fact',title:currentFact.title,text:currentFact.text,source:currentFact.source,credit:currentFact.credit,next:button('Další zajímavost →','fact','','text-button')});
 }
 function nav() {
-  return `<header class="topnav"><div class="tn-in"><a class="brand study-brand" href="./" data-action="home"><span class="study-monogram" aria-hidden="true">Č</span><span class="bt"><b>CERMAT Čeština</b><span>Český jazyk · 9. třída</span></span></a>
-    ${button('Menu','menu','','mobile-nav-toggle','aria-controls="study-navigation" aria-expanded="false"')}
-    <nav class="nav" id="study-navigation" aria-label="Hlavní navigace">
-      ${button('Testy','scroll','sect-tests','on')}${button('Témata','practice','topics')}${button('Můj pokrok','scroll','ov')}
-      ${button('Rozepsané a historie','history')}${button('Záloha','settings','backup')}${button('Nastavení','settings')}${button('Hledat','search','','si')}
-    </nav></div><div class="sbar" ${searchOpen?'':'hidden'}><input id="test-search" type="search" aria-label="Hledat test" placeholder="Hledat rok nebo termín…" value="${html(query)}"></div></header>`;
+  return UI.navigation({subject:'cz',brandAction:'data-action="home"',menuAction:'data-action="menu"',
+    items:button('Testy','scroll','sect-tests','on')+button('Témata','practice','topics')+button('Můj pokrok','scroll','ov')+button('Rozepsané a historie','history')+button('Nastavení','settings')+button('Hledat','search','','si','aria-label="Hledat test"'),
+    search:`<div class="sbar" ${searchOpen?'':'hidden'}><input id="test-search" type="search" aria-label="Hledat test" placeholder="Hledat rok, termín nebo test…" value="${html(query)}"></div>`});
 }
 function unfinishedMarkup(showAll=false) {
   const drafts = listAttempts('active');
@@ -81,83 +80,68 @@ function unfinishedMarkup(showAll=false) {
     ${drafts.length ? `<div class="unfinished-list">${drafts.slice(0,showAll?drafts.length:3).map(a=>`<div class="unfinished-row"><div><strong>${html(a.title)}</strong><span>${answered(a)}/${a.questionIds.length} hotovo · ${formatDate(a.updatedAt)}</span></div>${button('Pokračovat','resume',a.id)}</div>`).join('')}</div>` : '<p class="mut">Žádný rozepsaný test.</p>'}</section>`;
 }
 function overview() {
-  const completed = listAttempts('submitted');
-  const finals = completed.filter(a=>a.result?.final);
-  const average = finals.length ? Math.round(finals.reduce((n,a)=>n+a.result.pct,0)/finals.length) : null;
-  const officialIds = new Set(finals.filter(a=>a.examId).map(a=>a.examId));
-  const available = data.exams.filter(e=>e.complete).length;
-  return `<section class="card ov" id="ov" aria-label="Můj pokrok">
-    <div class="ovrow"><div><b>${completed.length}</b><span>Odevzdané pokusy</span></div><div><b>${average===null?'—':average+' %'}</b><span>Průměrná úspěšnost</span></div></div>
-    <div class="ov-detail"><div class="ov-label">Dokončená zadání · ${officialIds.size} / ${available}</div><div class="goal" role="progressbar" aria-label="Dokončená zadání" aria-valuemin="0" aria-valuemax="${available}" aria-valuenow="${officialIds.size}"><i style="width:${100*officialIds.size/available}%"></i></div>
-    <p class="mut">${completed.length?'Výsledky a poznámky najdeš v historii.':'Po prvním testu tu uvidíš svůj pokrok.'}</p></div>
-    ${completed.length?`<div class="tps">${topics.map(c=>{const s=topicStats(c.id);return `<div class="tp"><span>${c.name}</span><span class="bar"><i style="width:${s.pct??0}%"></i></span><b>${s.pct===null?'—':s.pct+' %'}</b></div>`;}).join('')}</div>`:''}
-  </section>`;
+  const completed=listAttempts('submitted'),finals=completed.filter(a=>a.result?.final);
+  const average=finals.length?Math.round(finals.reduce((n,a)=>n+a.result.pct,0)/finals.length):null;
+  const officialIds=new Set(finals.filter(a=>a.examId).map(a=>a.examId)),available=data.exams.filter(e=>e.complete).length;
+  return UI.progress({metrics:[{value:completed.length,label:'Odevzdané pokusy'},{value:average===null?'—':average+' %',label:'Průměrná úspěšnost'}],label:'Dokončená zadání · '+officialIds.size+' / '+available,max:available,value:officialIds.size,
+    description:completed.length?'Výsledky a poznámky najdeš v historii.':'Po prvním testu tu uvidíš svůj pokrok.',
+    topics:completed.length?topics.map(c=>{const s=topicStats(c.id);return `<div class="tp"><span>${html(c.name)}</span><div class="bar"><i style="width:${s.pct??0}%"></i></div><b>${s.pct===null?'—':s.pct+' %'}</b></div>`;}).join(''):''});
+}
+function topicCards() {
+  return topics.map(category=>{
+    const pool=practicePool(category.id,new Set()),s=topicStats(category.id);
+    return UI.topic({id:category.id,symbol:category.symbol,title:category.name,description:category.description,
+      count:`${countTasks(pool.length)} <span>·</span> ${category.topics.length} podtémat`,
+      stats:`<span><b>${s.rows.length}</b> vyhodnocených úloh</span><span><b>${s.pct===null?'—':s.pct+' %'}</b> úspěšnost</span>`,
+      actions:button('Procvičovat →','practice',category.id,'text-button',`aria-label="Procvičovat ${html(category.name)}"`)});
+  }).join('');
 }
 function topicHome() {
-  return `<section class="topic-home" id="sect-topics"><div class="sech"><div><span class="editorial-label">PROCVIČOVÁNÍ</span><h2>Procvičování podle témat</h2></div>${button('Sestavit test','practice','topics','text-button')}</div>
-    <div class="topic-grid">${topics.map(category => {
-      const pool = practicePool(category.id, new Set());
-      const s = topicStats(category.id);
-      return `<article class="tc topic-card"><div class="topic-card-head"><span class="topic-symbol" aria-hidden="true">${category.symbol}</span></div><h3>${category.name}</h3><p>${category.description}</p><div class="topic-card-topics">${category.topics.map(t=>html(t[1])).join(' · ')}</div>
-        <div class="topic-card-count">${countTasks(pool.length)}</div><div class="topic-card-stats"><span><b>${s.rows.length}</b> vyhodnocených úloh</span><span><b>${s.pct===null?'—':s.pct+' %'}</b> úspěšnost</span></div>
-        <div class="tc-act">${button('Procvičit','practice',category.id,'p')}</div></article>`;
-    }).join('')}</div></section>`;
+  return UI.topicHome({cards:topicCards(),action:button('Přehled témat →','practice','topics','text-button')});
 }
 function renderYears() {
-  const q = fold(query.trim());
-  const exams = data.exams.filter(e=>!q || fold(`cesky jazyk čeština ${e.year} ${e.title} ${e.id}`).includes(q));
-  const years = [...new Set(exams.map(e=>e.year))];
-  if (!years.length) return '<p class="mut">Žádné zadání neodpovídá hledání.</p>';
-  return years.map(year => {
-    const items = exams.filter(e=>e.year===year);
-    const full = items.filter(e=>e.kind!=='illustration').length;
-    const done = items.filter(e=>bestFor(e.id)!==null).length;
-    const tags = full===1?'1 termín':full>1?full+' termíny':'Ilustrační zadání';
-    return `<details class="tc year-card" data-year="${year}" ${(openedYears.has(year)||q)?'open':''}>
-      <summary><div class="year-heading"><span class="year-kicker">ČTYŘLETÉ OBORY</span><h3>Český jazyk – ${year}</h3><div class="tc-tags"><span>${tags}</span><span>${items.some(e=>e.kind==='illustration')&&full?'Ilustrační test':''}</span></div><small>${done} / ${items.length} dokončeno</small></div><span class="year-chevron" aria-hidden="true"></span></summary>
-      ${items.map(e => {
-        const draft = listAttempts('active').find(a=>a.examId===e.id);
-        const recent = listAttempts('submitted').find(a=>a.examId===e.id);
-        const best = bestFor(e.id);
-        const title = e.kind==='regular'&&data.exams.filter(x=>x.year===e.year&&x.kind==='regular').length===1&&e.year<=2020?'Řádný termín':e.title;
-        return `<div class="year-term"><div class="term-main"><h4>${title}</h4><div class="term-meta"><span>${e.complete?countTasks(e.questionIds.length)+' · '+e.maxPoints+' b.':'Zadání a klíč v PDF'}</span>${e.historicalFormat?'<span>· pilotní formát</span>':''}</div>
-        ${draft?`<span class="draft-mark">Rozpracováno · ${answered(draft)}/${draft.questionIds.length}</span>`:''}
-        <div class="term-review">${pdfLink(e.files.paper.path,'Zadání PDF')} · ${pdfLink(e.files.key.path,'Klíč PDF')}</div>
-        </div><div class="term-score"><span>Nejlepší</span><strong>${best===null?'—':best+' / '+e.maxPoints}</strong></div>
-        <div class="term-actions">${e.complete?button(draft?'Pokračovat':'Začít',draft?'resume':'start',draft?draft.id:e.id,'p'):''}
-        ${draft?button('Nový pokus','start',e.id):''}${recent?button('Výsledek','result',recent.id):''}</div></div>`;
-      }).join('')}
-    </details>`;
+  const q=fold(query.trim()),exams=data.exams.filter(e=>!q||fold(`cesky jazyk čeština ${e.year} ${e.title} ${e.id}`).includes(q));
+  const years=[...new Set(exams.map(e=>e.year))];
+  if(!years.length)return '<p class="mut">Žádné zadání neodpovídá hledání.</p>';
+  if(!yearsInitialized){openedYears.add(years[0]);yearsInitialized=true;}
+  return years.map(year=>{
+    const items=exams.filter(e=>e.year===year),done=items.filter(e=>bestFor(e.id)!==null).length;
+    const unfinished=items.filter(e=>listAttempts('active').some(a=>a.examId===e.id)).length;
+    const terms=items.map(e=>{
+      const draft=listAttempts('active').find(a=>a.examId===e.id),recent=listAttempts('submitted').find(a=>a.examId===e.id),best=bestFor(e.id);
+      const title=e.kind==='regular'&&data.exams.filter(x=>x.year===e.year&&x.kind==='regular').length===1&&e.year<=2020?'Řádný termín':e.title;
+      return UI.term({id:e.id,title,
+        meta:e.complete?`${countTasks(e.questionIds.length)} <span>·</span> ${e.durationMinutes} min <span>·</span> ${e.maxPoints} bodů${e.historicalFormat?' · pilotní formát':''}`:'Zadání a klíč v PDF',
+        status:draft?`<span class="draft-mark">Rozepsáno · ${answered(draft)}/${draft.questionIds.length} odpovědí</span>`:best!==null?'<span class="completion-mark">Dokončeno</span>':'<span class="mut">Zatím nespuštěno</span>',
+        review:`<div class="term-review">${pdfLink(e.files.paper.path,'Zadání PDF')} · ${pdfLink(e.files.key.path,'Klíč PDF')}</div>`,best:best===null?'—':best+' / '+e.maxPoints,
+        actions:(e.complete?button(draft?'Pokračovat':'Spustit',draft?'resume':'start',draft?draft.id:e.id,'p'):'')+(draft?button('Nový pokus','start',e.id):'')+(recent?button('Výsledek','result',recent.id):'')});
+    }).join('');
+    return UI.year({year,open:openedYears.has(year)||q,count:items.length,tasks:items.reduce((n,e)=>n+e.questionIds.length,0),unfinished,done,terms});
   }).join('');
 }
 function home() {
-  return `${nav()}<section class="study-intro"><div class="intro-copy"><div class="editorial-label">ČESKÝ JAZYK · PŘIJÍMACÍ ZKOUŠKY</div><h1>Čeština má<br> svůj příběh.</h1><p>Čti, hledej souvislosti a piš si poznámky přímo do zadání. Procvičuj češtinu na oficiálních testech CERMAT.</p><a class="intro-link" href="#sect-tests">Vybrat zadání <span aria-hidden="true">↓</span></a></div>
-    ${factMarkup()}<figure class="jungmann"><img src="./assets/josef-jungmann.jpg" width="600" height="800" alt="Portrét Josefa Jungmanna od Antonína Machka z roku 1833"><figcaption>Josef Jungmann<span>1773–1847</span><a href="${portraitUrl}" target="_blank" rel="noopener">Antonín Machek, 1833 · zdroj snímku</a></figcaption></figure></section>
-    <p class="cz-notice" id="global-notice" role="status">${html(message)}</p>
-    ${unfinishedMarkup()}${overview()}${topicHome()}
-    <div class="sech" id="sect-tests"><div><span class="editorial-label">TVOJE KNIHOVNA ZADÁNÍ</span><h2>Vyber si svůj další test</h2></div><span>${data.exams.length} zadání</span></div>
-    <div class="mix-feature"><article class="tc mix"><div class="tc-top"><div class="tc-h"><h3>Náhodný mix</h3><span class="tc-sub">Poskládej si test z různých ročníků.</span></div></div><div class="tc-act">${button('Nastavit mix','practice','mix','p')}</div></article></div>
-    <div class="tgrid year-grid" id="year-grid">${renderYears()}</div>
-    <details class="archive-notes"><summary>O zadáních a dostupnosti termínů</summary><p>${archiveNote}</p><p>Zdroj zadání a klíčů je Centrum pro zjišťování výsledků vzdělávání. <a href="${data.source}" target="_blank" rel="noopener">Oficiální archiv CERMAT</a></p></details>
-    <footer class="study-footer"><span>CERMAT Čeština · příprava na přijímací zkoušky</span><div class="row">${button('Offline archiv','settings','offline','text-button')}${button('Záloha a přenos dat','settings','backup','text-button')}</div></footer>`;
+  return UI.home({navigation:nav(),hero:UI.hero({subject:'cz',title:'Čeština má',accent:'svůj příběh.',description:'Oficiální testy CERMAT, procvičování podle témat a pracovní papír na poznámky i rozbor textu.'}),unfinished:unfinishedMarkup(),title:'Testy z českého jazyka',
+    library:`<div class="mix-feature">${UI.mix({meta:'Poskládej si test z různých ročníků.',actions:button('Nastavit mix','practice','mix','p')+button('10','mix-preset','10','', 'aria-label="Nastavit mix 10 úloh"')+button('30','mix-preset','30','', 'aria-label="Nastavit mix 30 úloh"')})}</div><section class="exam-index" aria-labelledby="official-exams-title"><div class="exam-index-heading"><h3 id="official-exams-title">Oficiální termíny</h3><span>${data.exams.length} termínů</span></div><div class="year-grid" id="year-grid">${renderYears()}</div></section><details class="archive-notes"><summary>O zadáních a dostupnosti termínů</summary><p>${archiveNote}</p><p>Zdroj zadání a klíčů je Centrum pro zjišťování výsledků vzdělávání. <a href="${html(data.source)}" target="_blank" rel="noopener">Oficiální archiv CERMAT</a></p></details>`,
+    fact:factMarkup(),portrait:`<figure class="comenius"><img src="./assets/josef-jungmann.jpg" width="600" height="800" alt="Portrét Josefa Jungmanna od Antonína Machka z roku 1833"><figcaption><strong>Josef Jungmann</strong><span>1773–1847</span><a href="${portraitUrl}" target="_blank" rel="noopener">Antonín Machek, 1833 · zdroj snímku</a></figcaption></figure>`,progress:overview(),topics:topicHome(),
+    notice:`<p class="cz-notice" id="global-notice" role="status">${html(message)}</p>`,footer:`<span>Cermat testy · Český jazyk pro 9. třídu</span><div class="row">${button('Offline archiv','settings','offline','text-button')}${button('Záloha postupu','settings','backup','text-button')}</div>`});
 }
-
 function practicePool(category, tags) {
   return data.questions.filter(q=>q.keyVerified && q.text && (!category||q.category===category) && (!tags.size||q.topics.some(tag=>tags.has(tag))));
 }
 function practiceView() {
+  if(topicOverview)return UI.heading({title:'Procvičování podle témat',back:button('← Zpět na testy','home','','text-button')})+'<p class="practice-lead">Vyber oblast a sestav si vlastní sadu úloh. Každý pokus má své odpovědi, pracovní papír a výsledky.</p><div class="topic-grid">'+topicCards()+'</div>'+button('Sestavit test z více oblastí','practice','all','text-button');
   const cat = topics.find(c=>c.id===selectedCategory);
   const selected = cat?[cat]:topics;
   const stats = topicStats(selectedCategory);
   const sessions = listAttempts('submitted').filter(a=>a.kind!=='official' && (!cat||a.practice?.category===cat.id)).slice(0,6);
-  return `<header class="practice-heading">${button('Zpět na testy','home')}<div class="editorial-label">${practiceMode==='mix'?'PROCVIČOVÁNÍ':'PROCVIČOVÁNÍ PODLE TÉMAT'}</div><h1>${cat?.name||(practiceMode==='mix'?'Náhodný mix':'Sestav si procvičování')}</h1></header>
+  return `${UI.heading({title:cat?.name||(practiceMode==='mix'?'Náhodný mix':'Sestav si procvičování'),back:cat?button('← Všechna témata','practice','topics','text-button'):button('← Zpět na testy','home','','text-button')})}
     <p class="practice-lead">${cat?.description||'Vyber si podtémata a počet úloh z oficiálních zadání.'}</p>
-    <div class="practice-layout"><form class="practice-config" id="practice-form"><h2>Nastavení testu</h2>
+    <div class="practice-layout"><form class="practice-config" id="practice-form"><h2>Sestav si procvičování</h2>
     <fieldset class="subtopic-picker"><legend>Co chceš procvičit?</legend><p>Bez výběru zahrneme všechna ${cat?'podtémata v této oblasti':'témata'}.</p>
-      ${selected.map(c=>`<details class="topic-filter" ${cat?'open':''}><summary>${c.name}</summary><div class="subtopic-options">${c.topics.map(([id,name])=>{
+      ${selected.map(c=>`${cat?'':`<details class="topic-filter"><summary>${c.name}</summary>`}<div class="subtopic-options">${c.topics.map(([id,name])=>{
         const n=practicePool(c.id,new Set([id])).length;
         return `<label><input type="checkbox" name="topic-tag" value="${id}" ${practiceTags.has(id)?'checked':''} ${n?'':'disabled'}><span>${name}</span><small>${n}</small></label>`;
-      }).join('')}</div></details>`).join('')}
+      }).join('')}</div>${cat?'':'</details>'}`).join('')}
     </fieldset><fieldset class="practice-count"><legend>Kolik úloh?</legend><div class="count-presets">${[5,10,20,30].map(n=>button(String(n),'count',n,'',`aria-pressed="${n===practiceCount}"`)).join('')}<label>Vlastní počet<input id="practice-count" type="number" min="1" max="${data.questions.length}" step="1" inputmode="numeric" value="${practiceCount}" required></label></div></fieldset>
     <div class="practice-availability" id="practice-availability" aria-live="polite"></div><button class="p practice-generate" type="submit" id="practice-generate">Vygenerovat a začít</button>
     <p class="practice-caption">Vygenerovaný test se uloží, i když ho nedokončíš.</p><p class="cz-notice" id="global-notice" role="status">${html(message)}</p></form>
@@ -312,7 +296,7 @@ function render({keepScroll=false}={}) {
   app.className = view==='home'?'homev':view==='practice'?'practice-view':view==='exam'?'paperview cz-workspace':view==='history'?'history-view':'';
   app.innerHTML = view==='home'?home():view==='practice'?practiceView():view==='exam'?workspace():view==='result'?resultView():view==='settings'?settingsView():historyView();
   if (view==='exam') setupPaper();
-  if (view==='practice') updatePractice();
+  if (view==='practice'&&document.getElementById('practice-count')) updatePractice();
   if (view==='settings') dispatchEvent(new Event('cermat:offline-panel'));
   window.scrollTo(0,keepScroll?scroll:0);
 }
@@ -503,7 +487,9 @@ async function action(event) {
     app.querySelector('[data-action="fact"]').focus({preventScroll:true});
   } else if(name==='history')switchView('history');
   else if(name==='settings'){switchView('settings');if(value)document.getElementById(value)?.scrollIntoView();}
+  else if(name==='mix-preset'){practiceCount=Number(value);topicOverview=false;selectedCategory='';practiceTags.clear();practiceMode='mix';switchView('practice');}
   else if(name==='practice'){
+    topicOverview=value==='topics';
     selectedCategory=topics.some(c=>c.id===value)?value:'';
     practiceTags.clear();
     practiceMode=value==='mix'?'mix':'topics';

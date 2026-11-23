@@ -1,14 +1,14 @@
 {
   "edition": "student",
-  "release": "c75f44acba8d7338",
+  "release": "a240c17003aa6849",
   "baseline": "ef8c3c4f373c8d1619d839963cc0d266c0ca9b60",
   "officialExams": 35,
   "bundledPracticeSets": 6,
   "questionRecords": 988,
   "artwork": 510,
   "browserDataIncluded": false,
-  "design": "ivory mathematics notebook",
-  "offlineResources": 267,
+  "design": "shared academic notebook components for both subjects",
+  "offlineResources": 270,
   "subjects": {
     "math": {
       "officialExams": 35,

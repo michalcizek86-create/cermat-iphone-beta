@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 670 430" fill="none">
+  <g stroke="#748078" stroke-width="1.2" opacity=".46" stroke-linecap="round">
+    <path d="M80 219q75-24 150 1v112q-72-25-150-2zm150 1q78-25 154-1v111q-78-24-154 2zm0 0v112"/>
+    <path d="m96 242 111 1m-111 14 111 2m-111 13 111 2m-111 13 88 2m58-44 113-2m-113 16 113-2m-113 17 113-1m-113 16 86-1" opacity=".65"/>
+    <path d="M77 100h205m-198 8 193-2M407 231h151m-144 7 139-1m-147 55q48-21 100-1m-95-12 7 18m80-17-5 18"/>
+    <path d="m458 116 39 27 44-25m-44 25v38m-7-8 7 9 8-10"/>
+  </g>
+  <g fill="#748078" opacity=".58" font-family="Georgia,serif" font-style="italic">
+    <text x="79" y="86" font-size="28" transform="rotate(-4 79 86)">slovo · věta · souvětí</text>
+    <text x="88" y="155" font-size="23" transform="rotate(2 88 155)">podmět → přísudek</text>
+    <text x="417" y="101" font-size="30">á ě í ó ú ů ý</text>
+    <text x="436" y="213" font-size="22">smysl a souvislosti</text>
+    <text x="108" y="374" font-size="21">číst · přemýšlet · porozumět</text>
+    <text x="427" y="338" font-size="25" transform="rotate(-5 427 338)">kdo? co? · jaký?</text>
+  </g>
+</svg>

@@ -96,11 +96,8 @@ dialog p {color:var(--mut);font-size:.875rem}
   .cz-workspace .tool-primary .zoom-controls {grid-column:2;grid-row:1}
   .cz-workspace .tool-primary .tool-actions {grid-column:1}
   .cz-workspace .tool-primary .jump-label {grid-column:2;grid-row:2}
-  .cz-workspace .tool-actions button,.cz-workspace .zoom-controls button {min-height:40px;padding:5px 8px}
   .cz-workspace .zoom-controls #paper-zoom {min-width:47px}
   .cz-workspace .instrument-hint {font-size:.625rem}
-  .cz-workspace .workspace-top {gap:7px}
-  .cz-workspace .workspace-top > button {padding:6px 9px}
   .cz-answer-stack {padding:5px 14px 8px}
   .review-answer-grid {grid-template-columns:1fr;gap:8px}
 }
