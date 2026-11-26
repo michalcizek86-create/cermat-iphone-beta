@@ -1,27 +1,22 @@
 # Pohyb a odezva rozhraní
 
-Sdílené soubory `subjects/motion.css` a `subjects/motion.js` doplňují původní obě aplikace. Nemění otázky, odpovědi, bodování, úložiště ani karty. `subjects/shell.js` a `subjects/bridge.js` propojují přepínač s krátkým přechodem mezi stále otevřenými předměty.
+Matematika i čeština používají časování ze souboru `subjects/motion.css`. Stejné hodnoty čte přepínač předmětů v hlavním okně i `subjects/motion.js` uvnitř obou předmětů.
 
 | Interakce | Délka |
 | --- | --- |
-| Výběr předmětu | 260 ms |
-| Přechod obsahu mezi předměty | 190 ms |
-| Ročník / tematický filtr | 250 ms |
-| Mobilní nabídka | 190 ms |
-| Vstup vybraných sekcí | 240 ms, odstup nejvýše 75 ms |
-| Ukazatel pokroku | 300 ms |
-| Uložení práce | 170 ms |
+| Stisk tlačítka, uložení práce | 150 ms |
+| Ročník, rozepsané pokusy, mobilní nabídka, dialog, ukazatel pokroku | 300 ms |
+| Přepnutí předmětu, otevření tématu nebo jiné stránky | 420 ms |
+| Úvodní nadpis a výsledek testu | 520 ms |
 
-Animace reagují na systémové nastavení omezeného pohybu, včetně změny za běhu. Tuto volbu nemusí uživatel nastavovat zvlášť v aplikaci. Kliknutí, obsluha klávesnice, ukládání a spuštění testu nečekají na dokončení animace. Opakovaný výběr, změna velikosti okna nebo změna předmětu probíhající animaci bezpečně ukončí nebo obrátí.
+U nové stránky postupně nastoupí nejvýše čtyři viditelné prvky s odstupem 32 ms. Tlačítka a formuláře přijímají vstup hned. Úspěšnost a výsledky zobrazují skutečné hodnoty už od prvního snímku.
 
-Pracovní papír, SVG, souřadnice anotací a geometrické nástroje se neanimují. Při začátku tahu se přechodné efekty ukončí. Odezva hlavičky nesleduje změny ve stromu kreseb, takže tahy nevyvolávají opakované prohledávání celé stránky. Matematický vzor zůstává statický.
+Při rychlém přepnutí zpět se prolínání předmětů obrátí z aktuální polohy. Indikátor používá tlumenou pružinu s překmitem menším než jedno procento. Ročník si změří obě velikosti jednou. V podporovaných prohlížečích pak postupně odhaluje termíny a posouvá dotčené řádky transformací. Klávesnicí jde otevření i zavření obrátit stejně jako dotykem.
 
-Převládají transformace a průhlednost. Pouze rozbalení a malý absolutně umístěný indikátor potřebují změnu rozměru. Nejsou přidané knihovny, trvalé animační smyčky, rozostřování ani dekorativní efekty na pozadí. Obě nová aktiva obsahuje původní offline sada.
+Při vstupu do testu se objeví jeho název. Papír a vrstva kreseb zůstávají v souřadnicích zadání. Začátek tahu nebo zadávání odpovědi ukončí probíhající přechod. Systémové omezení pohybu vypíná efekty i plynulé posouvání k úloze. Změna nastavení platí i na otevřené stránce.
 
-Ověření v Chromium 153 a WebKit 26.5: pohyb indikátoru, přechod pouze přes průhlednost, přepínání bez načtení dokumentů, klávesnice, rychlé obracení přechodů, rozbalení/zavření ročníků, mobilní menu, změna velikosti za běhu a omezený pohyb. Při omezeném pohybu nebyla při spuštění ani přepnutí vytvořena žádná nová animace. Regresní kontroly zahrnovaly původní hodnocení, oba náhodné mixy, témata, ukládání, obnovu poznámek a offline otevření obou předmětů.
+Dialog si ponechává nativní ovládání klávesnicí a formulář odevzdá výsledek při potvrzení. Ve WebKitu může zavřený dialog po dobu přechodu zůstat viditelný jako neaktivní plocha. Vstup v té době přijímá stránka pod ním a při opětovném otevření lze dialog ihned ovládat.
 
-Rozvržení a základní funkce byly zkontrolovány na 11 velikostech od 320×568 po 1920×1080, včetně obou orientací. Automatické porovnání původní a nové verze potvrdilo stejné rozměry, polohy, typografii a barvy hlaviček, karet, úvodu, pokroku i témat při šířkách 390 a 1440 px. V Chromium byly navíc ověřeny simulované dotykové a tlakové stylusové tahy v obou předmětech a matematická úsečka, zpět/znovu a přiblížení.
+Pro připojení rozhraní doučování lze použít nativní `dialog` nebo prvek s atributem `popover`. Atribut `data-motion="message"` patří na obal nově vložené zprávy. Text může postupně přibývat uvnitř stejného prvku. Zprávy načtené z historie tento atribut nepotřebují. Samotný tutor zatím není součástí tohoto vydání.
 
-Skutečný iPhone, Android, instalace na zařízení, hardwarový stylus a snímková frekvence na fyzickém zařízení nebyly dostupné k měření. Cílem je plynulý pohyb; dokumentace nezaručuje 60 FPS na libovolném zařízení.
-
-Před úpravami byla zachována větev `backup/before-premium-motion` a kopie původního soukromého balíčku. Žádný původní projektový soubor nebyl odstraněn. Vývojářské importy zůstávají v samostatné místní edici.
+Při měření na lokálně načtené matematice se v Chromium 153 i WebKitu 26.5 sledovaly intervaly `requestAnimationFrame` při šířkách 390 a 1440 px. V Chromium byl medián 16,7 ms. V desktopovém WebKitu se proti předchozímu vydání 95. percentil otevření ročníku zkrátil ze 40 na 22 ms a zavření z 38 na 27 ms. První vykreslení papíru může zabrat více snímků. Měření proběhlo v automatizovaných prohlížečích na Linuxu. Fyzické telefony a displej se 120 Hz nebyly součástí měření.

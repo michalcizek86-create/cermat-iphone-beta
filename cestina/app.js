@@ -477,7 +477,7 @@ async function action(event) {
     const opened=target.getAttribute('aria-expanded')==='true';
     target.setAttribute('aria-expanded',String(!opened));
     target.closest('.topnav').classList.toggle('menu-open',!opened);
-  } else if (name==='scroll') document.getElementById(value)?.scrollIntoView({behavior:'smooth'});
+  } else if (name==='scroll') document.getElementById(value)?.scrollIntoView({behavior:window.CermatMotion?.scrollBehavior || 'auto'});
   else if (name==='search') {
     searchOpen=!searchOpen;
     app.querySelector('.sbar').hidden=!searchOpen;
@@ -520,7 +520,7 @@ async function action(event) {
   else if(name==='jump-question'){
     const q=questionMap.get(value);
     const page=document.getElementById('paper-page-'+q.anchor.page);
-    page?.scrollIntoView({behavior:'smooth'});
+    page?.scrollIntoView({behavior:window.CermatMotion?.scrollBehavior || 'auto'});
   } else if(name==='result'){
     const record=attempts.get(value);
     if(record?.result){attempt=record;reviewFilter='all';switchView('result');if(resultScroll){window.scrollTo(0,resultScroll);resultScroll=0;}}
@@ -556,7 +556,7 @@ app.addEventListener('change',event=>{
     paper?.layers.forEach(layer=>layer.toolChanged());
     document.getElementById('tool-hint').textContent=toolHint();
   }
-  if(el.id==='paper-jump')document.getElementById('paper-page-'+el.value)?.scrollIntoView({behavior:'smooth'});
+  if(el.id==='paper-jump')document.getElementById('paper-page-'+el.value)?.scrollIntoView({behavior:window.CermatMotion?.scrollBehavior || 'auto'});
   if(el.id==='practice-jump')changePracticeIndex(Number(el.value));
   if(el.dataset.manual)saveManual(el.dataset.manual,el.value).catch(error=>notice(error.message));
   if(el.id==='backup-file')importBackup(el.files[0]).catch(error=>notice(error.message));

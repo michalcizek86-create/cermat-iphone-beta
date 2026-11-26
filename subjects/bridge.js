@@ -74,10 +74,10 @@
   addEventListener('message', event => {
     if (event.source!==parent || event.origin!==location.origin || event.data?.type!=='CERMAT_SUBJECT_VISIBILITY')return;
     visibility(!!event.data.active);
-    if(event.data.active){
-      document.querySelectorAll('.subject-switch').forEach(group=>window.CermatMotion?.segment(group,subject,{from:event.data.from,animated:event.data.animate}));
-      if(event.data.keyboard)document.querySelector('[data-subject-choice="'+subject+'"]')?.focus({preventScroll:true});
-    }
+    // Both still-visible indicators move together while the subject papers blend.
+    document.querySelectorAll('.subject-switch').forEach(group =>
+      window.CermatMotion?.segment(group,event.data.choice || subject,{from:event.data.from,animated:event.data.animate}));
+    if(event.data.active && event.data.keyboard)document.querySelector('[data-subject-choice="'+subject+'"]')?.focus({preventScroll:true});
   });
   addEventListener('cermat:motion-settle',()=>parent.postMessage({type:'CERMAT_SETTLE_SUBJECT'},location.origin));
   window.CermatSubjectBridge = {get active(){return active;}};

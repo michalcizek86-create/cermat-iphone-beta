@@ -6,6 +6,11 @@
   const ready = new Set();
   const status = document.getElementById('subject-loading');
   const preferenceMotion=matchMedia('(prefers-reduced-motion: reduce)');
+  const motionStyle = getComputedStyle(document.documentElement);
+  const fadeTiming = {
+    duration: parseFloat(motionStyle.getPropertyValue('--motion-page')) || 0,
+    easing: motionStyle.getPropertyValue('--motion-blend').trim() || 'ease-out'
+  };
   let fade=null,pending=null;
   status.style.zIndex='3';
   let selected = 'math';
@@ -21,7 +26,7 @@
 
   function signal(subject,motion={}) {
     const frame = frames.get(subject);
-    frame.contentWindow.postMessage({type:'CERMAT_SUBJECT_VISIBILITY',active:subject===selected,...motion}, location.origin);
+    frame.contentWindow.postMessage({type:'CERMAT_SUBJECT_VISIBILITY',active:subject===selected,choice:selected,...motion}, location.origin);
   }
 
   function settle() {
@@ -32,27 +37,35 @@
     }
   }
 
-  function paint(motion={}) {
-    const incoming=frames.get(selected),outgoing=frames.get(motion.from);
-    const animate=motion.animate&&ready.has(selected)&&ready.has(motion.from)&&!preferenceMotion.matches&&!document.hidden&&!!incoming.animate;
-    if(animate){
-      settle();outgoing.hidden=false;incoming.hidden=false;
-      outgoing.style.zIndex='1';incoming.style.zIndex='2';
-      // Opacity keeps both papers in their exact original coordinate systems.
-      const state={previous:motion.from,target:selected,animation:incoming.animate([{opacity:0},{opacity:1}],{duration:190,easing:'cubic-bezier(.22,1,.36,1)'})};
-      fade=state;
-      state.animation.finished.then(()=>{if(fade===state)settle();},()=>{});
+  function blendFrom(from) {
+    if (fade) {
+      // The same two documents are still stacked. Retrace the current blend.
+      fade.animation.reverse();
+      return;
     }
+    const incoming = frames.get(selected), outgoing = frames.get(from);
+    outgoing.hidden = incoming.hidden = false;
+    outgoing.style.zIndex = '1'; incoming.style.zIndex = '2';
+    const animation = incoming.animate([{opacity:0}, {opacity:1}], fadeTiming);
+    fade = {animation};
+    animation.finished.then(() => { if (fade?.animation === animation) settle(); }, () => {});
+  }
+
+  function paint(motion={}) {
+    const animate = motion.animate && ready.has(selected) && ready.has(motion.from) &&
+      !preferenceMotion.matches && !document.hidden && fadeTiming.duration && !!frames.get(selected).animate;
+    if (animate) blendFrom(motion.from);
+    const waitingOnSubject = !ready.has(selected) && ready.has(pending?.from);
     for (const [subject, frame] of frames) {
       const active=subject===selected;
-      frame.hidden=!active&&fade?.previous!==subject;
+      frame.hidden = !fade && (waitingOnSubject ? subject !== pending.from : !active);
       frame.setAttribute('aria-hidden', String(!active));
       frame.inert=!active;
       frame.style.pointerEvents=active?'auto':'none';
       if(!fade)frame.style.zIndex=active?'2':'0';
-      if (ready.has(subject)) signal(subject,active?{from:motion.from,animate:!!animate,keyboard:motion.keyboard}:{});
+      if (ready.has(subject)) signal(subject,{from:motion.from,animate:!!animate,keyboard:active && motion.keyboard});
     }
-    status.hidden = ready.has(selected);
+    status.hidden = ready.has(selected) || waitingOnSubject;
     document.documentElement.dataset.subject = selected;
     document.title = 'Cermat testy · ' + (selected==='math' ? 'Matematika' : 'Čeština');
   }
@@ -64,7 +77,6 @@
     try {localStorage.setItem(preference, subject);} catch (_) {}
     const url=new URL(location.href);
     if(url.searchParams.has('subject')){url.searchParams.set('subject',subject);history.replaceState(null,'',url);}
-    if(fade)settle();
     pending=ready.has(subject)?null:{from,keyboard};
     paint({from,keyboard,animate:true});
   }
@@ -96,6 +108,7 @@
   });
   setTimeout(() => {
     if (ready.has(selected)) return;
+    status.hidden = false;
     document.getElementById('subject-loading-text').textContent = 'Načítání trvá déle. Zkontroluj připojení a zkus to znovu.';
     document.getElementById('subject-retry').hidden = false;
   }, 18000);
