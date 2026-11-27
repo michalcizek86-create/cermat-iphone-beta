@@ -71,7 +71,7 @@ export function validateBackup(data, questionMap) {
       for (const o of p.objects) {
         if (!['pen','highlight','underline','strike','circle','arrow','text'].includes(o.type) || !/^#[0-9a-f]{6}$/i.test(o.color) ||
             !Number.isFinite(o.width) || o.width < 0 || o.width > 40 || !Array.isArray(o.points) || !o.points.length || o.points.length > 100000 ||
-            o.points.some(pt => !Array.isArray(pt) || pt.length !== 2 || pt.some(n => !Number.isFinite(n) || Math.abs(n)>10000)) ||
+            o.points.some(pt => !Array.isArray(pt) || (pt.length !== 2 && !(o.inkVersion===2 && o.penPressure===true && o.type==='pen' && pt.length===3 && pt[2]>=0 && pt[2]<=1)) || pt.some(n => !Number.isFinite(n) || Math.abs(n)>10000)) ||
             (o.text && (typeof o.text !== 'string' || o.text.length > 5000))) throw new Error('Neplatný objekt poznámky.');
       }
       p.undo = []; p.redo = [];

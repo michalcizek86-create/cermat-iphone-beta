@@ -19,7 +19,7 @@ export function answerForm(question, answer = {}) {
   const radios = (part, options) => options.map(option =>
     `<label class="po"><input type="radio" name="${qid}-${part}" ${attribute(part)} value="${option}" ${answer[part]===option?'checked':''} aria-label="${option}"><span class="bub">${option}</span></label>`
   ).join('');
-  const openInput = part => `<textarea id="answer-${qid}-${part}" ${attribute(part)} rows="2" maxlength="3000" spellcheck="false" aria-label="Odpověď ${part==='value'?question.no:part}" autocomplete="off">${html(answer[part])}</textarea>`;
+  const openInput = part => `<textarea id="answer-${qid}-${part}" ${attribute(part)} class="${part==='value'?'ws-long':'ws-part'}" rows="${part==='value'?3:1}" placeholder="Tvoje odpověď" maxlength="3000" spellcheck="false" aria-label="Odpověď ${part==='value'?question.no:part}" autocomplete="off">${html(answer[part])}</textarea>`;
   let inputs;
   if (question.kind==='choice') {
     inputs = `<div class="opts row">${radios('value', question.options)}</div>`;
@@ -36,8 +36,8 @@ export function answerForm(question, answer = {}) {
       } else {
         control = openInput(part.no);
       }
-      return `<div class="part-answer"><label for="answer-${qid}-${part.no}">${html(partLabel)}</label>${control}</div>`;
+      return `<div class="part-answer">${question.kind==='boolean-group'?`<span class="ws-part-label">${html(partLabel)}</span>`:`<label for="answer-${qid}-${part.no}">${html(partLabel)}</label>`}${control}</div>`;
     }).join('');
   }
-  return `<div class="cz-answer" id="task-${qid}" data-question="${qid}"><fieldset><legend>Úloha ${question.no} · ${question.points} b.</legend>${inputs}</fieldset>${button('Smazat odpověď','clear-answer',qid,'text-button clear-answer')}</div>`;
+  return `<div class="cz-answer" id="task-${qid}" data-question="${qid}"><fieldset><legend><span class="ws-question">Úloha ${question.no}</span><span class="ws-points">${question.points} b.</span></legend>${inputs}</fieldset>${button('Smazat odpověď','clear-answer',qid,'text-button clear-answer',Object.values(answer).some(value=>String(value).trim())?'':'disabled')}</div>`;
 }

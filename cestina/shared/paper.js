@@ -1,4 +1,4 @@
-import { AnnotationLayer, objectNode } from './annotations.js';
+import { AnnotationLayer, objectNode } from './annotations.js?v=c1bc0cfa786d';
 
 const vendor = new URL('../vendor/', import.meta.url);
 let library;

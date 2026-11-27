@@ -1,9 +1,9 @@
 import '../subjects/ui.js';
 import { topics } from './data/topics.js';
-import { SCHEMA, loadAttempts, newAttempt, putAttempt, recover, journal, pref, setPref, validateBackup } from './shared/storage.js';
+import { SCHEMA, loadAttempts, newAttempt, putAttempt, recover, journal, pref, setPref, validateBackup } from './shared/storage.js?v=b923139b433c';
 import { isAnswered, scoreAttempt, shuffleUnique } from './shared/scoring.js';
-import { PaperRenderer } from './shared/paper.js';
-import { html, formatDate, countTasks, plural, fold, clock, button, pdfLink, answerForm } from './shared/ui.js';
+import { PaperRenderer } from './shared/paper.js?v=c2513268094d';
+import { html, formatDate, countTasks, plural, fold, clock, button, pdfLink, answerForm } from './shared/ui.js?v=601a4426dc58';
 import { setupOffline, offlinePanel, cacheArchive } from './shared/offline.js';
 
 const UI=window.CermatUI;
@@ -18,7 +18,7 @@ const toolLabels = {
 
 let data, facts, examMap, questionMap, attempts = new Map();
 let view = 'home', attempt, currentFact, paper, selectedPage;
-let zoom = 100, tool = { tool:'move', color:'#2663a5', width:2.3 };
+let zoom = 100, tool = { tool:'move', color:'#2663a5', markerColor:'#e5b839', width:2.3 };
 let startedAt = null, saveTimer, saveChain = Promise.resolve();
 let query = '', searchOpen = false, selectedCategory = '', practiceMode = 'topics', reviewFilter = 'all';
 let practiceCount = 10, practiceTags = new Set(), readOnlyPaper = false, resultScroll = 0;
@@ -189,13 +189,13 @@ function toolbar(exam, length) {
   return `<div class="workspace-tools"><div class="tool-primary">
     <label><span>Nástroj poznámek</span><select id="ink-tool">${Object.entries(toolLabels).map(([id,label])=>`<option value="${id}" ${tool.tool===id?'selected':''}>${label}</option>`).join('')}</select></label>
     <div class="tool-actions">${undoButtons}</div>${zoomButtons}${jump}</div>
-    <details class="instrument-options"><summary>Barva a tloušťka</summary><div class="instrument-fields"><label>Barva<input type="color" id="ink-color" value="${tool.color}"></label><label>Tloušťka<input type="range" id="ink-width" min="1" max="8" step=".5" value="${tool.width}"></label></div></details>
+    <details class="instrument-options"><summary>Barva a tloušťka</summary><div class="instrument-fields"><label>Barva<input type="color" id="ink-color" value="${tool.tool==='highlight'?tool.markerColor:tool.color}"></label><label>Tloušťka<input type="range" id="ink-width" min="1" max="8" step=".5" value="${tool.width}"></label></div></details>
     <div class="instrument-hint" id="tool-hint">${toolHint()}</div></div>`;
 }
 function toolHint() {
   if (tool.tool==='move') return 'Posouvej stránku. Pro psaní a zvýraznění vyber nástroj.';
-  if (['text','grammar'].includes(tool.tool)) return 'Klepni do zadání a vlož poznámku.';
-  if (tool.tool==='eraser') return 'Klepni na poznámku nebo čáru, kterou chceš smazat.';
+  if (['text','grammar'].includes(tool.tool)) return 'Klepni na papír pro novou poznámku nebo na existující text pro úpravu.';
+  if (tool.tool==='eraser') return 'Klepni nebo táhni přes poznámky, které chceš smazat.';
   return 'Tahem myší, prstem nebo Apple Pencil označ místo v zadání.';
 }
 function pageMarkup(exam, pageNumber, key, pageQuestions, label) {
@@ -204,7 +204,7 @@ function pageMarkup(exam, pageNumber, key, pageQuestions, label) {
     <div class="paper-surface pdf-sheet" data-pdf-page="${pageNumber}" data-exam="${exam.id}" data-paper-key="${key}" style="aspect-ratio:${width}/${height}">
       <span class="pdf-status" role="status">Načítám stránku…</span><canvas role="img"></canvas><svg class="study-paper-svg" aria-label="Vrstva poznámek" xmlns="http://www.w3.org/2000/svg"></svg>
     </div><details class="pdf-transcript"><summary>Text stránky</summary><div class="pdf-transcript-text"></div></details>
-    ${pageQuestions.length&&!readOnlyPaper?`<div class="final-answers cz-answer-stack"><h3>Odpovědi k úlohám</h3>${pageQuestions.map(q=>answerForm(q,attempt.answers[q.id])).join('')}</div>`:''}</section>`;
+    ${pageQuestions.length&&!readOnlyPaper?`<div class="final-answers cz-answer-stack">${window.CermatWorksheet.answerHeading()}${pageQuestions.map(q=>answerForm(q,attempt.answers[q.id])).join('')}</div>`:''}</section>`;
 }
 function workspace() {
   const questions = attempt.questionIds.map(id=>questionMap.get(id));
@@ -233,6 +233,7 @@ function workspace() {
     ${!readOnlyPaper?button('Odevzdat test','finish','','p'):''}</div>`;
 }
 function setupPaper() {
+  window.CermatWorksheet.mount(app);
   paper = new PaperRenderer();
   const top = app.querySelector('.workspace-top');
   app.style.setProperty('--cz-toolbar-top',top.getBoundingClientRect().height+'px');
@@ -247,7 +248,7 @@ function setupPaper() {
       getTool:()=>tool.tool==='grammar'?{...tool,tool:'text'}:tool,
       onSelect:id=>{selectedPage=id;refreshUndo();},
       onChange:()=>{attempt.papers[key]=state;selectedPage=key;queueSave();refreshUndo();},
-      onText:(_point,callback)=>openNote(callback)
+      onText:options=>openNote(options)
     });
   });
   updateZoom();
@@ -308,11 +309,9 @@ function openModal(title, body, confirmLabel, callback) {
   dialog.addEventListener('close',()=>{if(dialog.returnValue==='ok')callback();},{once:true});
   dialog.showModal();
 }
-function openNote(callback) {
-  const grammar = tool.tool==='grammar';
-  openModal(grammar?'Označení větného členu':'Poznámka do zadání',`<label for="ink-text">Text poznámky</label><textarea id="ink-text" maxlength="180" rows="3" autofocus></textarea>
-  ${grammar?`<div class="dialog-presets">${['Podmět','Přísudek','Předmět','Přívlastek','Příslovečné určení','Věta vedlejší'].map(label=>button(label,'note-preset',label)).join('')}</div>`:''}`,
-  'Vložit',()=>callback(document.getElementById('ink-text').value));
+function openNote(options) {
+  const presets=tool.tool==='grammar'?['Podmět','Přísudek','Předmět','Přívlastek','Příslovečné určení','Věta vedlejší']:[];
+  window.CermatWorksheet.note({...options,presets});
 }
 function activeLayer() {
   return paper?.layers.get(selectedPage) || [...(paper?.layers.values()||[])].reverse().find(layer=>layer.state.objects.length||layer.state.redo.length);
@@ -342,6 +341,10 @@ function updateTimer() {
 function pauseClock() {
   if (attempt&&startedAt!==null) attempt.elapsedMs += Date.now()-startedAt;
   startedAt = null;
+}
+function finishActiveInk(){
+  if(!paper)return;
+  for(const layer of paper.layers.values())if(layer.active!=null&&!layer.noteStart)layer.complete();
 }
 function saveNow() {
   clearTimeout(saveTimer);
@@ -385,7 +388,7 @@ async function enter(record,resuming=false) {
   if(resuming)window.CermatMotion?.resumed?.();
 }
 async function leave() {
-  pauseClock();
+  finishActiveInk();pauseClock();
   await saveNow();
   view='home';
   readOnlyPaper=false;
@@ -398,7 +401,7 @@ function switchView(next) {
   render();
 }
 async function submit() {
-  pauseClock();
+  finishActiveInk();pauseClock();
   attempt.result=scoreAttempt(attempt,questionMap);
   attempt.status='submitted';
   await saveNow();
@@ -418,6 +421,8 @@ function updateAnswer(element) {
   const id=element.dataset.answer;
   attempt.answers[id] ||= {};
   attempt.answers[id][element.dataset.part]=element.value;
+  const clear=element.closest('.cz-answer')?.querySelector('.clear-answer');
+  if(clear)clear.disabled=!Object.values(attempt.answers[id]).some(value=>String(value).trim());
   refreshAnswerCount();
   queueSave();
 }
@@ -428,6 +433,7 @@ function refreshAnswerCount() {
 function resetAnswer(id) {
   delete attempt.answers[id];
   const section=document.getElementById('task-'+id);
+  const clear=section?.querySelector('.clear-answer');if(clear)clear.disabled=true;
   section?.querySelectorAll('input,select,textarea').forEach(element=>{
     if(element.type==='radio')element.checked=false;
     else element.value='';
@@ -476,7 +482,6 @@ async function action(event) {
   if (!target || target.disabled) return;
   event.preventDefault();
   const { action:name, value }=target.dataset;
-  if (name==='note-preset') {document.getElementById('ink-text').value=value;return;}
   if (name==='home') switchView('home');
   else if (name==='menu') {
     const opened=target.getAttribute('aria-expanded')==='true';
@@ -550,7 +555,7 @@ app.addEventListener('input',event=>{
   if(el.id==='test-search'){query=el.value;document.getElementById('year-grid').innerHTML=renderYears();}
   if(el.id==='practice-count'||el.name==='topic-tag')updatePractice();
   if(el.dataset.answer && el.type!=='radio' && el.tagName!=='SELECT')updateAnswer(el);
-  if(el.id==='ink-color')tool.color=el.value;
+  if(el.id==='ink-color')tool[tool.tool==='highlight'?'markerColor':'color']=el.value;
   if(el.id==='ink-width')tool.width=Number(el.value);
 });
 app.addEventListener('change',event=>{
@@ -558,6 +563,7 @@ app.addEventListener('change',event=>{
   if(el.dataset.answer && (el.type==='radio'||el.tagName==='SELECT'))updateAnswer(el);
   if(el.id==='ink-tool'){
     tool.tool=el.value;
+    document.getElementById('ink-color').value=tool.tool==='highlight'?tool.markerColor:tool.color;
     paper?.layers.forEach(layer=>layer.toolChanged());
     document.getElementById('tool-hint').textContent=toolHint();
   }
@@ -578,7 +584,7 @@ app.addEventListener('submit',async event=>{
   try {await enter(record);} catch (error) {notice(error.message);}
 });
 document.addEventListener('keydown',event=>{
-  if(view!=='exam'||readOnlyPaper||event.target.matches('input,textarea,select')||dialog.open)return;
+  if(view!=='exam'||readOnlyPaper||event.target.matches('input,textarea,select')||dialog.open||document.querySelector('dialog.ws-note[open]'))return;
   if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='z'){
     event.preventDefault();
     activeLayer()?.[event.shiftKey?'redo':'undo']();
@@ -587,15 +593,15 @@ document.addEventListener('keydown',event=>{
 });
 document.addEventListener('visibilitychange',()=>{
   if(view!=='exam'||readOnlyPaper)return;
-  if(document.hidden){pauseClock();saveNow();}
+  if(document.hidden){finishActiveInk();pauseClock();saveNow();}
   else if(startedAt===null&&window.CermatSubjectBridge?.active!==false)startedAt=Date.now();
 });
 addEventListener('cermat:subject-visibility',event=>{
   if(view!=='exam'||readOnlyPaper)return;
   if(event.detail.active){if(startedAt===null&&!document.hidden)startedAt=Date.now();}
-  else {pauseClock();updateTimer();saveNow();}
+  else {finishActiveInk();pauseClock();updateTimer();saveNow();}
 });
-addEventListener('pagehide',()=>{if(view==='exam'&&!readOnlyPaper){pauseClock();saveNow();}});
+addEventListener('pagehide',()=>{if(view==='exam'&&!readOnlyPaper){finishActiveInk();pauseClock();saveNow();}});
 addEventListener('pageshow',()=>{if(view==='exam'&&!readOnlyPaper&&startedAt===null&&window.CermatSubjectBridge?.active!==false)startedAt=Date.now();});
 addEventListener('resize',()=>{
   const top=app.querySelector('.workspace-top');

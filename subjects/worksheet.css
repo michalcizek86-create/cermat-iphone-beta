@@ -1,0 +1,136 @@
+/* The tools sit on the desk. Final answers sit on the paper. */
+.paperview { --ws-ink:#233b4c; --ws-blue:#295a80; --ws-line:#c8d2d6; --ws-wash:#e4eff6; --ws-paper:#fffefa; }
+.paperview .worksheet-tools { overflow:visible; max-block-size:none; padding:8px 0; }
+.worksheet-tools .ws-icon,.ws-answer-heading .ws-icon { width:20px;height:20px;flex:none; }
+.paperview .worksheet-tools .tool-primary { position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;max-width:none; }
+.ws-rail,.ws-utilities,.ws-rail .tool-actions,.ws-utilities .zoom-controls {display:flex;align-items:center;min-width:0;}
+.ws-rail {gap:2px;}
+.ws-utilities {gap:10px;}
+.ws-rail .ws-tool,.ws-rail .ws-more,.ws-utilities .instrument-options > summary,.ws-rail .tool-actions button {
+  --ws-active:#dceaf3; display:inline-flex;align-items:center;justify-content:center;gap:6px;flex:none;
+  margin:0;border:1px solid transparent;border-radius:5px;padding:0 8px;min-height:40px;min-width:38px;
+  font-family:inherit;line-height:1.1;font-size:.78rem;font-weight:600;
+  color:var(--ws-ink);background:transparent;cursor:pointer;box-shadow:none;
+  touch-action:manipulation;transition:background-color 150ms ease,border-color 150ms ease,color 150ms ease;
+}
+.ws-rail .ws-tool[aria-pressed=true],.ws-rail .ws-current,.ws-utilities details[open]>summary {
+  color:var(--ws-blue);background:var(--ws-active);border-color:#abc5d7;box-shadow:inset 0 -2px 0 #6088a6;
+}
+.ws-rail .tool-actions,.ws-utilities .zoom-controls {gap:0;border-inline-start:1px solid var(--ws-line);padding-inline-start:5px;margin-inline-start:3px;}
+.ws-rail .tool-actions button {padding:0;width:36px;min-width:36px;}
+.ws-rail .tool-actions button:disabled {opacity:.32;cursor:default;}
+.ws-rail .ws-more {position:relative;max-width:12rem;padding:0 8px;}
+.worksheet-tools .ws-rail .ws-more > span {display:inline;margin:0;font:inherit;color:inherit;}
+.ws-more select {position:absolute;inset:0;width:100%;height:100%!important;opacity:0;cursor:pointer;}
+.ws-more:focus-within,.ws-tool:focus-visible,.ws-utilities summary:focus-visible {outline:2px solid var(--ws-blue);outline-offset:2px;}
+.ws-utilities .instrument-options {position:static;margin:0;padding:0;}
+.ws-utilities .instrument-options > summary {list-style:none;}
+.ws-utilities summary::-webkit-details-marker {display:none;}
+.ws-utilities .zoom-controls button {min-width:32px;min-height:38px;background:transparent;border:0;box-shadow:none;}
+.ws-utilities .zoom-controls #paper-zoom {padding-inline:5px;min-width:44px;font-size:.76rem;font-variant-numeric:tabular-nums;}
+.ws-utilities .jump-label,.ws-utilities .question-picker {display:flex;align-items:center;min-width:0;margin:0;}
+.worksheet-tools .ws-utilities label.jump-label>span,.worksheet-tools .ws-utilities label.question-picker>span {display:none;}
+.worksheet-tools .ws-utilities :is(.jump-label,.question-picker)>select {width:auto;max-width:14em;min-width:0;height:38px;min-height:38px;margin:0;border-color:var(--ws-line);background-color:var(--ws-paper);}
+.ws-utilities .ws-panel {position:absolute;top:calc(100% + 7px);right:0;z-index:4;width:min(27rem,calc(100vw - 32px));max-height:min(54vh,28rem);overflow:auto;overscroll-behavior:contain;padding:14px 16px;background:var(--ws-paper);border:1px solid var(--ws-line);border-radius:6px;box-shadow:0 7px 22px #253a481c;}
+.ws-panel .instrument-fields {margin:0;gap:8px 14px;}
+.ws-panel .instrument-fields :is(label,input,select) {font-size:.83rem;}
+.ws-panel .selection-actions {margin-top:10px;}
+.ws-panel .instrument-scale {margin-bottom:0;}
+.worksheet-tools:not(.ws-instructions) .instrument-hint {position:absolute;width:1px;height:1px;min-height:0;overflow:hidden;clip-path:inset(50%);padding:0;margin:0;}
+.worksheet-tools.ws-instructions .instrument-hint {margin-top:6px;margin-inline:0;min-height:22px;font-size:.78rem;}
+@media (hover:hover) {
+  .ws-rail button:not(:disabled,[aria-pressed=true]):hover,.ws-rail .ws-more:not(.ws-current):hover,.ws-utilities summary:hover {background:#e9eded;}
+}
+.ws-rail button:active:not(:disabled),.ws-utilities summary:active {background:#d8e5ec;}
+.paperview .final-answers {display:block;padding:0 clamp(14px,3vw,34px) 12px;color:var(--ws-ink);background:var(--ws-paper);border-top:2px solid #aac2d0;}
+.paperview .final-answers:empty {display:none;}
+.paperview .ws-answer-heading {display:flex;align-items:center;gap:9px;margin:0;padding:15px 0 11px;color:var(--ws-blue);font-family:var(--display,Georgia,serif);font-weight:600;font-size:1.16rem;letter-spacing:0;line-height:1.25;}
+.ws-answer-heading .ws-icon {width:18px;height:18px;}
+.paperview .final-answers :is(.final-short,.final-choice,.final-series,.cz-answer) {margin:0;padding:12px 0;border:0;border-top:1px solid #d5dedf;min-inline-size:0;}
+.paperview .final-short {display:grid;grid-template-columns:minmax(5em,auto) minmax(0,1fr);align-items:center;gap:10px 20px;}
+.paperview .final-short > label,.final-answers .ws-question {font-weight:650;font-size:.86rem;color:var(--ws-ink);line-height:1.3;margin:0;}
+.final-answers .ws-points {font-weight:400;color:#526773;font-size:.77rem;margin-inline-start:8px;}
+.paperview .final-answers :is(.final-short input[type=text],textarea,.part-answer select) {color:var(--ws-ink);border:1px solid var(--ws-line);border-bottom:2px solid #9cb3c0;background:#fbfcfa;border-radius:4px;margin:0;min-width:0;max-width:100%;box-shadow:none;padding:8px 11px;line-height:1.45;font-size:1rem;transition:background-color 170ms,border-color 170ms,box-shadow 170ms;}
+.paperview .final-short input[type=text] {width:min(100%,clamp(14ch,var(--ws-entry-width,14ch),44ch));height:44px;min-height:44px;font-variant-numeric:tabular-nums;}
+.paperview .final-answers textarea {width:100%;max-height:14em;min-height:44px;resize:vertical;}
+@supports(field-sizing:content){.paperview .final-answers textarea {field-sizing:content;}}
+.paperview .final-answers textarea.ws-long {min-height:5.5em;max-width:52em;}
+.paperview .final-answers textarea.ws-part {max-width:38em;}
+.paperview .final-answers .part-answer select {width:100%;max-width:16em;min-height:44px;}
+.paperview .final-answers :is(input[type=text],textarea,select)::placeholder {color:#657681;font-size:.88rem;}
+.paperview .final-answers :is(input[type=text],textarea,select):focus {outline:2px solid transparent;border-color:#587e99;background:#fff;box-shadow:0 0 0 3px #aecbdd80;}
+.paperview .final-choice,.paperview .final-series {display:flow-root;}
+.paperview .final-answers :is(.final-choice,.final-series)>legend {float:left;width:100%;padding:0;margin:0 0 8px;}
+.paperview .final-answers :is(.opts,.answer-inline) {display:flex;flex-wrap:wrap;align-items:stretch;gap:6px;margin:0;clear:both;}
+.paperview .final-answers .po {position:relative;display:inline-flex;flex:0 0 auto;align-items:center;justify-content:center;gap:9px;margin:0;padding:0 9px;min-width:44px;min-height:44px;color:var(--ws-ink);background:#fffefa;border:1px solid var(--ws-line);border-radius:5px;transition:background-color 140ms,border-color 140ms,box-shadow 140ms;}
+.paperview .final-answers .po .bub {width:auto;height:auto;min-width:1em;padding:0;border:0;background:none;color:inherit;font-weight:650;font-size:.9rem;}
+.paperview .final-answers .po:has(.bub + span) {flex:1 1 12em;justify-content:flex-start;padding:7px 12px;}
+.paperview .final-answers .po:has(.bub + span) .bub {border-right:1px solid var(--ws-line);padding-right:9px;}
+.paperview .final-answers .po:has(input:checked) {color:#174c73;background:#deecf5;border-color:#6890ad;box-shadow:inset 0 -2px 0 #6890ad;}
+.paperview .final-answers .po:has(input:focus-visible) {outline:2px solid #467593;outline-offset:2px;}
+.paperview .final-answers .tfp {width:100%;clear:both;}
+.paperview .final-answers .tfp td:not(:first-child) {padding:0;}
+.final-series .ws-mark {display:grid;place-items:center;min-height:44px;min-width:44px;margin:0;cursor:pointer;}
+.paperview .cz-answer {position:relative;}
+.paperview .cz-answer legend {margin:0 0 9px;padding:0;padding-right:5rem;}
+.paperview .cz-answer .clear-answer {position:absolute;inset-inline-end:0;top:4px;min-height:34px;margin:0;padding:3px 0 3px 8px;font-size:.73rem;}
+.cz-answer .clear-answer:disabled {visibility:hidden;}
+.paperview .cz-answer .part-answer {grid-template-columns:minmax(3.1em,auto) minmax(0,1fr);gap:10px;margin:6px 0;}
+.paperview .cz-answer .part-answer>label,.paperview .cz-answer .ws-part-label {font-size:.82rem;font-variant-numeric:tabular-nums;color:var(--ws-ink);font-weight:600;}
+.paperview .construction-note {margin:8px 0;line-height:1.5;}
+.ws-note {margin:auto;width:min(26rem,calc(100% - 24px));max-height:calc(100dvh - var(--ws-keyboard,0px) - 24px);inset-block-end:var(--ws-keyboard,0px);overflow:auto;padding:clamp(16px,4vw,25px);background:#fffefa;color:#233b4c;border:1px solid #aebfc7;border-radius:8px;box-shadow:0 14px 40px #253a482c;}
+.ws-note::backdrop {background:#1e2d3a52;}
+.ws-note h2 {margin:0 0 12px;font-family:var(--display,Georgia,serif);font-size:1.4rem;}
+.ws-note label {margin-bottom:4px;font-size:.83rem;}
+.ws-note textarea {width:100%;resize:vertical;min-height:5em;border:1px solid #9cb3c0;background:white;font:inherit;font-size:16px;line-height:1.5;padding:8px 10px;}
+.ws-note textarea:focus {outline:2px solid #96b7cc;outline-offset:1px;}
+.ws-note-actions,.ws-presets {display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
+.ws-note-actions {justify-content:flex-end;margin-top:14px;}
+.ws-note-actions button {min-height:42px;font-size:.84rem;}
+.ws-note-actions .ws-delete {margin-right:auto;color:#843f36;}
+.ws-presets:not(:empty) {margin-top:8px;}
+.ws-presets button {padding:4px 8px;font-size:.8rem;}
+main.paperview {padding-bottom:calc(80px + env(safe-area-inset-bottom,0px) + var(--ws-keyboard,0px));}
+body:has(.paperview) #mk {bottom:var(--ws-keyboard,0px);}
+@media (max-width:1000px) {
+  .ws-rail .ws-tool {padding-inline:7px;}
+  .ws-utilities {gap:5px;}
+}
+@media (max-width:760px) {
+  .paperview .worksheet-tools {padding:5px 0;}
+  .paperview .worksheet-tools .tool-primary {display:grid;grid-template-columns:minmax(0,1fr);gap:3px;}
+  .ws-rail {justify-content:space-between;gap:1px;}
+  .ws-rail .ws-tool,.ws-rail .ws-more {flex:1 1 0;min-width:0;min-height:44px;padding:3px 2px;flex-direction:column;gap:3px;}
+  .ws-rail .ws-tool span,.worksheet-tools .ws-rail .ws-more > span {font-size:.64rem;line-height:1.1;}
+  .ws-rail .ws-more.ws-current {flex:1.65 1 0;text-align:center;}
+  .ws-rail .tool-actions {padding-left:2px;gap:0;flex:none;}
+  .ws-rail .tool-actions button {width:34px;min-width:34px;min-height:44px;}
+  .ws-utilities {width:100%;justify-content:flex-start;}
+  .ws-utilities .zoom-controls {margin-inline-start:auto;}
+  .ws-utilities .instrument-options>summary {min-height:40px;gap:5px;font-size:.76rem;padding-inline:5px;}
+  .ws-utilities .ws-panel {right:auto;left:0;}
+  .ws-utilities .zoom-controls button {min-height:40px;}
+  .worksheet-tools .ws-utilities :is(.jump-label,.question-picker)>select {max-width:min(38vw,15em);height:40px;font-size:.78rem;}
+  .paperview .workspace-top {display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"title title timer" "back switch finish";align-items:center;gap:4px;padding:6px 0;min-height:0;}
+  .paperview .workspace-top .workspace-title {grid-area:title;min-width:0;line-height:1.25;}
+  .paperview .workspace-top .workspace-title strong {line-height:1.25;}
+  .paperview .workspace-top #timer {grid-area:timer;justify-self:end;margin:0;font-size:.68rem;}
+  .paperview .workspace-top > button:first-child {grid-area:back;}
+  .paperview .workspace-top > button.p {grid-area:finish;}
+  .paperview .workspace-top > .subject-switch {grid-area:switch;justify-self:center;margin:0;}
+  .paperview .workspace-top > button,.paperview .workspace-top .subject-switch button {font-size:.73rem;padding-inline:7px;min-height:40px;}
+  .paperview .workspace-introduction {margin-block:9px;}
+  .paperview .final-short input[type=text] {width:100%;}
+  .paperview .ws-answer-heading {font-size:1.06rem;padding:12px 0 9px;}
+  .paperview .final-answers .po:has(.bub + span) {flex-basis:9em;}
+}
+@media (min-width:761px) and (max-width:1180px) {
+  .ws-rail .ws-tool {flex-direction:column;gap:3px;font-size:.67rem;}
+}
+@media (max-height:540px) {
+  .paperview .workspace-top,.paperview .worksheet-tools {position:relative;top:auto!important;}
+  .ws-utilities .ws-panel {max-height:55dvh;}
+}
+@media (prefers-reduced-motion:reduce) {
+  .ws-rail button,.ws-utilities summary,.paperview .final-answers :is(input,label,textarea,select) {transition:none;}
+}
