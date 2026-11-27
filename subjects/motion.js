@@ -8,7 +8,7 @@
   const token = name => css.getPropertyValue('--motion-' + name).trim();
   const duration = name => parseFloat(token(name)) || 0;
   const timing = {
-    press: duration('press'), component: duration('component'), page: duration('page'),
+    subject: duration('subject'), press: duration('press'), component: duration('component'), page: duration('page'),
     disclosure: duration('disclosure'), progress: duration('progress'),
     entrance: duration('entrance'), stagger: duration('stagger'),
     ease: token('ease') || 'ease-out', spring: token('spring') || 'ease-out'
@@ -74,7 +74,7 @@
     if (animated && !preference.matches && !document.hidden && !pointers.size && state.indicator.animate && startWidth && Number.isFinite(startX)) {
       state.animation = state.indicator.animate([
         {transform:`translateX(${startX}px) scaleX(${startWidth / width})`}, {transform:destination}
-      ], {duration:timing.page, easing:timing.spring});
+      ], {duration:timing.subject, easing:timing.spring});
       state.animation.id='cermat-subject-indicator';
     }
   }

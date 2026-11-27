@@ -8,7 +8,7 @@
   const preferenceMotion=matchMedia('(prefers-reduced-motion: reduce)');
   const motionStyle = getComputedStyle(document.documentElement);
   const fadeTiming = {
-    duration: parseFloat(motionStyle.getPropertyValue('--motion-page')) || 0,
+    duration: parseFloat(motionStyle.getPropertyValue('--motion-subject')) || 0,
     easing: motionStyle.getPropertyValue('--motion-blend').trim() || 'ease-out'
   };
   let fade=null,pending=null;
@@ -58,13 +58,13 @@
     for (const frame of [outgoing, incoming]) {
       const entering = frame === incoming;
       const frames = entering ? [
-        {opacity:.16, transform:'translateX(' + direction*12 + 'px)'},
-        {opacity:.35, transform:'translateX(' + direction*8 + 'px)', offset:.36},
+        {opacity:.16, transform:'translateX(' + direction*32 + 'px)'},
+        {opacity:.35, transform:'translateX(' + direction*23 + 'px)', offset:.36},
         {opacity:1, transform:'translateX(0px)'}
       ] : [
         {opacity:1, transform:'translateX(0px)'},
-        {opacity:.12, transform:'translateX(' + -direction*3 + 'px)', offset:.36},
-        {opacity:.04, transform:'translateX(' + -direction*6 + 'px)'}
+        {opacity:.12, transform:'translateX(' + -direction*7 + 'px)', offset:.36},
+        {opacity:.04, transform:'translateX(' + -direction*12 + 'px)'}
       ];
       for (const el of frame.contentWindow.CermatMotion?.subjectContent?.() || []) {
         const detail = el.animate(frames, {...fadeTiming, fill:'both'});

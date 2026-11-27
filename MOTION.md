@@ -7,11 +7,12 @@ Matematika i čeština používají časování ze souboru `subjects/motion.css`
 | Stisk a uvolnění tlačítka | 70 až 200 ms |
 | Mobilní nabídka a dialog | 340 ms |
 | Rozbalení ročníku, otočení šipky a odkrytí termínů | 380 ms |
-| Přepnutí předmětu nebo stránky | 390 ms |
+| Přechod na další stránku | 390 ms |
+| Přepnutí předmětu | 520 ms |
 | Úvodní nadpis a výsledek testu | 460 ms |
 | Změna ukazatele pokroku | 540 ms |
 
-Při přepnutí předmětu naváže modrý indikátor na svoji současnou polohu. Viditelný obsah se ztlumí a další předmět se přisune o 12 px. Opětovné přepnutí během přechodu obrátí probíhající pohyb. U ročníku se současně otáčí šipka, odkrývají termíny a posouvají okolní řádky.
+Při přepnutí předmětu naváže modrý indikátor na svoji současnou polohu. Viditelný obsah se ztlumí a další předmět se přisune o 32 px. Opětovné přepnutí během přechodu obrátí probíhající pohyb. U ročníku se současně otáčí šipka, odkrývají termíny a posouvají okolní řádky.
 
 Na nové stránce se postupně objeví nejvýše čtyři viditelné prvky s odstupem 40 ms. Při přechodu na Můj pokrok začne animace cílové sekce po příchodu do výřezu. Ukazatel naváže na naposledy zobrazenou hodnotu i po překreslení stránky. Text výsledku a hodnoty pro čtečku jsou dostupné hned.
 

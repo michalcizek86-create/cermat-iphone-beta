@@ -4,6 +4,7 @@
   --motion-component: 340ms;
   --motion-disclosure: 380ms;
   --motion-page: 390ms;
+  --motion-subject: 520ms;
   --motion-progress: 540ms;
   --motion-entrance: 460ms;
   --motion-stagger: 40ms;
@@ -23,6 +24,7 @@
   position: absolute; top: 2px; left: 0; bottom: 2px;
   border-radius: 3px; background: var(--sel); pointer-events: none; z-index: -1;
   transform-origin: left center;
+  box-shadow: inset 0 -2px var(--ac);
 }
 .subject-switch[data-motion-ready] button[aria-pressed="true"],
 .subject-switch[data-motion-ready] button:hover { background: transparent; }
