@@ -56,3 +56,9 @@ body:has(.folio-columns){background-image:linear-gradient(#f6f3edc9,#f6f3edc9),u
 @media(max-width:960px) and (min-height:561px){.folio-overview{position:sticky;top:var(--folio-header);z-index:52;max-height:48dvh;overflow:auto}.folio-desk .worksheet-tools{top:calc(var(--folio-header) + var(--folio-strip))!important}}
 @media(max-width:760px){.folio-desk .folio-width select{width:74px}.folio-desk .exam-page-heading h2{font-size:1.13rem;gap:6px}}
 .folio-desk .worksheet-tools .folio-width select{width:81px;padding-left:5px;padding-right:16px;font-size:.76rem}
+.folio-desk .instrument-options:not([open])>.ws-panel,.folio-overview details:not([open])>:not(summary){display:none}
+.folio-desk .instrument-options[open]>.ws-panel{translate:var(--folio-panel-shift,0px) 0}
+.folio-desk .ws-more{overflow:hidden}
+.folio-desk .ws-rail .ws-more select{min-inline-size:0;max-inline-size:100%}
+.folio-desk .final-series .tfp :is(td,th):not(:first-child){width:46px;min-width:46px}
+@media(max-width:360px){.folio-desk .ws-rail .ws-tool span{font-size:.58rem}.folio-brand{gap:5px;font-size:.95rem}}

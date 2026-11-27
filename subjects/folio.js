@@ -33,6 +33,14 @@
     }
     // Keep page navigation and every construction option in the secondary menu.
     const settings=util.querySelector('details'),panel=settings.querySelector('.ws-panel'),jump=util.querySelector('.jump-label,.question-picker');
+    function fitPanel(){
+      if(!settings.open)return;
+      panel.style.removeProperty('--folio-panel-shift');
+      const r=panel.getBoundingClientRect(),width=document.documentElement.clientWidth;
+      const dx=Math.max(8-r.left,Math.min(0,width-8-r.right));
+      panel.style.setProperty('--folio-panel-shift',dx+'px');
+    }
+    listen(settings,'toggle',fitPanel);listen(window,'resize',fitPanel);
     if(jump)panel.prepend(jump);
     if(intro)panel.append(intro);
     const oldIndex=desk.querySelector('.question-index');if(oldIndex)panel.append(oldIndex);
