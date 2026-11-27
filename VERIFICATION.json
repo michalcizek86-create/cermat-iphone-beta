@@ -1,6 +1,6 @@
 {
   "edition": "student",
-  "release": "821cb1d566927257",
+  "release": "d8ceab45d866b72c",
   "baseline": "ef8c3c4f373c8d1619d839963cc0d266c0ca9b60",
   "officialExams": 35,
   "bundledPracticeSets": 6,
@@ -8,7 +8,7 @@
   "artwork": 510,
   "browserDataIncluded": false,
   "design": "shared academic notebook components for both subjects",
-  "offlineResources": 272,
+  "offlineResources": 274,
   "subjects": {
     "math": {
       "officialExams": 35,

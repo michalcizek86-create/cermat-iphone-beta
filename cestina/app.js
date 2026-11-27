@@ -234,6 +234,19 @@ function workspace() {
 }
 function setupPaper() {
   window.CermatWorksheet.mount(app);
+  if(!readOnlyPaper){
+    const items=attempt.questionIds.map((id,i)=>({id,label:String(attempt.examId?questionMap.get(id).no:i+1),q:questionMap.get(id)}));
+    const target=item=>attempt.examId?document.getElementById('paper-page-'+item.q.anchor.page)?.querySelector('.pdf-sheet'):
+      item.id===attempt.questionIds[attempt.currentIndex]?app.querySelector('.exam-page'):null;
+    const position=(item,el)=>el.getBoundingClientRect().top+(attempt.examId?item.q.anchor.y*el.getBoundingClientRect().height/examMap.get(attempt.examId).pageSizes[item.q.anchor.page-1][1]:0);
+    window.CermatFolio.mount(app,{record:attempt,items,initial:attempt.examId?attempt.overviewQuestion:attempt.questionIds[attempt.currentIndex],
+      subtitle:(attempt.examId?'Český jazyk':'Procvičování')+' · '+countTasks(items.length),target,position,
+      answered:item=>isAnswered(item.q,attempt.answers[item.id]),save:queueSave,
+      jump:(item,i)=>{if(!attempt.examId){changePracticeIndex(i);return;}
+        const el=target(item);if(el){const bar=app.querySelector('.worksheet-tools');window.scrollBy({top:position(item,el)-(getComputedStyle(bar).position==='sticky'?app.querySelector('.workspace-top').offsetHeight+bar.offsetHeight:0)-16,behavior:'instant'});}},
+      exit:async id=>{await leave();if(id==='history')switchView('history');else document.getElementById(id)?.scrollIntoView();}
+    });
+  }
   paper = new PaperRenderer();
   const top = app.querySelector('.workspace-top');
   app.style.setProperty('--cz-toolbar-top',top.getBoundingClientRect().height+'px');
@@ -385,7 +398,13 @@ async function enter(record,resuming=false) {
   startedAt=window.CermatSubjectBridge?.active===false?null:Date.now();
   await saveNow();
   render();
-  if(resuming)window.CermatMotion?.resumed?.();
+  if(resuming){
+    if(attempt.examId&&attempt.overviewQuestion){
+      const current=app.querySelector('.folio-numbers button[aria-current=step]');
+      current?.click();
+    }
+    window.CermatMotion?.resumed?.();
+  }
 }
 async function leave() {
   finishActiveInk();pauseClock();
@@ -427,6 +446,7 @@ function updateAnswer(element) {
   queueSave();
 }
 function refreshAnswerCount() {
+  app.dispatchEvent(new Event('folio:answers'));
   document.getElementById('answered-count').textContent=answered(attempt)+' / '+attempt.questionIds.length+' zodpovězeno';
   app.querySelectorAll('[data-action="jump-question"]').forEach(b=>b.classList.toggle('answered',isAnswered(questionMap.get(b.dataset.value),attempt.answers[b.dataset.value])));
 }

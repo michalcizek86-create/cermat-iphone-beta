@@ -1,0 +1,58 @@
+body:has(.folio-columns){background:#f5f2ed url("../assets/paper-grain.60a3ea610bc1.webp") repeat;background-size:320px;color:#252d31}
+main.paperview:has(.folio-columns){max-width:1600px;padding-inline:clamp(12px,2vw,36px)}
+.paperview:has(.folio-columns) .workspace-top{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto auto;grid-template-areas:"brand switch links links links" "back title save timer finish";column-gap:clamp(10px,1.4vw,24px);row-gap:0;align-items:center;padding:0 0 12px;background:#f7f5f0;min-height:0;border:0}
+.folio-brand{grid-area:brand;display:flex;align-items:center;gap:9px;font:600 clamp(1.15rem,2vw,1.65rem)/1.1 var(--display,Georgia,serif);padding-block:13px}
+.folio-monogram{border-radius:4px;background:#d7eaf4;color:#245879;padding:4px 8px}
+.workspace-top:has(.folio-brand) .subject-switch{grid-area:switch;justify-self:start;margin:0}
+.folio-links{grid-area:links;display:flex;justify-content:end;gap:12px}
+.folio-links button,.workspace-top:has(.folio-brand)>button:first-child{background:none;border:0;box-shadow:none;font-family:var(--display,Georgia,serif);font-size:1rem}
+.workspace-top:has(.folio-brand)>button:first-child{grid-area:back;color:#265d80;padding-left:0;border-right:1px solid #d3d2ca;border-radius:0;text-align:start}
+.workspace-top:has(.folio-brand) .workspace-title{grid-area:title;display:grid;gap:2px;min-width:0}
+.workspace-top:has(.folio-brand) .workspace-title strong{font:600 clamp(1.15rem,2vw,2rem)/1.1 var(--display,Georgia,serif);color:#242d31}
+.folio-subtitle,.folio-save{font-size:.83rem;color:#54616a}
+.folio-save{grid-area:save}.workspace-top:has(.folio-brand) #timer{grid-area:timer;font-size:1rem;color:#25313b}
+.workspace-top:has(.folio-brand)>button.p{grid-area:finish;background:#215e87;border:1px solid #184d70;color:white;padding-inline:18px;font-weight:650}
+.folio-columns{display:grid;grid-template-columns:minmax(0,1fr) clamp(230px,22%,330px);gap:clamp(15px,2vw,30px);align-items:start;margin-top:14px}
+.folio-desk{min-width:0}
+.folio-desk .worksheet-tools{margin:0 auto -12px;width:fit-content;max-width:calc(100% - 16px);padding:5px 7px;background:#fffefa;border:1px solid #d6d5d0;border-radius:9px;box-shadow:0 3px 10px #302e291a;z-index:50}
+.folio-desk .worksheet-tools .tool-primary{justify-content:center}
+.folio-desk .tool-actions{border:0;border-right:1px solid #d4d6d4;padding:0 5px 0 0;margin:0}
+.folio-desk .ws-tool[aria-pressed=true]{background:#dfedf5;border-color:#b9d3e1;color:#205877;box-shadow:none}
+.folio-desk .ws-utilities :is(.folio-color,.folio-width){display:inline-flex;align-items:center;margin:0;padding:2px 4px;font-size:0}
+.folio-color input[type=color]{appearance:none;width:30px;height:30px;margin:0;padding:2px;border:1px solid #bcc9d0;border-radius:50%;background:white;cursor:pointer}
+.folio-color input::-webkit-color-swatch-wrapper{padding:0}.folio-color input::-webkit-color-swatch{border:0;border-radius:50%}
+.folio-width select,.folio-width input[type=range]{width:68px;min-width:0;margin:0;font-size:.77rem;accent-color:#326783}
+.folio-desk .ws-panel .workspace-introduction{display:block;margin:.6em 0 0}.folio-desk .ws-panel .workspace-introduction span{display:block}
+.folio-desk .exam-paper-stack{max-width:none;margin:0;gap:22px}
+.folio-desk .exam-page{margin:0 0 22px;padding:clamp(23px,3vw,48px) clamp(14px,3.6vw,56px) 18px;background:#fff;border:1px solid #e5e2dc;border-radius:2px;box-shadow:0 4px 18px #34342a12}
+.folio-desk .exam-page-heading{align-items:center;padding:2px 0 12px;margin:0;border-bottom:1px solid #e0e2df}
+.folio-desk .exam-page-heading h2{font:600 1.18rem/1.25 var(--display,Georgia,serif);color:#2c3537}
+.folio-desk .paper-surface{border:0;box-shadow:none;background:white}
+.folio-desk .study-paper-svg>rect:first-of-type{fill:white}
+.folio-desk .final-answers{margin:0;padding:2px 0 8px;border:0;border-top:1px solid #cdd8dc;background:white}
+.folio-desk .final-short input[type=text],.folio-desk .final-answers textarea{background:white;border:1px solid #adbcc6;border-radius:4px}
+.folio-overview{position:sticky;top:var(--folio-offset,148px);max-height:calc(100dvh - var(--folio-offset,148px) - 12px);overflow:auto;padding:clamp(14px,1.6vw,24px);background:#fffefa;border:1px solid #dbd9d2;border-radius:8px;box-shadow:0 3px 12px #3030230d}
+.folio-overview summary{cursor:pointer;font:600 1.45rem/1.2 var(--display,Georgia,serif);list-style:none}
+.folio-overview summary::-webkit-details-marker{display:none}.folio-count{display:block;font:400 1rem/1.5 var(--display,Georgia,serif);color:#586168;margin-top:5px}
+.folio-overview progress{display:block;width:100%;height:6px;appearance:none;border:0;border-radius:4px;background:#e6e8e7;margin:11px 0 19px}
+.folio-overview progress::-webkit-progress-bar{background:#e6e8e7;border-radius:4px}.folio-overview progress::-webkit-progress-value{background:#326b93;border-radius:4px}.folio-overview progress::-moz-progress-bar{background:#326b93}
+.folio-numbers{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.folio-numbers button{position:relative;min-width:0;min-height:39px;padding:4px 0;font:600 .94rem/1.15 var(--display,Georgia,serif);border:1px solid #c9cecf;background:white;color:#263238;border-radius:5px}
+.folio-numbers .done{background:#d7eaf4}.folio-numbers .done:before{content:'✓';position:absolute;top:1px;left:2px;font:9px sans-serif}.folio-numbers .marked:after{content:'⚑';position:absolute;right:1px;top:0;font:11px sans-serif;color:#285f82}
+.folio-numbers [aria-current=step]{border:2px solid #285e84;text-decoration:underline;text-underline-offset:3px}
+.folio-legend{margin:18px 0 9px;padding-top:12px;border-top:1px solid #deded8;font-size:.77rem;color:#54636c}
+.folio-mark{background:none;color:#215b81;border:0;padding:6px 0;box-shadow:none;text-align:left}
+.folio-desk .cz-paper-scroll{margin:0}.folio-desk .cz-paper-inner{max-width:none}
+@media(min-width:961px){.folio-overview details:not([open]) summary:after{content:' ▾'}.folio-desk .ws-tool,.folio-desk .ws-more{padding-inline:5px}.folio-desk .ws-utilities{gap:4px}}
+@media(max-width:960px){.folio-columns{display:flex;flex-direction:column;gap:9px;margin-top:4px}.folio-overview{order:-1;position:relative;top:auto;width:100%;padding:8px 12px;max-height:none}.folio-overview summary{display:flex;align-items:center;gap:10px;font-size:1.05rem}.folio-count{margin:0 0 0 auto;font:400 .77rem/1.4 inherit;font-family:inherit;font-size:.77rem}.folio-overview summary:after{content:'⌄';font-size:1em}.folio-overview details[open] summary:after{transform:rotate(180deg)}.folio-numbers{grid-template-columns:repeat(auto-fit,minmax(44px,1fr))}.folio-desk{width:100%}.folio-links{gap:0}}
+@media(max-width:760px){.paperview:has(.folio-columns) .workspace-top{grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:"brand switch switch" "title title title" "back timer finish" "save save save";gap:3px 6px;padding:3px 0}.folio-brand{font-size:1.1rem;padding:0}.folio-brand .folio-monogram{font-size:1rem}.workspace-top:has(.folio-brand) .subject-switch{justify-self:end}.folio-links{display:none}.workspace-top:has(.folio-brand) .workspace-title strong{font-size:1.13rem}.folio-subtitle,.folio-save{font-size:.73rem}.workspace-top:has(.folio-brand)>button:first-child{font-size:.85rem;border:0}.workspace-top:has(.folio-brand) #timer{font-size:.76rem}.workspace-top:has(.folio-brand)>button.p{padding-inline:10px}.folio-desk .worksheet-tools{width:100%;max-width:100%;margin-bottom:-5px;padding:3px}.folio-desk .ws-utilities{justify-content:space-between;gap:0}.folio-desk .ws-panel{left:0;right:auto}.folio-desk .exam-page{padding:18px 10px 10px}.folio-desk .ws-rail .tool-actions{padding-right:2px}.folio-desk .ws-utilities .zoom-controls{margin-left:0}.folio-desk .exam-page-heading h2{font-size:1rem}}
+@media(max-height:560px){.folio-overview{position:static;max-height:none}}
+@media(hover:hover){.folio-numbers button:hover,.folio-mark:hover{background:#edf5fa}}
+@media(prefers-reduced-motion:no-preference){.folio-numbers button,.folio-mark{transition:background-color .18s,border-color .18s,transform .15s}.folio-numbers button:active,.folio-mark:active{transform:translateY(1px)}}
+body:has(.folio-columns){background-image:linear-gradient(#f6f3edc9,#f6f3edc9),url("../assets/paper-grain.60a3ea610bc1.webp")}
+.folio-desk .exam-page-heading h2{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;font-variant:small-caps;font-size:1.45rem}
+.folio-page-label{font:400 .88rem/1.3 var(--display,Georgia,serif);font-variant:normal;color:#5c676b}
+.folio-desk .folio-width select{width:84px}.folio-desk .folio-construction{display:flex;align-items:center;gap:8px;font-size:.9rem}.folio-construction input{width:18px;height:18px}
+@media(max-width:960px) and (min-height:561px){.folio-overview{position:sticky;top:var(--folio-header);z-index:52;max-height:48dvh;overflow:auto}.folio-desk .worksheet-tools{top:calc(var(--folio-header) + var(--folio-strip))!important}}
+@media(max-width:760px){.folio-desk .folio-width select{width:74px}.folio-desk .exam-page-heading h2{font-size:1.13rem;gap:6px}}
+.folio-desk .worksheet-tools .folio-width select{width:81px;padding-left:5px;padding-right:16px;font-size:.76rem}
