@@ -378,12 +378,13 @@
   function subjectContent() {
     if (screen === 'paper') return [...app.querySelectorAll('.workspace-title > strong, .workspace-introduction')];
     if (screen === 'home') {
-      const editorial = visibleElements('.notebook-intro, .notebook-pattern, .fact-editorial, .comenius, .notebook-progress',4);
-      const content = visibleElements('.library-heading, .notebook-mix, .exam-index-heading, .year-card > summary, .year-card[open] > .year-terms, .topic-home > .sech, .topic-card, .unfinished',6-editorial.length);
+      // Photos and paper textures already blend with their frame. Only text needs a separate moving layer.
+      const editorial = visibleElements('.notebook-intro, .fact-editorial, .notebook-progress',2);
+      const content = visibleElements('.library-heading, .notebook-mix, .exam-index-heading, .year-card > summary, .year-card[open] > .year-terms, .topic-home > .sech, .topic-card, .unfinished',3-editorial.length);
       return editorial.concat(content);
     }
     const selector = ':scope > header h1, .result-heading h1, .practice-lead, .topic-card, .practice-config > h2, .practice-metrics, .result-score, .history-row > div, .unfinished-row > div, :scope > .sech, :scope > .mut, .sgrp';
-    return visibleElements(selector,6);
+    return visibleElements(selector,3);
   }
   function reveal(element, index, elapsed, {distance=9, fade=.36, ms=timing.page, scale=1} = {}) {
     const delay = index * timing.stagger - elapsed;
