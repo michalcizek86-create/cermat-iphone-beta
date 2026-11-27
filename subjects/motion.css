@@ -1,19 +1,20 @@
 /* Durations and curves are shared by both subjects and the outer subject switch. */
 :root {
   --motion-press: 150ms;
-  --motion-component: 300ms;
-  --motion-page: 420ms;
-  --motion-entrance: 520ms;
-  --motion-stagger: 32ms;
-  --motion-ease: cubic-bezier(.22, 1, .36, 1);
-  --motion-blend: cubic-bezier(.32, .06, .22, 1);
-  --motion-spring: cubic-bezier(.22, .85, .25, 1.035);
+  --motion-component: 340ms;
+  --motion-disclosure: 380ms;
+  --motion-page: 390ms;
+  --motion-progress: 540ms;
+  --motion-entrance: 460ms;
+  --motion-stagger: 40ms;
+  --motion-ease: cubic-bezier(.24, .68, .23, 1);
+  --motion-blend: cubic-bezier(.32, .08, .24, 1);
+  --motion-spring: cubic-bezier(.31, .06, .20, 1.04);
 }
 @supports (animation-timing-function: linear(0, 1)) {
   :root {
-    /* Samples of a damped spring (damping ratio .84), with under 1% overshoot. */
-    --motion-spring: linear(0, .0944, .2852, .486, .6578, .7887, .8802, .9396, .9752, .9947,
-                            1.004, 1.0073, 1.0076, 1.0064, 1.0049, 1.0034, 1.0022, 1.0013, 1.0007, 1.0003, 1);
+    --motion-spring: linear(0, .033 8%, .137 16%, .32 25%, .55 35%, .74 45%, .88 55%,
+                            .956 65%, .993 76%, 1.004 85%, 1.002 93%, 1);
   }
 }
 
@@ -25,24 +26,50 @@
 }
 .subject-switch[data-motion-ready] button[aria-pressed="true"],
 .subject-switch[data-motion-ready] button:hover { background: transparent; }
-.year-card[open][data-motion-expanded="false"] .year-chevron { transform: rotate(45deg); }
+.year-grid .year-card .year-chevron { margin-top: 0; transform: translateY(-2px) rotate(45deg); }
+.year-grid .year-card[open] .year-chevron { margin-top: 0; transform: translateY(1.5px) rotate(225deg); }
+.year-grid .year-card[data-motion-expanded="false"] .year-chevron { transform: translateY(-2px) rotate(45deg); }
+.year-grid .year-card[data-motion-expanded="false"] > summary { background-color: transparent; border-bottom-color: transparent; }
+.year-grid .year-card[data-motion-expanded="false"] > summary h4 { color: var(--tx); }
 .topnav[data-motion-menu-closing] .nav { display: flex !important; }
 .goal > i, .tp .bar > i { transform-origin: left center; }
-[data-motion-fill] { width: 100% !important; }
+[data-motion-fill] { width: 100% !important; transform: scaleX(var(--motion-fill, 1)); }
+.workspace-title, #save-status, #study-save-status { position: relative; }
+.workspace-title > .motion-resume-note {
+  position: absolute; inset-inline: 0; bottom: 0; margin: 0; color: var(--ac); pointer-events: none;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.workspace-title:has(> .motion-resume-note) > :is(#save-status, #study-save-status):not(.save-error) { opacity: 0; }
+.workspace-title > .save-error ~ .motion-resume-note { display: none; }
 
 @media (prefers-reduced-motion: no-preference) {
   button, .notebook-links a, .year-card > summary {
     transition: background-color var(--motion-press) ease-out, border-color var(--motion-press) ease-out,
-                color var(--motion-press) ease-out, transform var(--motion-press) var(--motion-ease);
+                color var(--motion-press) ease-out, box-shadow 200ms var(--motion-ease), transform 200ms var(--motion-ease);
   }
-  button:where(:not(:disabled, .paperview button, #mk button, .subject-switch button)):active,
-  .notebook-links a:active { transform: translateY(1px) scale(.988); }
-  .year-chevron { transition: transform var(--motion-component) var(--motion-ease); }
+  :is(button, .notebook-links a):where(:not(:disabled, .paperview button, #mk button, .subject-switch button)):is(:active, [data-motion-pressed]),
+  :is(.workspace-top, .workspace-bottom) > button:enabled:is(:active, [data-motion-pressed]) {
+    transform: translateY(1px) scale(.975); box-shadow: inset 0 1px 2px var(--sh); transition-duration: 70ms;
+  }
+  .year-grid .year-card > summary:is(:active, [data-motion-pressed]) { background-color: var(--sel); }
+  .year-chevron { transition: transform var(--motion-disclosure) var(--motion-spring); }
+  .year-card > summary h4 { transition: color 200ms ease-out; }
   .topic-card, .notebook-mix { transition: transform var(--motion-component) var(--motion-ease), border-color var(--motion-press) ease-out; }
   @media (hover: hover) and (pointer: fine) {
-    .topic-card:hover, .notebook-mix:hover { transform: translateY(-2px); }
-    button:where(:not(:disabled, .paperview button, #mk button, .subject-switch button)):hover:not(:active),
-    .notebook-links a:hover:not(:active) { transform: translateY(-1px); }
+    .topic-card:has(.tc-act :hover), .notebook-mix:has(.tc-act :hover) { transform: translateY(-2px); border-color: var(--blue-line); }
+    :is(button, .notebook-links a):where(:not(:disabled, .paperview button, #mk button, .subject-switch button)):hover:not(:active, [data-motion-pressed]),
+    :is(.workspace-top, .workspace-bottom) > button:enabled:hover:not(:active, [data-motion-pressed]) { transform: translateY(-1px); }
+    :is(.tc-act, .term-actions, .unfinished-row) button:hover:not(:active, [data-motion-pressed], :disabled),
+    .notebook-links a:hover:not(:active, [data-motion-pressed]) { box-shadow: 0 2px 5px var(--sh); }
+  }
+  [data-motion-saved]:not(.save-error)::after {
+    content: ''; position: absolute; inset-inline-start: 0; bottom: -2px; block-size: 2px; inline-size: min(4rem,100%);
+    pointer-events: none; background: var(--ac); transform-origin: left;
+    animation: cermat-save 680ms var(--motion-ease) both;
+  }
+  @keyframes cermat-save {
+    0% { transform: scaleX(.06); opacity: .3; } 48% { transform: scaleX(1); opacity: .86; }
+    70% { opacity: .86; } 100% { transform: scaleX(1); opacity: 0; }
   }
 
   /* Native tool trays take their final position immediately, including over an exam. */

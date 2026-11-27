@@ -31,6 +31,7 @@
 
   function settle() {
     const prior=fade;fade=null;prior?.animation.cancel();
+    for (const detail of prior?.content || []) detail.cancel();
     for(const [subject,frame]of frames){
       frame.hidden=subject!==selected;
       frame.style.zIndex=subject===selected?'2':'0';
@@ -41,13 +42,37 @@
     if (fade) {
       // The same two documents are still stacked. Retrace the current blend.
       fade.animation.reverse();
+      for (const detail of fade.content) detail.reverse();
       return;
     }
     const incoming = frames.get(selected), outgoing = frames.get(from);
     outgoing.hidden = incoming.hidden = false;
     outgoing.style.zIndex = '1'; incoming.style.zIndex = '2';
-    const animation = incoming.animate([{opacity:0}, {opacity:1}], fadeTiming);
-    fade = {animation};
+    const animation = incoming.animate([
+      {opacity:0}, {opacity:0,offset:.16}, {opacity:1,offset:.58}, {opacity:1}
+    ], fadeTiming);
+    animation.id = 'cermat-subject-blend';
+    const content = [];
+    const direction = selected === 'cz' ? 1 : -1;
+    // Headers and paper coordinates stay fixed. Only visible pieces of editorial content travel.
+    for (const frame of [outgoing, incoming]) {
+      const entering = frame === incoming;
+      const frames = entering ? [
+        {opacity:.16, transform:'translateX(' + direction*12 + 'px)'},
+        {opacity:.35, transform:'translateX(' + direction*8 + 'px)', offset:.36},
+        {opacity:1, transform:'translateX(0px)'}
+      ] : [
+        {opacity:1, transform:'translateX(0px)'},
+        {opacity:.12, transform:'translateX(' + -direction*3 + 'px)', offset:.36},
+        {opacity:.04, transform:'translateX(' + -direction*6 + 'px)'}
+      ];
+      for (const el of frame.contentWindow.CermatMotion?.subjectContent?.() || []) {
+        const detail = el.animate(frames, {...fadeTiming, fill:'both'});
+        detail.id = entering ? 'cermat-subject-enter' : 'cermat-subject-leave';
+        content.push(detail);
+      }
+    }
+    fade = {animation,content};
     animation.finished.then(() => { if (fade?.animation === animation) settle(); }, () => {});
   }
 
@@ -63,22 +88,22 @@
       frame.inert=!active;
       frame.style.pointerEvents=active?'auto':'none';
       if(!fade)frame.style.zIndex=active?'2':'0';
-      if (ready.has(subject)) signal(subject,{from:motion.from,animate:!!animate,keyboard:active && motion.keyboard});
+      if (ready.has(subject)) signal(subject,{from:motion.from,position:motion.position,animate:!!animate,keyboard:active && motion.keyboard});
     }
     status.hidden = ready.has(selected) || waitingOnSubject;
     document.documentElement.dataset.subject = selected;
     document.title = 'Cermat testy · ' + (selected==='math' ? 'Matematika' : 'Čeština');
   }
 
-  function select(subject,keyboard=false) {
+  function select(subject,keyboard=false,position) {
     if (!frames.has(subject) || subject===selected) return;
     const from=selected;
     selected = subject;
     try {localStorage.setItem(preference, subject);} catch (_) {}
     const url=new URL(location.href);
     if(url.searchParams.has('subject')){url.searchParams.set('subject',subject);history.replaceState(null,'',url);}
-    pending=ready.has(subject)?null:{from,keyboard};
-    paint({from,keyboard,animate:true});
+    pending=ready.has(subject)?null:{from,keyboard,position};
+    paint({from,keyboard,position,animate:true});
   }
 
   addEventListener('message', event => {
@@ -91,7 +116,7 @@
       if(entry[0]===selected)pending=null;
       paint(motion);
     }
-    if (event.data?.type==='CERMAT_SELECT_SUBJECT') select(event.data.subject,!!event.data.keyboard);
+    if (event.data?.type==='CERMAT_SELECT_SUBJECT') select(event.data.subject,!!event.data.keyboard,event.data.position);
     if (event.data?.type==='CERMAT_SETTLE_SUBJECT'&&entry[0]===selected)settle();
   });
   addEventListener('pagehide', () => {

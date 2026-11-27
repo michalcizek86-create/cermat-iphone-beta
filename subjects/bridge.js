@@ -16,16 +16,18 @@
     if (subject==='cz' && top?.isConnected) document.getElementById('app').style.setProperty('--cz-toolbar-top', top.offsetHeight+'px');
   });
 
-  function visibility(value) {
+  function visibility(value,transition=false) {
     if (value===active) return;
     active = value;
-    dispatchEvent(new CustomEvent('cermat:subject-visibility', {detail:{active}}));
+    dispatchEvent(new CustomEvent('cermat:subject-visibility', {detail:{active,transition}}));
   }
 
   function select(next,keyboard=false) {
     if (next===subject) return;
+    const group=document.querySelector('.subject-switch');
+    const position=window.CermatMotion?.indicatorPosition?.(group);
     visibility(false);
-    parent.postMessage({type:'CERMAT_SELECT_SUBJECT',subject:next,keyboard},location.origin);
+    parent.postMessage({type:'CERMAT_SELECT_SUBJECT',subject:next,keyboard,position},location.origin);
   }
 
   function control() {
@@ -73,10 +75,10 @@
 
   addEventListener('message', event => {
     if (event.source!==parent || event.origin!==location.origin || event.data?.type!=='CERMAT_SUBJECT_VISIBILITY')return;
-    visibility(!!event.data.active);
+    visibility(!!event.data.active,!!event.data.animate);
     // Both still-visible indicators move together while the subject papers blend.
     document.querySelectorAll('.subject-switch').forEach(group =>
-      window.CermatMotion?.segment(group,event.data.choice || subject,{from:event.data.from,animated:event.data.animate}));
+      window.CermatMotion?.segment(group,event.data.choice || subject,{from:event.data.from,position:event.data.position,animated:event.data.animate}));
     if(event.data.active && event.data.keyboard)document.querySelector('[data-subject-choice="'+subject+'"]')?.focus({preventScroll:true});
   });
   addEventListener('cermat:motion-settle',()=>parent.postMessage({type:'CERMAT_SETTLE_SUBJECT'},location.origin));

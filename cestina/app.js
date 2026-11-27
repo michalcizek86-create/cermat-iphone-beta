@@ -355,10 +355,14 @@ function saveNow() {
     if (el&&!readOnlyPaper&&attempt?.id===snapshot.id) {
       el.textContent=text;
       el.classList.toggle('save-error',bad);
+      return el;
     }
   };
   update('Ukládám…');
-  saveChain=saveChain.catch(()=>{}).then(()=>putAttempt(snapshot)).then(()=>update('Uloženo v zařízení')).catch(()=>{
+  saveChain=saveChain.catch(()=>{}).then(()=>putAttempt(snapshot)).then(()=>{
+    const status=update('Uloženo v zařízení');
+    window.CermatMotion?.saved?.(status);
+  }).catch(()=>{
     update(journalSaved?'Uloženo do obnovy · vytvoř zálohu':'Ukládání selhalo · vytvoř zálohu',true);
   });
   return saveChain;
@@ -367,7 +371,7 @@ function queueSave() {
   clearTimeout(saveTimer);
   saveTimer=setTimeout(()=>saveNow(),180);
 }
-async function enter(record) {
+async function enter(record,resuming=false) {
   message='';
   attempt=record;
   view='exam';
@@ -378,6 +382,7 @@ async function enter(record) {
   startedAt=window.CermatSubjectBridge?.active===false?null:Date.now();
   await saveNow();
   render();
+  if(resuming)window.CermatMotion?.resumed?.();
 }
 async function leave() {
   pauseClock();
@@ -506,7 +511,7 @@ async function action(event) {
     await enter(newAttempt('official',name,exam.questionIds.map(id=>questionMap.get(id)),exam.id));
   } else if(name==='resume'){
     const record=attempts.get(value);
-    if(record?.status==='active')await enter(record);
+    if(record?.status==='active')await enter(record,true);
   } else if(name==='leave')await leave();
   else if(name==='finish'){
     const blank=attempt.questionIds.length-answered(attempt);

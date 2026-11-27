@@ -4,14 +4,18 @@ Matematika i čeština používají časování ze souboru `subjects/motion.css`
 
 | Interakce | Délka |
 | --- | --- |
-| Stisk tlačítka, uložení práce | 150 ms |
-| Ročník, rozepsané pokusy, mobilní nabídka, dialog, ukazatel pokroku | 300 ms |
-| Přepnutí předmětu, otevření tématu nebo jiné stránky | 420 ms |
-| Úvodní nadpis a výsledek testu | 520 ms |
+| Stisk a uvolnění tlačítka | 70 až 200 ms |
+| Mobilní nabídka a dialog | 340 ms |
+| Rozbalení ročníku, otočení šipky a odkrytí termínů | 380 ms |
+| Přepnutí předmětu nebo stránky | 390 ms |
+| Úvodní nadpis a výsledek testu | 460 ms |
+| Změna ukazatele pokroku | 540 ms |
 
-U nové stránky postupně nastoupí nejvýše čtyři viditelné prvky s odstupem 32 ms. Tlačítka a formuláře přijímají vstup hned. Úspěšnost a výsledky zobrazují skutečné hodnoty už od prvního snímku.
+Při přepnutí předmětu naváže modrý indikátor na svoji současnou polohu. Viditelný obsah se ztlumí a další předmět se přisune o 12 px. Opětovné přepnutí během přechodu obrátí probíhající pohyb. U ročníku se současně otáčí šipka, odkrývají termíny a posouvají okolní řádky.
 
-Při rychlém přepnutí zpět se prolínání předmětů obrátí z aktuální polohy. Indikátor používá tlumenou pružinu s překmitem menším než jedno procento. Ročník si změří obě velikosti jednou. V podporovaných prohlížečích pak postupně odhaluje termíny a posouvá dotčené řádky transformací. Klávesnicí jde otevření i zavření obrátit stejně jako dotykem.
+Na nové stránce se postupně objeví nejvýše čtyři viditelné prvky s odstupem 40 ms. Při přechodu na Můj pokrok začne animace cílové sekce po příchodu do výřezu. Ukazatel naváže na naposledy zobrazenou hodnotu i po překreslení stránky. Text výsledku a hodnoty pro čtečku jsou dostupné hned.
+
+Krátká modrá linka pod stavem uložení se objeví po úspěšném zápisu odpovědi nebo poznámky. Při otevření rozepsaného pokusu se na místě stavového řádku krátce zobrazí „Pokračuješ v testu“. Chyba ukládání má přednost.
 
 Při vstupu do testu se objeví jeho název. Papír a vrstva kreseb zůstávají v souřadnicích zadání. Začátek tahu nebo zadávání odpovědi ukončí probíhající přechod. Systémové omezení pohybu vypíná efekty i plynulé posouvání k úloze. Změna nastavení platí i na otevřené stránce.
 
@@ -19,4 +23,4 @@ Dialog si ponechává nativní ovládání klávesnicí a formulář odevzdá v�
 
 Pro připojení rozhraní doučování lze použít nativní `dialog` nebo prvek s atributem `popover`. Atribut `data-motion="message"` patří na obal nově vložené zprávy. Text může postupně přibývat uvnitř stejného prvku. Zprávy načtené z historie tento atribut nepotřebují. Samotný tutor zatím není součástí tohoto vydání.
 
-Při měření na lokálně načtené matematice se v Chromium 153 i WebKitu 26.5 sledovaly intervaly `requestAnimationFrame` při šířkách 390 a 1440 px. V Chromium byl medián 16,7 ms. V desktopovém WebKitu se proti předchozímu vydání 95. percentil otevření ročníku zkrátil ze 40 na 22 ms a zavření z 38 na 27 ms. První vykreslení papíru může zabrat více snímků. Měření proběhlo v automatizovaných prohlížečích na Linuxu. Fyzické telefony a displej se 120 Hz nebyly součástí měření.
+Odkazy na skripty, styly pohybu a oba předměty obsahují otisk jejich obsahu. Instalovaná aplikace při aktualizaci připraví nové podklady v samostatné mezipaměti. Po opětovném otevření lze pokračovat v uloženém pokusu i bez připojení.
