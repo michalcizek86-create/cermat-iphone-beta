@@ -12,6 +12,8 @@
 
 ## Vydávání změn
 
-GitHub Pages publikuje kořen větve `main` při každém pushi. Soubory v `js/` mají v názvu otisk obsahu. Při změně kódu nebo zadání aktualizuj názvy změněných souborů, odkazy v `index.html` a seznam `FILES` v `service-worker.js`. Hodnoty `cermat-release` v HTML a `RELEASE` ve workeru musejí odpovídat.
+GitHub Pages publikuje kořen větve `main` při každém pushi. Soubory v `js/` mají v názvu otisk obsahu. Při změně souborů aktualizuj jejich odkazy a případně uprav seznam `FILES` v `service-worker.js`. Před pushem spusť `python stamp-release.py`, aby se přepočítaly otisky offline souborů a označení verze.
+
+Při aktualizaci aplikace použije uložené soubory se stejným obsahem. Nová verze je k dispozici po ověření všech souborů. Tlačítko **Načíst novou verzi** se objeví mimo otevřený test.
 
 Do této větve patří pouze vydané soubory pro žáky. Vývojářská edice a zálohy se používají na místní adrese.

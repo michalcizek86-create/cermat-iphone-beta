@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="cermat-edition" content="student">
-<meta name="cermat-release" content="58a64263b7fe4ba1">
+<meta name="cermat-release" content="b4ae58378ad1597d">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#f8f7f3">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -20,12 +20,16 @@ iframe{position:fixed;top:env(safe-area-inset-top,0px);left:env(safe-area-inset-
 [hidden]{display:none!important;}
 #subject-loading{position:fixed;inset:0;display:grid;place-content:center;gap:12px;padding:24px;background:#f8f7f3;font:16px/1.5 system-ui,sans-serif;}
 #subject-loading h1{font:500 26px/1.2 Georgia,serif;margin:0;}#subject-loading p{margin:0;}#subject-retry{padding:10px 14px;font:inherit;color:#1e4059;background:#d8eaf4;border:1px solid #a7c2d3;border-radius:4px;}
+#cermat-update{position:fixed;z-index:4;right:max(14px,env(safe-area-inset-right));bottom:calc(14px + env(safe-area-inset-bottom));min-height:44px;padding:9px 14px;border:1px solid #a7c2d3;border-radius:6px;background:#e9f2f8;color:#1e4059;box-shadow:0 2px 9px #20384820;font:600 14px/1.35 system-ui,sans-serif;cursor:pointer}
+#cermat-update:focus-visible{outline:2px solid #356784;outline-offset:3px}
 </style>
 <link rel="stylesheet" href="./subjects/motion.css?v=d45787fa0790">
 <script defer src="./subjects/shell.js?v=cfd999f4deb5"></script>
+<script defer src="./subjects/update.js?v=85d4bbaa3e3d"></script>
 </head><body>
 <iframe title="Matematika" name="mathematics" data-subject-frame="math" src="./matematika.html?v=5e86b04fb887"></iframe>
 <iframe title="Český jazyk" name="czech" data-subject-frame="cz" src="./cestina/index.html?v=299b7b2ed289" hidden></iframe>
 <section id="subject-loading" role="status"><h1>Cermat testy</h1><p id="subject-loading-text">Načítám aplikaci…</p><button id="subject-retry" hidden>Zkusit znovu</button></section>
 <noscript>Pro práci s aplikací povol JavaScript v prohlížeči.</noscript>
+<button id="cermat-update" type="button" hidden>Načíst novou verzi</button>
 </body></html>
