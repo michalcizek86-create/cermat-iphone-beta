@@ -3,7 +3,7 @@ import { topics } from './data/topics.js';
 import { SCHEMA, loadAttempts, newAttempt, putAttempt, recover, journal, pref, setPref, validateBackup } from './shared/storage.js?v=b923139b433c';
 import { isAnswered, scoreAttempt, shuffleUnique } from './shared/scoring.js';
 import { PaperRenderer } from './shared/paper.js?v=c8e702dd0416';
-import { html, formatDate, countTasks, plural, fold, clock, button, pdfLink, answerForm } from './shared/ui.js?v=601a4426dc58';
+import { html, formatDate, countTasks, plural, fold, clock, button, pdfLink, answerForm } from './shared/ui.js?v=a6630b33d090';
 import { setupOffline, offlinePanel, cacheArchive } from './shared/offline.js';
 
 const UI=window.CermatUI;
@@ -221,13 +221,13 @@ function toolHint() {
   if (tool.tool==='eraser') return 'Klepni nebo táhni přes poznámky, které chceš smazat.';
   return 'Tahem myší, prstem nebo Apple Pencil označ místo v zadání.';
 }
-function pageMarkup(exam, pageNumber, key, pageQuestions, label, band) {
+function pageMarkup(exam, pageNumber, key, pageQuestions, label, band, practiceNumber) {
   const [width,height] = exam.pageSizes[pageNumber-1];
   return `<section class="exam-page cz-page" id="paper-page-${pageNumber}${band?'-'+band[1]:''}"><div class="exam-page-heading"><h2>${html(label||'Strana '+pageNumber)}</h2>${pdfLink(exam.files.paper.path,'Originál PDF',pageNumber)}</div>
     <div class="paper-surface pdf-sheet" data-pdf-page="${pageNumber}" data-exam="${exam.id}" data-paper-key="${key}" ${band?`data-clip-top="${band[1]}" data-clip-bottom="${band[2]}"`:''} style="aspect-ratio:${width}/${band?band[2]-band[1]:height}">
       <span class="pdf-status" role="status">Načítám stránku…</span><canvas role="img"></canvas><svg class="study-paper-svg" aria-label="Vrstva poznámek" xmlns="http://www.w3.org/2000/svg"></svg>
     </div><details class="pdf-transcript"><summary>Text stránky</summary><div class="pdf-transcript-text"></div></details>
-    ${pageQuestions.length&&!readOnlyPaper?`<div class="final-answers cz-answer-stack">${window.CermatWorksheet.answerHeading()}${pageQuestions.map(q=>answerForm(q,attempt.answers[q.id])).join('')}</div>`:''}</section>`;
+    ${pageQuestions.length&&!readOnlyPaper?`<div class="final-answers cz-answer-stack">${window.CermatWorksheet.answerHeading()}${pageQuestions.map(q=>answerForm(q,attempt.answers[q.id],practiceNumber)).join('')}</div>`:''}</section>`;
 }
 function workspace() {
   const questions = attempt.questionIds.map(id=>questionMap.get(id));
@@ -236,12 +236,13 @@ function workspace() {
   const activeExam = exam || examMap.get(activeQuestion.examId);
   const numbers = exam?.pageSizes.map((_,i)=>i+1);
   const title = html(attempt.title);
+  const practiceNumber = exam ? null : attempt.currentIndex + 1;
   const source = exam ? `${exam.year} · cvičný limit ${exam.durationMinutes} min · ${exam.maxPoints} b.` : `${activeExam.year} · ${html(activeExam.title)} · původní úloha ${activeQuestion.no}`;
   const bands=exam?numbers.map(p=>[p]):practiceIndex.regions[activeQuestion.id];
   const pageParts = bands.map((band,i) => {
     const p=band[0];
     const qs = exam ? questions.filter(q=>q.pages.at(-1)===p) : i===bands.length-1?[activeQuestion]:[];
-    return pageMarkup(activeExam,p,(exam ? exam.id : activeQuestion.id)+':p'+p,qs,exam?'Strana '+p:'Původní úloha '+activeQuestion.no,exam?null:band);
+    return pageMarkup(activeExam,p,(exam ? exam.id : activeQuestion.id)+':p'+p,qs,exam?'Strana '+p:i===0?'Zadání':'Pokračování zadání',exam?null:band,practiceNumber);
   }).join('');
   return `<header class="workspace-top">
     ${button(readOnlyPaper?'Výsledek':'Uložit a odejít',readOnlyPaper?'result':'leave',attempt.id)}
@@ -250,7 +251,7 @@ function workspace() {
     ${toolbar(exam,questions.length)}
     <div class="workspace-introduction"><span>${source}</span><span id="answered-count">${answered(attempt)} / ${questions.length} zodpovězeno</span></div>
     ${exam?`<details class="question-index"><summary>Přejít na úlohu</summary><div class="cz-question-nav">${questions.map(q=>button(String(q.no),'jump-question',q.id,isAnswered(q,attempt.answers[q.id])?'answered':'',`aria-label="Úloha ${q.no}"`)).join('')}</div></details>`:`
-      <div class="cz-practice-header"><div><h1>Úloha ${attempt.currentIndex+1} z ${questions.length}</h1><p class="mut">Na původní stránce vyřeš úlohu ${activeQuestion.no}.</p></div><div class="row">
+      <div class="cz-practice-header"><div><h1>Úloha ${practiceNumber} z ${questions.length}</h1></div><div class="row">
       ${button('Předchozí','step','-1','',attempt.currentIndex===0?'disabled':'')}${button('Další','step','1','',attempt.currentIndex===questions.length-1?'disabled':'')}</div></div>`}
     <div class="cz-paper-scroll"><div class="cz-paper-inner"><div class="exam-paper-stack">${pageParts}</div></div></div>
     <div class="workspace-bottom">${button(readOnlyPaper?'Zpět na výsledek':'Uložit a odejít',readOnlyPaper?'result':'leave',attempt.id)}
@@ -318,7 +319,9 @@ function resultRow(row) {
   const hasWrittenAnswer = Object.values(answer).some(value=>String(value).trim());
   const state = row.pending?'Ke kontrole':row.correct?'Správně':row.answered?'Zkontroluj řešení':'Nevyplněno';
   const points = row.pending?'— / '+row.max:row.points+' / '+row.max;
-  return `<article class="card answer-review" id="review-${q.id}"><div class="review-heading"><h2>Úloha ${q.no}${attempt.examId?'':' · '+exam.year}</h2><span class="${row.correct?'ok':row.pending?'':'bad'}">${state} · ${points} b.</span></div>
+  const number = attempt.examId ? q.no : attempt.questionIds.indexOf(q.id) + 1;
+  return `<article class="card answer-review" id="review-${q.id}"><div class="review-heading"><h2>Úloha ${number}</h2><span class="${row.correct?'ok':row.pending?'':'bad'}">${state} · ${points} b.</span></div>
+    ${attempt.examId?'':`<p class="practice-source">${exam.year} · ${html(exam.title)} · původní úloha ${q.no}</p>`}
     <p class="review-question">${html(q.prompt.replace(/\s+/g,' ').slice(0,380))}</p>
     <div class="review-answer-grid"><div><span class="mut">Tvoje odpověď</span><pre class="key-text">${html(your)}</pre></div><div><span class="mut">Oficiální klíč</span><pre class="key-text">${html(expected||'Viz klíč PDF.')}</pre></div></div>
     <div class="inline-key-links">${pdfLink(exam.files.paper.path,'Zadání',q.anchor.page)}${pdfLink(exam.files.key.path,'Klíč a bodování',q.keyPage)}</div>
