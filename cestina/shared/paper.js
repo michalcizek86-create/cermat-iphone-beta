@@ -55,6 +55,11 @@ export class PaperRenderer {
     const overlay = element.querySelector('svg');
     canvas.setAttribute('aria-label', 'Originální zadání, strana ' + pageNumber);
     overlay.setAttribute('viewBox', `0 0 ${width} ${height}`);
+    if(element.hasAttribute('data-clip-top')){
+      const top=Number(element.dataset.clipTop),span=Number(element.dataset.clipBottom)-top;
+      element.style.overflow='hidden';
+      overlay.style.top=(-100*top/span)+'%';overlay.style.height=(100*height/span)+'%';
+    }
     if (annotation) {
       if (annotation.readOnly) {
         overlay.append(...annotation.state.objects.map(objectNode));
@@ -80,8 +85,10 @@ export class PaperRenderer {
       const scale = Math.min(2.35, Math.max(1.55, element.clientWidth / page.view[2] * 1.55));
       const viewport = page.getViewport({ scale });
       canvas.width = Math.ceil(viewport.width);
-      canvas.height = Math.ceil(viewport.height);
-      const job = page.render({ canvasContext: canvas.getContext('2d', { alpha: false }), viewport, background: '#ffffff' });
+      const clipped=element.hasAttribute('data-clip-top'),top=Number(element.dataset.clipTop)||0;
+      const bottom=clipped?Number(element.dataset.clipBottom):page.view[3];
+      canvas.height = clipped?Math.ceil((bottom-top)*scale):Math.ceil(viewport.height);
+      const job = page.render({ canvasContext: canvas.getContext('2d', { alpha: false }), viewport, transform:clipped?[1,0,0,1,0,-top*scale]:undefined, background: '#ffffff' });
       this.jobs.add(job);
       try { await job.promise; } finally { this.jobs.delete(job); }
       if (this.closed || !element.isConnected) return;
@@ -90,7 +97,13 @@ export class PaperRenderer {
       const text = await page.getTextContent();
       const transcript = element.closest('.exam-page')?.querySelector('.pdf-transcript-text');
       if (transcript) {
-        transcript.textContent = text.items.map(item => (item.str ?? '') + (item.hasEOL ? '\n' : ' ')).join('');
+        const visible=clipped?text.items.filter(item=>{
+          if(!item.transform)return false;
+          const [,baseline]=viewport.convertToViewportPoint(item.transform[4],item.transform[5]);
+          const middle=baseline/scale-(item.height||0)*.4;
+          return middle>=top && middle<bottom;
+        }):text.items;
+        transcript.textContent = visible.map(item => (item.str ?? '') + (item.hasEOL ? '\n' : ' ')).join('');
       }
     } catch (error) {
       if (this.closed || !element.isConnected) return;

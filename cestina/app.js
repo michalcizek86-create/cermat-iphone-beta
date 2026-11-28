@@ -2,7 +2,7 @@ import '../subjects/ui.js';
 import { topics } from './data/topics.js';
 import { SCHEMA, loadAttempts, newAttempt, putAttempt, recover, journal, pref, setPref, validateBackup } from './shared/storage.js?v=b923139b433c';
 import { isAnswered, scoreAttempt, shuffleUnique } from './shared/scoring.js';
-import { PaperRenderer } from './shared/paper.js?v=c2513268094d';
+import { PaperRenderer } from './shared/paper.js?v=c8e702dd0416';
 import { html, formatDate, countTasks, plural, fold, clock, button, pdfLink, answerForm } from './shared/ui.js?v=601a4426dc58';
 import { setupOffline, offlinePanel, cacheArchive } from './shared/offline.js';
 
@@ -16,7 +16,7 @@ const toolLabels = {
   strike:'Přeškrtnutí', pen:'Pero', arrow:'Šipka', text:'Poznámka', grammar:'Označení větného členu', eraser:'Guma'
 };
 
-let data, facts, examMap, questionMap, attempts = new Map();
+let data, facts, practiceIndex, examMap, questionMap, attempts = new Map();
 let view = 'home', attempt, currentFact, paper, selectedPage;
 let zoom = 100, tool = { tool:'move', color:'#2663a5', markerColor:'#e5b839', width:2.3 };
 let startedAt = null, saveTimer, saveChain = Promise.resolve();
@@ -30,7 +30,7 @@ async function json(path) {
   return response.json();
 }
 async function boot() {
-  [data, facts] = await Promise.all([json('./data/subject-cz.json'), json('./data/facts.json')]);
+  [data, facts, practiceIndex] = await Promise.all([json('./data/subject-cz.json'), json('./data/facts.json'), json('./data/practice-regions.json')]);
   examMap = new Map(data.exams.map(exam => [exam.id, exam]));
   questionMap = new Map(data.questions.map(question => [question.id, question]));
   try {
@@ -127,8 +127,29 @@ function home() {
     fact:factMarkup(),portrait:`<figure class="comenius"><img src="./assets/josef-jungmann.jpg" width="600" height="800" alt="Portrét Josefa Jungmanna od Antonína Machka z roku 1833"><figcaption><strong>Josef Jungmann</strong><span>1773–1847</span><a href="${portraitUrl}" target="_blank" rel="noopener">Antonín Machek, 1833 · zdroj snímku</a></figcaption></figure>`,progress:overview(),topics:topicHome(),
     notice:`<p class="cz-notice" id="global-notice" role="status">${html(message)}</p>`,footer:`<span>Cermat testy · Český jazyk pro 9. třídu</span><div class="row">${button('Offline archiv','settings','offline','text-button')}${button('Záloha postupu','settings','backup','text-button')}</div>`});
 }
-function practicePool(category, tags) {
-  return data.questions.filter(q=>q.keyVerified && q.text && (!category||q.category===category) && (!tags.size||q.topics.some(tag=>tags.has(tag))));
+// Reviewed against the printed options and key. In each task the deciding error
+// concerns i/y after an ambiguous consonant (e.g. promítání, pobít or splývat).
+const listedWords = new Set([
+  'cz-2025-n2:q1', // promítání
+  'cz-2023-n2:q24', // vyzývavé
+  'cz-2020-i1:q14', // uplynulo
+  'cz-2019-r1:q1', // viklal
+  'cz-2019-i1:q30', // vířivky
+  'cz-2018-r2:q1', // kolísavým
+  'cz-2017-r2:q24', // pobít a pobýt
+  'cz-2017-i1:q1', // splývavé
+  'cz-2016-i1:q30', // vymykalo
+  'cz-2015-r1:q21', // visutého
+]);
+function practicePool(category,tags) {
+  const unique=new Map();
+  for(const q of data.questions){
+    if(!q.keyVerified||!practiceIndex.regions[q.id]||(category&&q.category!==category))continue;
+    if(tags.size&&![...tags].some(t=>t==='vyjmenovana'?listedWords.has(q.id):q.topics.includes(t)))continue;
+    const key=practiceIndex.duplicates[q.id]||q.id;
+    if(!unique.has(key))unique.set(key,q);
+  }
+  return [...unique.values()];
 }
 function practiceView() {
   if(topicOverview)return UI.heading({title:'Procvičování podle témat',back:button('← Zpět na testy','home','','text-button')})+'<p class="practice-lead">Vyber oblast a sestav si vlastní sadu úloh. Každý pokus má své odpovědi, pracovní papír a výsledky.</p><div class="topic-grid">'+topicCards()+'</div>'+button('Sestavit test z více oblastí','practice','all','text-button');
@@ -159,7 +180,9 @@ function updatePractice() {
   const size = Math.min(practiceCount,pool.length);
   const text = !pool.length?'Pro tento výběr nejsou dostupné ověřené úlohy.':!valid?'Zadej kladný celý počet úloh.':`Test bude mít ${size} ${plural(size,'úlohu','úlohy','úloh')}.`;
   document.getElementById('practice-availability').innerHTML = `<strong>${countTasks(pool.length)} k dispozici</strong><span>${text}</span>`;
-  document.getElementById('practice-generate').disabled = !valid || !pool.length;
+  const start=document.getElementById('practice-generate');
+  start.disabled=!valid||!size;
+  start.textContent=start.disabled?'Spustit procvičování':`Spustit procvičování ${[4,6,7,16,17].includes(size)?'se':'s'} ${size} ${size===1?'úlohou':'úlohami'}`;
   app.querySelectorAll('[data-action="count"]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.value)===practiceCount)));
 }
 function historyRow(a) {
@@ -198,10 +221,10 @@ function toolHint() {
   if (tool.tool==='eraser') return 'Klepni nebo táhni přes poznámky, které chceš smazat.';
   return 'Tahem myší, prstem nebo Apple Pencil označ místo v zadání.';
 }
-function pageMarkup(exam, pageNumber, key, pageQuestions, label) {
+function pageMarkup(exam, pageNumber, key, pageQuestions, label, band) {
   const [width,height] = exam.pageSizes[pageNumber-1];
-  return `<section class="exam-page cz-page" id="paper-page-${pageNumber}"><div class="exam-page-heading"><h2>${html(label||'Strana '+pageNumber)}</h2>${pdfLink(exam.files.paper.path,'Originál PDF',pageNumber)}</div>
-    <div class="paper-surface pdf-sheet" data-pdf-page="${pageNumber}" data-exam="${exam.id}" data-paper-key="${key}" style="aspect-ratio:${width}/${height}">
+  return `<section class="exam-page cz-page" id="paper-page-${pageNumber}${band?'-'+band[1]:''}"><div class="exam-page-heading"><h2>${html(label||'Strana '+pageNumber)}</h2>${pdfLink(exam.files.paper.path,'Originál PDF',pageNumber)}</div>
+    <div class="paper-surface pdf-sheet" data-pdf-page="${pageNumber}" data-exam="${exam.id}" data-paper-key="${key}" ${band?`data-clip-top="${band[1]}" data-clip-bottom="${band[2]}"`:''} style="aspect-ratio:${width}/${band?band[2]-band[1]:height}">
       <span class="pdf-status" role="status">Načítám stránku…</span><canvas role="img"></canvas><svg class="study-paper-svg" aria-label="Vrstva poznámek" xmlns="http://www.w3.org/2000/svg"></svg>
     </div><details class="pdf-transcript"><summary>Text stránky</summary><div class="pdf-transcript-text"></div></details>
     ${pageQuestions.length&&!readOnlyPaper?`<div class="final-answers cz-answer-stack">${window.CermatWorksheet.answerHeading()}${pageQuestions.map(q=>answerForm(q,attempt.answers[q.id])).join('')}</div>`:''}</section>`;
@@ -211,12 +234,14 @@ function workspace() {
   const exam = attempt.examId ? examMap.get(attempt.examId) : null;
   const activeQuestion = questions[attempt.currentIndex] || questions[0];
   const activeExam = exam || examMap.get(activeQuestion.examId);
-  const numbers = exam ? exam.pageSizes.map((_,i)=>i+1) : [...new Set([...activeQuestion.contextPages,...activeQuestion.pages])].sort((a,b)=>a-b);
+  const numbers = exam?.pageSizes.map((_,i)=>i+1);
   const title = html(attempt.title);
   const source = exam ? `${exam.year} · cvičný limit ${exam.durationMinutes} min · ${exam.maxPoints} b.` : `${activeExam.year} · ${html(activeExam.title)} · původní úloha ${activeQuestion.no}`;
-  const pageParts = numbers.map(p => {
-    const qs = exam ? questions.filter(q=>q.pages.at(-1)===p) : p===numbers.at(-1)?[activeQuestion]:[];
-    return pageMarkup(activeExam,p,(exam ? exam.id : activeQuestion.id)+':p'+p,qs,exam?'Strana '+p:'Původní strana '+p);
+  const bands=exam?numbers.map(p=>[p]):practiceIndex.regions[activeQuestion.id];
+  const pageParts = bands.map((band,i) => {
+    const p=band[0];
+    const qs = exam ? questions.filter(q=>q.pages.at(-1)===p) : i===bands.length-1?[activeQuestion]:[];
+    return pageMarkup(activeExam,p,(exam ? exam.id : activeQuestion.id)+':p'+p,qs,exam?'Strana '+p:'Původní úloha '+activeQuestion.no,exam?null:band);
   }).join('');
   return `<header class="workspace-top">
     ${button(readOnlyPaper?'Výsledek':'Uložit a odejít',readOnlyPaper?'result':'leave',attempt.id)}
@@ -250,17 +275,20 @@ function setupPaper() {
   paper = new PaperRenderer();
   const top = app.querySelector('.workspace-top');
   app.style.setProperty('--cz-toolbar-top',top.getBoundingClientRect().height+'px');
+  const pageStates=new Map();
   app.querySelectorAll('.pdf-sheet').forEach(element => {
     const exam = examMap.get(element.dataset.exam);
     const page = Number(element.dataset.pdfPage);
     const key = element.dataset.paperKey;
     const [w,h] = exam.pageSizes[page-1];
-    const state = attempt.papers[key] || {objects:[],undo:[],redo:[]};
-    paper.mount(element,exam.files.paper.path,page,w,h,key,{
+    const layerKey=element.hasAttribute('data-clip-top')?key+'@'+element.dataset.clipTop:key;
+    const state=pageStates.get(key)||attempt.papers[key]||{objects:[],undo:[],redo:[]};
+    pageStates.set(key,state);
+    paper.mount(element,exam.files.paper.path,page,w,h,layerKey,{
       state,readOnly:readOnlyPaper,
       getTool:()=>tool.tool==='grammar'?{...tool,tool:'text'}:tool,
       onSelect:id=>{selectedPage=id;refreshUndo();},
-      onChange:()=>{attempt.papers[key]=state;selectedPage=key;queueSave();refreshUndo();},
+      onChange:()=>{attempt.papers[key]=state;selectedPage=layerKey;for(const [id,layer] of paper.layers)if(id!==layerKey&&layer.state===state)layer.paint();queueSave();refreshUndo();},
       onText:options=>openNote(options)
     });
   });
