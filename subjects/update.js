@@ -49,6 +49,21 @@
     worker.postMessage({type: 'CERMAT_STATUS'}, [channel.port2]);
   }
 
+  function activate(worker = registration?.waiting) {
+    if (worker?.state === 'installed') worker.postMessage({type: 'CERMAT_ACTIVATE'});
+  }
+
+  function watchInstall(worker) {
+    if (!worker) return;
+    const checkState = () => {
+      if (worker.state === 'installing') return;
+      worker.removeEventListener('statechange', checkState);
+      activate(worker);
+    };
+    worker.addEventListener('statechange', checkState);
+    checkState();
+  }
+
   button.onclick = () => {
     paint();
     if (!button.hidden) location.reload();
@@ -58,14 +73,17 @@
     observe(frame);
   }
   workers.addEventListener('controllerchange', readStatus);
-  addEventListener('pageshow', () => {readStatus(); check();});
+  addEventListener('pageshow', () => {activate(); readStatus(); check();});
   addEventListener('online', () => check(true));
   document.addEventListener('visibilitychange', () => {
-    if (!document.hidden) { readStatus(); check(); }
+    if (!document.hidden) { activate(); readStatus(); check(); }
   });
-  setInterval(check, 180000);
+  setInterval(() => { if (!document.hidden) activate(); check(); }, 60000);
   workers.register('./service-worker.js', {scope: './', updateViaCache: 'none'}).then(reg => {
     registration = reg;
+    registration.addEventListener('updatefound', () => watchInstall(registration.installing));
+    watchInstall(registration.installing);
+    activate();
     readStatus();
     check();
   }).catch(() => {});
